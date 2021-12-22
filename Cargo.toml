@@ -1,0 +1,18 @@
+[package]
+name = "protobuf-src"
+authors = ["Materialize, Inc."]
+readme = "README.md"
+description = "Build system integration for libprotobuf, Google's data interchange format."
+documentation = "https://docs.rs/krb5-src"
+repository = "https://github.com/MaterializeInc/rust-krb5-src"
+license = "Apache-2.0"
+categories = ["external-ffi-bindings"]
+version = "0.1.0+3.19.1"
+edition = "2018"
+# Dummy `links` value so that we can pass DEP_* environment variables to our
+# dependents.
+# See: https://github.com/rust-lang/cargo/issues/7846
+links = "protobuf-src"
+
+[build-dependencies]
+autotools = "0.2.4"
