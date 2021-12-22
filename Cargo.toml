@@ -7,7 +7,7 @@ documentation = "https://docs.rs/krb5-src"
 repository = "https://github.com/MaterializeInc/rust-krb5-src"
 license = "Apache-2.0"
 categories = ["external-ffi-bindings"]
-version = "0.1.0+3.19.1"
+version = "1.0.0+3.19.1"
 edition = "2018"
 # Dummy `links` value so that we can pass DEP_* environment variables to our
 # dependents.

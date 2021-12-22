@@ -26,10 +26,24 @@
 //! `protobuf-src`. Then, in the build script for your crate, the environment
 //! variable `DEP_PROTOBUF_SRC_ROOT` will point to the directory in which the
 //! bundled copy of protobuf has been installed. You can build and link another
-//! C/C++ library against this copy of libprotobuf, generate Rust bindings and
-//! link Rust code against this copy of libprotobuf, or invoke the protoc
-//! binary.
+//! C/C++ library against this copy of libprotobuf or generate Rust bindings and
+//! link Rust code against this copy of libprotobuf.
+//!
+//! If you simply need to invoke the vendored protoc binary, [`protoc`] returns
+//! the path to pass to [`std::process::Command`].
 //!
 //! [protobuf]: https://developers.google.com/protocol-buffers
 //! [v3.19.1]: https://github.com/protocolbuffers/protobuf/releases/tag/v3.19.1
 //! [prost-build]: https://docs.rs/prost-build/latest/prost_build/
+
+use std::path::PathBuf;
+
+/// Returns the path to the vendored protoc binary.
+pub fn protoc() -> PathBuf {
+    PathBuf::from(env!("OUT_DIR")).join("bin").join("protoc")
+}
+
+/// Returns the path to the vendored include directory.
+pub fn include() -> PathBuf {
+    PathBuf::from(env!("OUT_DIR")).join("include")
+}

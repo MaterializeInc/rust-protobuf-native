@@ -13,8 +13,8 @@ Rust build system integration for [protobuf], Google's data interchange format.
 ```toml
 # Cargo.toml
 [dependencies]
-protobuf-src = "0.1.0+3.19.1"
+protobuf-src = "1.0.0+3.19.1"
 ```
 
 [protobuf]: https://developers.google.com/protocol-buffers
-[docs]: https://docs.rs/protobuf-src/0.1.0+3.19.1/protobuf_src
+[docs]: https://docs.rs/protobuf-src/1.0.0+3.19.1/protobuf_src
