@@ -17,5 +17,5 @@ Rust build system integration with libprotobuf, the C++ implementation of
 protobuf-src = "1.0.1+3.19.1"
 ```
 
-[protobuf]: https://developers.google.com/protocol-buffers
-[docs]: https://docs.rs/protobuf-src/1.0.0+3.19.1/protobuf_src
+[docs]: https://docs.rs/protobuf-src/1.0.1+3.19.1/protobuf_src
+[Protocol Buffers]: https://github.com/google/protobuf
