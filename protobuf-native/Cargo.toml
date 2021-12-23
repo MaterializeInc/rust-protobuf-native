@@ -13,9 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[workspace]
-members = [
-    "protobuf-native",
-    "protobuf-src",
-    "protobuf-sys",
-]
+[package]
+name = "protobuf-native"
+authors = ["Materialize, Inc."]
+readme = "README.md"
+description = "A high-level, safe API for libprotobuf."
+documentation = "https://docs.rs/protobuf-native"
+repository = "https://github.com/MaterializeInc/rust-protobuf-native"
+license = "Apache-2.0"
+categories = ["api-bindings"]
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+cxx = "1.0.60"
+protobuf-src = { path = "../protobuf-src", version = "1.0.0" }
+
+[build-dependencies]
+cxx-build = "1.0.60"
