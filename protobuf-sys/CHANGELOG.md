@@ -9,9 +9,12 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+## [0.1.1+3.19.1] - 2021-12-23
+
 ## 0.1.0+3.19.1 - 2021-12-23
 
 Initial release.
 
 <!-- #release:next-url -->
-[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-sys-v0.1.0+3.19.1...HEAD
+[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-sys-v0.1.1+3.19.1...HEAD
+[0.1.1+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-sys-v0.1.0+3.19.1...protobuf-sys-v0.1.1+3.19.1
