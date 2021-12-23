@@ -14,10 +14,10 @@
 # limitations under the License.
 
 pre-release-replacements = [
-  { file="README.md", search = "predicates = .*", replace = "{{crate_name}} = \"{{version}}\"" },
+  { file="README.md", search = "protobuf-[a-z]+ = .*", replace = "{{crate_name}} = \"{{version}}\"" },
   { file="CHANGELOG.md", search = "Unreleased", replace = "{{version}}" },
   { file="CHANGELOG.md", search = "\\.\\.\\.HEAD", replace = "...{{tag_name}}", exactly=1 },
   { file="CHANGELOG.md", search = "<!-- #release:date -->", replace = "{{date}}" },
-  { file="CHANGELOG.md", search = "<!-- #release:next-header -->", replace = "<!-- next-header -->\n\n## [Unreleased] - <!-- #release:date -->", exactly = 1 },
-  { file="CHANGELOG.md", search = "<!-- #release:next-url -->", replace = "<!-- next-url -->\n[Unreleased]: https://github.com/assert-rs/rust-protobuf-native/compare/{{tag_name}}...HEAD", exactly = 1 },
+  { file="CHANGELOG.md", search = "<!-- #release:next-header -->", replace = "<!-- #release:next-header -->\n\n## [Unreleased] <!-- #release:date -->", exactly = 1 },
+  { file="CHANGELOG.md", search = "<!-- #release:next-url -->", replace = "<!-- #release:next-url -->\n[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/{{tag_name}}...HEAD", exactly = 1 },
 ]
