@@ -9,7 +9,7 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
-## [1.0.1+3.19.1] 2021-12-23
+## [1.0.1+3.19.1] - 2021-12-23
 
 * Correct the documentation and repository links in the crate metadata.
 

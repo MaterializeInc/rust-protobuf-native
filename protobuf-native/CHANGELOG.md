@@ -9,6 +9,9 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Generate bindings for the `google::protobuf::io::CodedInputStream` and
+  `google::protobuf::io::ZeroCopyInputStream` types.
+
 ## 0.1.0+3.19.1 - 2021-12-23
 
 Initial release.
