@@ -13,7 +13,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Build system integration for [protobuf], Google's data interchange format.
+//! [<img src="https://materialize.com/wp-content/uploads/2020/01/materialize_logo_primary.png" width=180 align=right>](https://materialize.com)
+//!
+//! Build system integration with `libprotobuf`, the C++ implementation of
+//! [Protocol Buffers], Google's data interchange format.
+//!
+//! # Maintainership
+//!
+//! This crate is maintained by [Materialize]. Contributions are encouraged:
+//!
+//! * [View source code](https://github.com/MaterializeInc/rust-protobuf-native/tree/master/src/protobuf-src)
+//! * [Report an issue](https://github.com/MaterializeInc/rust-protobuf-native/issues/new/choose)
+//! * [Submit a pull request](https://github.com/MaterializeInc/rust-protobuf-native/compare)
+//!
+//! # Details
 //!
 //! This crate builds a vendored copy of libprotobuf and protoc using Cargo's
 //! support for custom build scripts. It is not intended for direct consumption,
@@ -32,7 +45,8 @@
 //! If you simply need to invoke the vendored protoc binary, [`protoc`] returns
 //! the path to pass to [`std::process::Command`].
 //!
-//! [protobuf]: https://developers.google.com/protocol-buffers
+//! [Materialize]: https://materialize.com
+//! [Protocol Buffers]: https://developers.google.com/protocol-buffers
 //! [v3.19.1]: https://github.com/protocolbuffers/protobuf/releases/tag/v3.19.1
 //! [prost-build]: https://docs.rs/prost-build/latest/prost_build/
 

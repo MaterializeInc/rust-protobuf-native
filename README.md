@@ -1,20 +1,32 @@
-# rust-protobuf-src
+# rust-protobuf-native
 
-[![crates.io](https://img.shields.io/crates/v/protobuf-src.svg)](https://crates.io/crates/protobuf-src)
-[![CI](https://github.com/MaterializeInc/rust-protobuf-src/workflows/CI/badge.svg)](https://github.com/MaterializeInc/rust-protobuf-src/actions?query=workflow%3ACI+branch%3Amaster)
-[![Rust Documentation](https://img.shields.io/badge/api-rustdoc-blue.svg)][docs]
+This is a collection of crates that provide Rust interop for [Protocol
+Buffers](https://github.com/google/protobuf), Google's data interchange format.
+The following crates are available:
 
-Rust build system integration for [protobuf], Google's data interchange format.
+* [**protobuf-native**](./protobuf-native) is a high-level, safe API to
+  `libprotobuf`.
+* [**protobuf-sys**](./protobuf-sys) provides automatically-generated Rust
+  bindings to `libprotobuf` via [autocxx].
+* [**protobuf-src**](./protobuf-src) vendors the upstream Protobuf source code
+  and builds the `libprotobuf` library and `protoc` binary.
 
-**[View documentation.][docs]**
+## Related projects
 
-## Installation
+There are two other major Protobuf projects in the Rust ecosystem:
 
-```toml
-# Cargo.toml
-[dependencies]
-protobuf-src = "1.0.0+3.19.1"
-```
+  * [rust-protobuf] contains a `protoc` plugin for generating Rust code,
+    an (incomplete) pure-Rust reimplementation of `libprotobuf`, including
+    (incomplete) support for dynamic messages, and a Rust API for compiling
+    protobufs.
 
-[protobuf]: https://developers.google.com/protocol-buffers
-[docs]: https://docs.rs/protobuf-src/1.0.0+3.19.1/protobuf_src
+  * [prost] contains a Rust API for compiling protobufs that uses an alternative
+    code generation backend that purports to generate more idiomatic Rust.
+
+This project is meant to supplement these existing tools, not supplant them.
+The hope is that prost and rust-protobuf will support optional integration
+with these crates for users who want to avoid the system `protoc`.
+
+[autocxx]: https://github.com/google/autocxx
+[rust-protobuf]: https://github.com/stepancheg/rust-protobuf
+[prost]: https://github.com/tokio-rs/prost

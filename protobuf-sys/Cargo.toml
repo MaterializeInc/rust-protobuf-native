@@ -13,9 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[workspace]
-members = [
-    "protobuf-native",
-    "protobuf-src",
-    "protobuf-sys",
-]
+[package]
+name = "protobuf-sys"
+authors = ["Materialize, Inc."]
+readme = "README.md"
+description = "Low-level bindings to libprotobuf."
+documentation = "https://docs.rs/protobuf-sys"
+repository = "https://github.com/MaterializeInc/rust-protobuf-native"
+license = "Apache-2.0"
+categories = ["external-ffi-bindings"]
+version = "0.1.0+3.19.1"
+edition = "2018"
+
+[dependencies]
+autocxx = "0.14.0"
+cxx = "1.0.54"
+protobuf-src = { path = "../protobuf-src", version = "1.0.0" }
+
+[build-dependencies]
+autocxx-build = "0.14.0"

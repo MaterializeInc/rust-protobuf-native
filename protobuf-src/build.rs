@@ -13,8 +13,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use std::env;
+
 fn main() {
     autotools::Config::new("protobuf")
         .disable("maintainer-mode", None)
         .build();
+    println!(
+        "cargo:CXXBRIDGE_DIR0={}/include",
+        env::var("OUT_DIR").unwrap()
+    )
 }
