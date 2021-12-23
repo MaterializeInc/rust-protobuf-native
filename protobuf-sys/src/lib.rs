@@ -60,6 +60,8 @@ autocxx::include_cpp! {
     generate!("google::protobuf::compiler::SourceTree")
     generate!("google::protobuf::compiler::Importer")
     generate!("google::protobuf::compiler::DiskSourceTree")
+    generate!("google::protobuf::io::CodedInputStream")
+    generate!("google::protobuf::io::ZeroCopyInputStream")
     generate!("google::protobuf::io::CodedOutputStream")
     generate!("google::protobuf::io::ZeroCopyOutputStream")
     safety!(unsafe)
