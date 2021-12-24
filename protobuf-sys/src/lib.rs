@@ -55,6 +55,8 @@ autocxx::include_cpp! {
     #include "google/protobuf/descriptor_database.h"
     #include "google/protobuf/compiler/importer.h"
     #include "google/protobuf/io/coded_stream.h"
+    #include "google/protobuf/util/json_util.h"
+    #include "google/protobuf/util/time_util.h"
 
     generate!("google::protobuf::DescriptorDatabase")
     generate!("google::protobuf::compiler::SourceTree")
@@ -64,6 +66,9 @@ autocxx::include_cpp! {
     generate!("google::protobuf::io::ZeroCopyInputStream")
     generate!("google::protobuf::io::CodedOutputStream")
     generate!("google::protobuf::io::ZeroCopyOutputStream")
+    generate_pod!("google::protobuf::util::JsonParseOptions")
+    generate_pod!("google::protobuf::util::JsonPrintOptions")
+    generate_pod!("google::protobuf::util::TimeUtil")
     safety!(unsafe)
 }
 

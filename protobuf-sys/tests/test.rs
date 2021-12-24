@@ -13,19 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::env;
-use std::path::PathBuf;
+use protobuf_sys::google::protobuf::util::TimeUtil;
 
-fn main() {
-    let include_paths = [
-        PathBuf::from(env::var("DEP_PROTOBUF_SRC_ROOT").unwrap()).join("include"),
-        PathBuf::from("src"),
-    ];
-    autocxx_build::Builder::new("src/lib.rs", &include_paths)
-        .expect_build()
-        .flag_if_supported("-std=c++14")
-        .compile("protobuf-sys");
-    println!("cargo:rerun-if-changed=src/lib.rs");
-    println!("cargo:rustc-link-search=native={}/lib", env::var("DEP_PROTOBUF_SRC_ROOT").unwrap());
-    println!("cargo:rustc-link-lib=static=protobuf");
+#[test]
+fn test_linkage() {
+    // Simple test that calls a function to verify that linking has occurred.
+    let s = TimeUtil::ToString1(&TimeUtil::SecondsToDuration(42));
+    assert_eq!(s.to_str().unwrap(), "42s");
 }

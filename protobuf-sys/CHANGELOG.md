@@ -9,6 +9,15 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Generate bindings for the following additional types:
+
+  * `google::protobuf::util::JsonParseOptions`
+  * `google::protobuf::util::JsonPrintOptions`
+  * `google::protobuf::util::TimeUtil`
+
+* Emit the Cargo directives to request linking with the vendored copy of
+  `libprotobuf`.
+
 ## [0.1.1+3.19.1] - 2021-12-23
 
 * Generate bindings for the `google::protobuf::io::CodedInputStream` and
