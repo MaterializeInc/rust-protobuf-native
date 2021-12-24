@@ -40,9 +40,10 @@
 //! [Materialize]: https://materialize.com
 //! [Protocol Buffers]: https://github.com/google/protobuf
 
-#[cxx::bridge]
-mod ffi {
-    unsafe extern "C++" {
-        include!("protobuf-native/src/bindings.h");
-    }
-}
+pub mod compiler;
+pub mod descriptor_database;
+pub mod descriptor_pb;
+pub mod error;
+pub mod io;
+
+mod internal;

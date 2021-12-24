@@ -13,9 +13,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use std::env;
+
+const MODULES: &[&str] = &[
+    "src/compiler/importer",
+    "src/descriptor_pb",
+    "src/io/zero_copy_stream",
+];
+
 fn main() {
-    cxx_build::bridge("src/lib.rs")
+    let rs_files = MODULES.iter().map(|m| format!("{}.rs", m));
+    let cxx_files = MODULES.iter().map(|m| format!("{}.cc", m));
+    cxx_build::bridges(rs_files)
         .flag("-std=c++14")
-        .file("src/bindings.cc")
-        .compile("protobuf_native")
+        .files(cxx_files)
+        .compile("protobuf_native");
+
+    // NOTE(benesch): once the bindings in protobuf-sys are more complete,
+    // we'll switch to depending on protobuf-sys instead of protobuf-src,
+    // and let protobuf-sys drive the linking.
+    println!(
+        "cargo:rustc-link-search=native={}/lib",
+        env::var("DEP_PROTOBUF_SRC_ROOT").unwrap()
+    );
+    println!("cargo:rustc-link-lib=static=protobuf");
 }
