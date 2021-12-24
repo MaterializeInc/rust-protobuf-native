@@ -26,5 +26,6 @@ Initial release.
 [Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.1+3.19.1...HEAD
 [1.0.1+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.0+3.19.1...protobuf-src-v1.0.1+3.19.1
 [1.0.0+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v0.1.0+3.19.1...protobuf-src-v1.0.0+3.19.1
+
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
 [Semantic Versioning]: https://semver.org/spec/v2.0.0.html
