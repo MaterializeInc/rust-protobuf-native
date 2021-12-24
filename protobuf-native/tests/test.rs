@@ -24,6 +24,5 @@ fn test_open() {
     let mut source_tree = DiskSourceTree::new();
     source_tree.map_path(Path::new(""), Path::new("testdata"));
     let mut database = SourceTreeDescriptorDatabase::new(&mut source_tree);
-    println!("{:?}", database.find_file_by_name(Path::new("test.proto")));
-    panic!("failed");
+    database.find_file_by_name(Path::new("test.proto")).unwrap();
 }

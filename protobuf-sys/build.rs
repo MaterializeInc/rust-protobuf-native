@@ -26,6 +26,9 @@ fn main() {
         .flag_if_supported("-std=c++14")
         .compile("protobuf-sys");
     println!("cargo:rerun-if-changed=src/lib.rs");
-    println!("cargo:rustc-link-search=native={}/lib", env::var("DEP_PROTOBUF_SRC_ROOT").unwrap());
+    println!(
+        "cargo:rustc-link-search=native={}/lib",
+        env::var("DEP_PROTOBUF_SRC_ROOT").unwrap()
+    );
     println!("cargo:rustc-link-lib=static=protobuf");
 }

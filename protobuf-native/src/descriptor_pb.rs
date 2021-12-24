@@ -40,10 +40,3 @@ impl FileDescriptorProto {
         }
     }
 }
-
-use std::fmt;
-impl fmt::Debug for FileDescriptorProto {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("a real file desc")
-    }
-}
