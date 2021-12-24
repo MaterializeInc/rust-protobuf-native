@@ -14,7 +14,6 @@
 // limitations under the License.
 
 //! [<img src="https://materialize.com/wp-content/uploads/2020/01/materialize_logo_primary.png" width=180 align=right>](https://materialize.com)
-//!
 //! Low-level bindings to `libprotobuf`, the C++ implementation of [Protocol
 //! Buffers], Google's data interchange format.
 //!
