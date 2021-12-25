@@ -17,7 +17,7 @@
 
 set -euo pipefail
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/../protobuf-src"
 
 if [[ $# -ne 1 ]]; then
     echo "fatal: usage: $0 VERSION" >&2

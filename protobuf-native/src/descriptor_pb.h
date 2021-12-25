@@ -13,9 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <memory>
-
 #include <google/protobuf/descriptor.pb.h>
+
+#include <memory>
 
 using namespace google::protobuf;
 
