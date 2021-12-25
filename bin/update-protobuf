@@ -33,3 +33,109 @@ rm -rf protobuf
 mkdir -p protobuf
 tar --strip-components=1 -C protobuf -xf protobuf.tar.gz
 rm protobuf.tar.gz
+
+# https://github.com/protocolbuffers/protobuf/pull/9344
+(cd protobuf && patch -p1 <<'EOF')
+From 7de0d76eb2bfbffe05005b1ca09d45ecff3e5283 Mon Sep 17 00:00:00 2001
+From: Nikhil Benesch <nikhil.benesch@gmail.com>
+Date: Sat, 25 Dec 2021 13:13:04 -0500
+Subject: [PATCH 1/2] Don't drop parser warnings on the floor
+
+Fix #9343.
+---
+ .../compiler/command_line_interface_unittest.cc   | 15 +++++++++++++++
+ src/google/protobuf/compiler/importer.cc          |  6 ++++++
+ 2 files changed, 21 insertions(+)
+
+diff --git a/src/google/protobuf/compiler/command_line_interface_unittest.cc b/src/google/protobuf/compiler/command_line_interface_unittest.cc
+index 9cc8cf98c7..ea5aa8b5a8 100644
+--- a/src/google/protobuf/compiler/command_line_interface_unittest.cc
++++ b/src/google/protobuf/compiler/command_line_interface_unittest.cc
+@@ -2346,6 +2346,21 @@ TEST_F(CommandLineInterfaceTest, Warnings) {
+   ExpectErrorSubstring("foo.proto:2:1: warning: Import bar.proto is unused.");
+ }
+
++TEST_F(CommandLineInterfaceTest, ParserWarnings) {
++  // Test that parser warnings are propagated. See #9343.
++
++  CreateTempFile("foo.proto",
++                 "syntax = \"proto2\";\n"
++                 "message bad_to_the_bone {};\n");
++
++  Run("protocol_compiler --test_out=$tmpdir "
++      "--proto_path=$tmpdir foo.proto");
++  ExpectCapturedStderrSubstringWithZeroReturnCode(
++      "foo.proto:2:25: warning: Message name should be in UpperCamelCase. "
++      "Found: bad_to_the_bone. "
++      "See https://developers.google.com/protocol-buffers/docs/style");
++}
++
+ // -------------------------------------------------------------------
+ // Flag parsing tests
+
+diff --git a/src/google/protobuf/compiler/importer.cc b/src/google/protobuf/compiler/importer.cc
+index 3bcb0c90c2..e5f57e60ba 100644
+--- a/src/google/protobuf/compiler/importer.cc
++++ b/src/google/protobuf/compiler/importer.cc
+@@ -105,6 +105,12 @@ class SourceTreeDescriptorDatabase::SingleFileErrorCollector
+     had_errors_ = true;
+   }
+
++  void AddWarning(int line, int column, const std::string& message) override {
++    if (multi_file_error_collector_ != NULL) {
++      multi_file_error_collector_->AddWarning(filename_, line, column, message);
++    }
++  }
++
+  private:
+   std::string filename_;
+   MultiFileErrorCollector* multi_file_error_collector_;
+
+From 95fbc45f3c294df41ef2bd630c6f70249fed7fcd Mon Sep 17 00:00:00 2001
+From: Nikhil Benesch <nikhil.benesch@gmail.com>
+Date: Sat, 25 Dec 2021 13:21:04 -0500
+Subject: [PATCH 2/2] Convert "missing syntax" warning to an actual warning
+
+For some reason this warning was emitted as a log message rather than a
+structured warning. Convert it to use the AddWarning API so that it gets
+emitted with a file and line number by protoc, and is visible via the
+error collection interface during programmatic use.
+---
+ src/google/protobuf/compiler/parser.cc          | 9 +++++----
+ src/google/protobuf/compiler/parser_unittest.cc | 2 +-
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/src/google/protobuf/compiler/parser.cc b/src/google/protobuf/compiler/parser.cc
+index 49ddfceb1a..19dbdbb753 100644
+--- a/src/google/protobuf/compiler/parser.cc
++++ b/src/google/protobuf/compiler/parser.cc
+@@ -646,10 +646,11 @@ bool Parser::Parse(io::Tokenizer* input, FileDescriptorProto* file) {
+       // Store the syntax into the file.
+       if (file != NULL) file->set_syntax(syntax_identifier_);
+     } else if (!stop_after_syntax_identifier_) {
+-      GOOGLE_LOG(WARNING) << "No syntax specified for the proto file: " << file->name()
+-                   << ". Please use 'syntax = \"proto2\";' "
+-                   << "or 'syntax = \"proto3\";' to specify a syntax "
+-                   << "version. (Defaulted to proto2 syntax.)";
++      AddWarning(
++        "No syntax specified. Please use 'syntax = \"proto2\";' or "
++        "'syntax = \"proto3\";' to specify a syntax version. "
++        "(Defaulted to proto2 syntax.)"
++      );
+       syntax_identifier_ = "proto2";
+     }
+
+diff --git a/src/google/protobuf/compiler/parser_unittest.cc b/src/google/protobuf/compiler/parser_unittest.cc
+index 6973bc993d..122218fb81 100644
+--- a/src/google/protobuf/compiler/parser_unittest.cc
++++ b/src/google/protobuf/compiler/parser_unittest.cc
+@@ -223,7 +223,7 @@ TEST_F(ParserTest, WarnIfSyntaxIdentifierOmmitted) {
+   FileDescriptorProto file;
+   CaptureTestStderr();
+   EXPECT_TRUE(parser_->Parse(input_.get(), &file));
+-  EXPECT_TRUE(GetCapturedTestStderr().find("No syntax specified") !=
++  EXPECT_TRUE(error_collector_.warning_.find("No syntax specified") !=
+               std::string::npos);
+ }
+
+EOF
