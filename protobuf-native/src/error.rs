@@ -13,23 +13,39 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! Error types.
+
 use std::error::Error;
 use std::fmt;
 
-/// A file was not found.
-#[derive(Debug, Clone, Copy)]
-pub struct FileNotFoundError;
+#[cxx::bridge(namespace = "protobuf_native")]
+pub(crate) mod ffi {
 
-impl fmt::Display for FileNotFoundError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("file not found")
+}
+
+/// An error occurred while opening a file.
+#[derive(Debug, Clone, Eq, PartialEq, Hash)]
+pub struct FileOpenError(String);
+
+impl FileOpenError {
+    pub(crate) fn new(message: String) -> FileOpenError {
+        FileOpenError(message)
     }
 }
 
-impl Error for FileNotFoundError {}
+impl fmt::Display for FileOpenError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        f.write_str(&self.0)
+    }
+}
+
+impl Error for FileOpenError {}
 
 /// A file was not loadable.
-#[derive(Debug, Clone, Copy)]
+///
+/// This error does not contain details about why the file was not loadable.
+/// For details, seek an API that returns a [`FileLoadError`] instead.
+#[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
 pub struct FileNotLoadableError;
 
 impl fmt::Display for FileNotLoadableError {

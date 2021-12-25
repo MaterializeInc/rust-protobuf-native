@@ -26,8 +26,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-cxx = "1.0.60"
+cxx = "1.0.62"
+paste = "1.0.6"
+pretty_assertions = "1.0.0"
 protobuf-src = { path = "../protobuf-src", version = "1.0.0" }
+tempfile = "3.2.0"
 
 [build-dependencies]
-cxx-build = "1.0.60"
+cxx-build = "1.0.62"

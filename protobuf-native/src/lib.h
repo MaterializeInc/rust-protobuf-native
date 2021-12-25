@@ -13,17 +13,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <google/protobuf/compiler/importer.h>
-#include <google/protobuf/io/zero_copy_stream.h>
+#pragma once
 
-using namespace google::protobuf::compiler;
+#include <google/protobuf/descriptor.h>
+#include <google/protobuf/descriptor.pb.h>
+
+#include <memory>
+
+using namespace google::protobuf;
 
 namespace protobuf_native {
-namespace compiler {
 
-std::unique_ptr<DiskSourceTree> NewDiskSourceTree();
-std::unique_ptr<SourceTreeDescriptorDatabase> NewSourceTreeDescriptorDatabase(
-    SourceTree* source_tree);
+MessageLite* NewMessageLite(const MessageLite& message);
+void DeleteMessageLite(MessageLite*);
 
-}
-}
+DescriptorPool* NewDescriptorPool();
+void DeleteDescriptorPool(DescriptorPool*);
+
+FileDescriptorSet* NewFileDescriptorSet();
+void DeleteFileDescriptorSet(FileDescriptorSet* set);
+
+FileDescriptorProto* NewFileDescriptorProto();
+void DeleteFileDescriptorProto(FileDescriptorProto*);
+
+DescriptorProto* NewDescriptorProto();
+void DeleteDescriptorProto(DescriptorProto* proto);
+
+void DeleteFileDescriptor(FileDescriptor*);
+
+}  // namespace protobuf_native

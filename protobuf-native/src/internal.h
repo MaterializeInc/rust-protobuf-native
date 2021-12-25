@@ -13,21 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "importer.h"
-
-using namespace google::protobuf::compiler;
-
 namespace protobuf_native {
-namespace compiler {
+namespace internal {
 
-std::unique_ptr<DiskSourceTree> NewDiskSourceTree() {
-    return std::make_unique<DiskSourceTree>();
-}
+typedef int CInt;
+typedef void CVoid;
 
-std::unique_ptr<SourceTreeDescriptorDatabase> NewSourceTreeDescriptorDatabase(
-    SourceTree* source_tree) {
-    return std::make_unique<SourceTreeDescriptorDatabase>(source_tree);
-}
-
-} // namespace compiler
-} // namespace protobuf_native
+}  // namespace internal
+}  // namespace protobuf_native

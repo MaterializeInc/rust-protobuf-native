@@ -15,19 +15,17 @@
 
 use std::env;
 
-const MODULES: &[&str] = &[
-    "src/compiler/importer",
-    "src/descriptor_pb",
-    "src/io/zero_copy_stream",
-];
-
 fn main() {
-    let rs_files = MODULES.iter().map(|m| format!("{}.rs", m));
-    let cxx_files = MODULES.iter().map(|m| format!("{}.cc", m));
-    cxx_build::bridges(rs_files)
-        .flag("-std=c++14")
-        .files(cxx_files)
-        .compile("protobuf_native");
+    cxx_build::bridges([
+        "src/compiler.rs",
+        "src/internal.rs",
+        "src/io.rs",
+        "src/lib.rs",
+    ])
+    .flag("-std=c++14")
+    .files(["src/compiler.cc", "src/io.cc", "src/lib.cc"])
+    .warnings_into_errors(cfg!(deny_warnings))
+    .compile("protobuf_native");
 
     // NOTE(benesch): once the bindings in protobuf-sys are more complete,
     // we'll switch to depending on protobuf-sys instead of protobuf-src,

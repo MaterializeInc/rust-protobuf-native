@@ -9,8 +9,10 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
-* Generate bindings for the `google::protobuf::io::CodedInputStream` and
-  `google::protobuf::io::ZeroCopyInputStream` types.
+* Add initial bindings. The bindings in the `protobuf::io` and
+  `protobuf::compiler` modules are now largely complete, while the bindings in
+  the top-level `protobuf` module are very sparse. The `protobuf::util` module
+  is entirely absent.
 
 ## 0.1.0+3.19.1 - 2021-12-23
 
