@@ -23,7 +23,7 @@ repository = "https://github.com/MaterializeInc/rust-protobuf-native"
 license = "Apache-2.0"
 categories = ["external-ffi-bindings"]
 version = "0.1.2+3.19.1"
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 autocxx = "0.14.0"
