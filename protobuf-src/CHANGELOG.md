@@ -9,6 +9,9 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Patch the vendored copy of `libprotobuf` with [protocolbuffers/protobuf#9344]
+  to fix programmatic access to parser warnings.
+
 ## [1.0.1+3.19.1] - 2021-12-23
 
 * Correct the documentation and repository links in the crate metadata.
@@ -29,3 +32,4 @@ Initial release.
 
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
 [Semantic Versioning]: https://semver.org/spec/v2.0.0.html
+[protocolbuffers/protobuf#9344]: https://github.com/protocolbuffers/protobuf/pull/9344
