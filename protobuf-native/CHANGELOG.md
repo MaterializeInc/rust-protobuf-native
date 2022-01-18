@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+## [0.2.1+3.19.1] - 2022-01-18
+
 * Fix the file descriptor traversal in
  `SourceTreeDescriptorDatabase::build_file_descriptor_set` to avoid duplicating
  already-visited file descriptors.
@@ -25,7 +27,8 @@ Versioning].
 Initial release.
 
 <!-- #release:next-url -->
-[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.0+3.19.1...HEAD
+[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.1+3.19.1...HEAD
+[0.2.1+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.0+3.19.1...protobuf-native-v0.2.1+3.19.1
 [0.2.0+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.1.0+3.19.1...protobuf-native-v0.2.0+3.19.1
 
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
