@@ -247,6 +247,8 @@ impl<'a> SourceTreeDescriptorDatabase<'a> {
         }
     }
 
+    /// Builds a file descriptor set containing all file descriptor protos
+    /// reachable from the specified roots.
     pub fn build_file_descriptor_set<P>(
         mut self: Pin<&mut Self>,
         roots: &[P],
@@ -258,17 +260,21 @@ impl<'a> SourceTreeDescriptorDatabase<'a> {
         let mut seen = HashSet::new();
         let mut stack = vec![];
         for root in roots {
-            stack.push(self.as_mut().find_file_by_name(root.as_ref())?);
-            seen.insert(ProtobufPath::from(root.as_ref()));
+            let root = root.as_ref();
+            stack.push(self.as_mut().find_file_by_name(root)?);
+            seen.insert(ProtobufPath::from(root).as_ref().to_vec());
         }
         while let Some(file) = stack.pop() {
             out.as_mut().add_file().copy_from(&file);
             for i in 0..file.dependency_size() {
                 let dep_path = ProtobufPath::from(file.dependency(i));
-                let dep = self
-                    .as_mut()
-                    .find_file_by_name(dep_path.as_path().as_ref())?;
-                stack.push(dep);
+                if !seen.contains(dep_path.as_ref()) {
+                    let dep = self
+                        .as_mut()
+                        .find_file_by_name(dep_path.as_path().as_ref())?;
+                    stack.push(dep);
+                    seen.insert(dep_path.as_ref().to_vec());
+                }
             }
         }
         Ok(out)

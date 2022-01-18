@@ -426,6 +426,8 @@ impl private::MessageLite for DynMessageLite {
 /// internal library are allowed to create subclasses.
 pub trait Message: private::Message + MessageLite {}
 
+/// The protocol compiler can output a file descriptor set containing the .proto
+/// files it parses.
 pub struct FileDescriptorSet {
     _opaque: PhantomPinned,
 }
