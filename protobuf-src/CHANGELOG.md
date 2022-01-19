@@ -9,6 +9,9 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Don't fail to build if `$OUTDIR/install` already exists, which can happen
+  with repeated `cargo build` commands.
+
 ## [1.0.2+3.19.1] - 2022-01-18
 
 * Patch the vendored copy of `libprotobuf` with [protocolbuffers/protobuf#9344]

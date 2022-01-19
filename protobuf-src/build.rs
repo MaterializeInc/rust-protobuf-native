@@ -21,7 +21,7 @@ use std::path::PathBuf;
 fn main() -> Result<(), Box<dyn Error>> {
     let out_dir = PathBuf::from(env::var("OUT_DIR")?);
     let install_dir = out_dir.join("install");
-    fs::create_dir(&install_dir)?;
+    fs::create_dir_all(&install_dir)?;
 
     autotools::Config::new("protobuf")
         .disable("maintainer-mode", None)
