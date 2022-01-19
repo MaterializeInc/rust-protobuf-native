@@ -53,10 +53,12 @@ use std::path::PathBuf;
 
 /// Returns the path to the vendored protoc binary.
 pub fn protoc() -> PathBuf {
-    PathBuf::from(env!("OUT_DIR")).join("bin").join("protoc")
+    PathBuf::from(env!("INSTALL_DIR"))
+        .join("bin")
+        .join("protoc")
 }
 
 /// Returns the path to the vendored include directory.
 pub fn include() -> PathBuf {
-    PathBuf::from(env!("OUT_DIR")).join("include")
+    PathBuf::from(env!("INSTALL_DIR")).join("include")
 }

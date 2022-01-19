@@ -12,6 +12,10 @@ Versioning].
 * Patch the vendored copy of `libprotobuf` with [protocolbuffers/protobuf#9344]
   to fix programmatic access to parser warnings.
 
+* Install `libprotobuf` to `$OUTDIR/install` rather than `$OUTDIR` directly.
+  This makes it easier for build tools downstream of Cargo to extract the
+  compiled artifacts without the build artifacts.
+
 ## [1.0.1+3.19.1] - 2021-12-23
 
 * Correct the documentation and repository links in the crate metadata.

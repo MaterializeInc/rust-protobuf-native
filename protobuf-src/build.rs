@@ -14,13 +14,24 @@
 // limitations under the License.
 
 use std::env;
+use std::error::Error;
+use std::fs;
+use std::path::PathBuf;
 
-fn main() {
+fn main() -> Result<(), Box<dyn Error>> {
+    let out_dir = PathBuf::from(env::var("OUT_DIR")?);
+    let install_dir = out_dir.join("install");
+    fs::create_dir(&install_dir)?;
+
     autotools::Config::new("protobuf")
         .disable("maintainer-mode", None)
+        .out_dir(&install_dir)
         .build();
-    println!(
-        "cargo:CXXBRIDGE_DIR0={}/include",
-        env::var("OUT_DIR").unwrap()
-    )
+
+    // Move the build directory out of the installation directory.
+    fs::rename(install_dir.join("build"), out_dir.join("build"))?;
+
+    println!("cargo:rustc-env=INSTALL_DIR={}", install_dir.display());
+    println!("cargo:CXXBRIDGE_DIR0={}/include", install_dir.display());
+    Ok(())
 }
