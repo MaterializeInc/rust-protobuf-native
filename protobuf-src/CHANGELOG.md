@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+## [1.0.4+3.19.1] - 2022-01-18
+
 * Don't fail to build if `$OUTDIR/build` already exists, which can happen with
   repeated `cargo build` commands.
 
@@ -40,7 +42,8 @@ Versioning].
 Initial release.
 
 <!-- #release:next-url -->
-[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.3+3.19.1...HEAD
+[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.4+3.19.1...HEAD
+[1.0.4+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.3+3.19.1...protobuf-src-v1.0.4+3.19.1
 [1.0.3+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.2+3.19.1...protobuf-src-v1.0.3+3.19.1
 [1.0.2+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.1+3.19.1...protobuf-src-v1.0.2+3.19.1
 [1.0.1+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.0+3.19.1...protobuf-src-v1.0.1+3.19.1
