@@ -29,6 +29,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .build();
 
     // Move the build directory out of the installation directory.
+    let _ = fs::remove_dir_all(out_dir.join("build"));
     fs::rename(install_dir.join("build"), out_dir.join("build"))?;
 
     println!("cargo:rustc-env=INSTALL_DIR={}", install_dir.display());
