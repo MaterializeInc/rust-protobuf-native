@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+## [1.0.2+3.19.1] - 2022-01-18
+
 * Patch the vendored copy of `libprotobuf` with [protocolbuffers/protobuf#9344]
   to fix programmatic access to parser warnings.
 
@@ -30,7 +32,8 @@ Versioning].
 Initial release.
 
 <!-- #release:next-url -->
-[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.1+3.19.1...HEAD
+[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.2+3.19.1...HEAD
+[1.0.2+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.1+3.19.1...protobuf-src-v1.0.2+3.19.1
 [1.0.1+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.0+3.19.1...protobuf-src-v1.0.1+3.19.1
 [1.0.0+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v0.1.0+3.19.1...protobuf-src-v1.0.0+3.19.1
 
