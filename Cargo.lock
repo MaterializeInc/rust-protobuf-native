@@ -542,7 +542,7 @@ dependencies = [
 
 [[package]]
 name = "protobuf-src"
-version = "1.0.4+3.19.1"
+version = "1.0.5+3.19.3"
 dependencies = [
  "autotools",
 ]
