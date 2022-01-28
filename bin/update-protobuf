@@ -139,3 +139,5 @@ index 6973bc993d..122218fb81 100644
  }
 
 EOF
+
+(cd protobuf && autoreconf -ivf)

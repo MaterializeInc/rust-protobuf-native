@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Upgrade to libprotobuf v3.19.3.
+
 ## [1.0.4+3.19.1] - 2022-01-18
 
 * Don't fail to build if `$OUTDIR/build` already exists, which can happen with
