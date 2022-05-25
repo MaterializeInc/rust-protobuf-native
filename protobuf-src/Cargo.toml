@@ -30,4 +30,4 @@ edition = "2021"
 links = "protobuf-src"
 
 [build-dependencies]
-autotools = "0.2.4"
+autotools = "0.2.5"
