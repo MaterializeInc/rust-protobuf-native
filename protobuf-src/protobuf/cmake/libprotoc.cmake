@@ -36,6 +36,7 @@ set(libprotoc_files
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_doc_comment.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_enum.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_enum_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_enum_field.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_enum_field_lite.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_enum_lite.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_extension.cc
@@ -64,24 +65,38 @@ set(libprotoc_files
   ${protobuf_source_dir}/src/google/protobuf/compiler/js/js_generator.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/js/well_known_types_embed.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_enum.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_enum.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_enum_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_enum_field.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_extension.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_extension.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_field.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_file.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_file.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_generator.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_helpers.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_map_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_map_field.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_message.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_message.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_message_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_message_field.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_nsobject_methods.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_oneof.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_oneof.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_primitive_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_primitive_field.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/php/php_generator.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/plugin.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/plugin.pb.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/python/python_generator.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/python/python_helpers.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/python/python_pyi_generator.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/ruby/ruby_generator.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/subprocess.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/zip_writer.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/zip_writer.h
 )
 
 set(libprotoc_headers
@@ -95,18 +110,16 @@ set(libprotoc_headers
   ${protobuf_source_dir}/src/google/protobuf/compiler/csharp/csharp_generator.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/csharp/csharp_names.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/csharp/csharp_options.h
-  ${protobuf_source_dir}/src/google/protobuf/compiler/importer.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_generator.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_kotlin_generator.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_names.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/js/js_generator.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_generator.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_helpers.h
-  ${protobuf_source_dir}/src/google/protobuf/compiler/parser.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/php/php_generator.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/plugin.h
-  ${protobuf_source_dir}/src/google/protobuf/compiler/plugin.pb.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/python/python_generator.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/python/python_pyi_generator.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/ruby/ruby_generator.h
 )
 
@@ -118,8 +131,17 @@ endif()
 
 add_library(libprotoc ${protobuf_SHARED_OR_STATIC}
   ${libprotoc_files} ${libprotoc_headers} ${libprotoc_rc_files})
-target_link_libraries(libprotoc libprotobuf)
-if(MSVC AND protobuf_BUILD_SHARED_LIBS)
+if(protobuf_HAVE_LD_VERSION_SCRIPT)
+  if(${CMAKE_VERSION} VERSION_GREATER 3.13 OR ${CMAKE_VERSION} VERSION_EQUAL 3.13)
+    target_link_options(libprotoc PRIVATE -Wl,--version-script=${protobuf_source_dir}/src/libprotoc.map)
+  elseif(protobuf_BUILD_SHARED_LIBS)
+    target_link_libraries(libprotoc PRIVATE -Wl,--version-script=${protobuf_source_dir}/src/libprotoc.map)
+  endif()
+  set_target_properties(libprotoc PROPERTIES
+    LINK_DEPENDS ${protobuf_source_dir}/src/libprotoc.map)
+endif()
+target_link_libraries(libprotoc PRIVATE libprotobuf)
+if(protobuf_BUILD_SHARED_LIBS)
   target_compile_definitions(libprotoc
     PUBLIC  PROTOBUF_USE_DLLS
     PRIVATE LIBPROTOC_EXPORTS)
@@ -127,6 +149,7 @@ endif()
 set_target_properties(libprotoc PROPERTIES
     COMPILE_DEFINITIONS LIBPROTOC_EXPORTS
     VERSION ${protobuf_VERSION}
+    SOVERSION 31
     OUTPUT_NAME ${LIB_PREFIX}protoc
     DEBUG_POSTFIX "${protobuf_DEBUG_POSTFIX}")
 add_library(protobuf::libprotoc ALIAS libprotoc)

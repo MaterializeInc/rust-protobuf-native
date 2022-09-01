@@ -1,5 +1,5 @@
 # Minimum CMake required
-cmake_minimum_required(VERSION 3.1.3)
+cmake_minimum_required(VERSION 3.5)
 
 if(protobuf_VERBOSE)
   message(STATUS "Protocol Buffers Configuring...")
@@ -41,6 +41,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES Intel)
 endif()
 
 # Options
+option(protobuf_INSTALL "Install protobuf binaries and files" ON)
 if(WITH_PROTOC)
   set(protobuf_PROTOC_EXE ${WITH_PROTOC} CACHE FILEPATH "Protocol Buffer Compiler executable" FORCE)
 endif()
@@ -126,6 +127,30 @@ if (protobuf_DISABLE_RTTI)
   add_definitions(-DGOOGLE_PROTOBUF_NO_RTTI=1)
 endif()
 
+file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/cmaketest.map
+"{
+  global:
+    main;
+  local:
+    *;
+};")
+# CheckLinkerFlag module available in CMake >=3.18.
+if(${CMAKE_VERSION} VERSION_GREATER 3.18 OR ${CMAKE_VERSION} VERSION_EQUAL 3.18)
+  include(CheckLinkerFlag)
+  check_linker_flag(CXX -Wl,--version-script=${CMAKE_CURRENT_BINARY_DIR}/cmaketest.map protobuf_HAVE_LD_VERSION_SCRIPT)
+else()
+  include(CheckCXXSourceCompiles)
+  set(OLD_CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS})
+  set(CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS} -Wl,--version-script=${CMAKE_CURRENT_BINARY_DIR}/cmaketest.map)
+  check_cxx_source_compiles("
+    int main() {
+      return 0;
+    }
+  " protobuf_HAVE_LD_VERSION_SCRIPT)
+  set(CMAKE_REQUIRED_FLAGS ${OLD_CMAKE_REQUIRED_FLAGS})
+endif()
+file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/cmaketest.map)
+
 find_package(Threads REQUIRED)
 
 set(_protobuf_FIND_ZLIB)
@@ -181,8 +206,12 @@ else (protobuf_BUILD_SHARED_LIBS)
   # Prior to CMake 3.15, the MSVC runtime library was pushed into the same flags
   # making programmatic control difficult.  Prefer the functionality in newer
   # CMake versions when available.
-  if(CMAKE_VERSION VERSION_GREATER 3.15 OR CMAKE_VERSION VERSION_EQUAL 3.15)
-    set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>)
+  if(${CMAKE_VERSION} VERSION_GREATER 3.15 OR ${CMAKE_VERSION} VERSION_EQUAL 3.15)
+    if (protobuf_MSVC_STATIC_RUNTIME)
+        set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>)
+    else()
+        set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded$<$<CONFIG:Debug>:Debug>DLL)
+    endif()
   else()
     # In case we are building static libraries, link also the runtime library statically
     # so that MSVCR*.DLL is not required at runtime.
@@ -210,9 +239,7 @@ if (MSVC)
   add_definitions(/utf-8)
   # MSVC warning suppressions
   add_definitions(
-    /wd4018 # 'expression' : signed/unsigned mismatch
     /wd4065 # switch statement contains 'default' but no 'case' labels
-    /wd4146 # unary minus operator applied to unsigned type, result still unsigned
     /wd4244 # 'conversion' conversion from 'type1' to 'type2', possible loss of data
     /wd4251 # 'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2'
     /wd4267 # 'var' : conversion from 'size_t' to 'type', possible loss of data
@@ -294,6 +321,7 @@ if (protobuf_BUILD_TESTS OR protobuf_BUILD_CONFORMANCE OR protobuf_BUILD_EXAMPLE
 endif ()
 
 if (protobuf_BUILD_TESTS)
+  enable_testing()
   include(tests.cmake)
 endif (protobuf_BUILD_TESTS)
 
@@ -301,7 +329,9 @@ if (protobuf_BUILD_CONFORMANCE)
   include(conformance.cmake)
 endif (protobuf_BUILD_CONFORMANCE)
 
-include(install.cmake)
+if (protobuf_INSTALL)
+  include(install.cmake)
+endif (protobuf_INSTALL)
 
 if (protobuf_BUILD_EXAMPLES)
   include(examples.cmake)

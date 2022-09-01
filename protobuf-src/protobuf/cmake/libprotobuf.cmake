@@ -14,13 +14,13 @@ set(libprotobuf_files
   ${protobuf_source_dir}/src/google/protobuf/field_mask.pb.cc
   ${protobuf_source_dir}/src/google/protobuf/generated_message_bases.cc
   ${protobuf_source_dir}/src/google/protobuf/generated_message_reflection.cc
-  ${protobuf_source_dir}/src/google/protobuf/generated_message_table_driven.cc
   ${protobuf_source_dir}/src/google/protobuf/generated_message_tctable_full.cc
   ${protobuf_source_dir}/src/google/protobuf/io/gzip_stream.cc
   ${protobuf_source_dir}/src/google/protobuf/io/printer.cc
   ${protobuf_source_dir}/src/google/protobuf/io/tokenizer.cc
   ${protobuf_source_dir}/src/google/protobuf/map_field.cc
   ${protobuf_source_dir}/src/google/protobuf/message.cc
+  ${protobuf_source_dir}/src/google/protobuf/reflection_internal.h
   ${protobuf_source_dir}/src/google/protobuf/reflection_ops.cc
   ${protobuf_source_dir}/src/google/protobuf/service.cc
   ${protobuf_source_dir}/src/google/protobuf/source_context.pb.cc
@@ -107,24 +107,34 @@ endif()
 
 add_library(libprotobuf ${protobuf_SHARED_OR_STATIC}
   ${libprotobuf_lite_files} ${libprotobuf_files} ${libprotobuf_includes} ${libprotobuf_rc_files})
-target_link_libraries(libprotobuf ${CMAKE_THREAD_LIBS_INIT})
+if(protobuf_HAVE_LD_VERSION_SCRIPT)
+  if(${CMAKE_VERSION} VERSION_GREATER 3.13 OR ${CMAKE_VERSION} VERSION_EQUAL 3.13)
+    target_link_options(libprotobuf PRIVATE -Wl,--version-script=${protobuf_source_dir}/src/libprotobuf.map)
+  elseif(protobuf_BUILD_SHARED_LIBS)
+    target_link_libraries(libprotobuf PRIVATE -Wl,--version-script=${protobuf_source_dir}/src/libprotobuf.map)
+  endif()
+  set_target_properties(libprotobuf PROPERTIES
+    LINK_DEPENDS ${protobuf_source_dir}/src/libprotobuf.map)
+endif()
+target_link_libraries(libprotobuf PRIVATE ${CMAKE_THREAD_LIBS_INIT})
 if(protobuf_WITH_ZLIB)
-  target_link_libraries(libprotobuf ${ZLIB_LIBRARIES})
+  target_link_libraries(libprotobuf PRIVATE ${ZLIB_LIBRARIES})
 endif()
 if(protobuf_LINK_LIBATOMIC)
-  target_link_libraries(libprotobuf atomic)
+  target_link_libraries(libprotobuf PRIVATE atomic)
 endif()
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Android")
-	target_link_libraries(libprotobuf log)
+  target_link_libraries(libprotobuf PRIVATE log)
 endif()
 target_include_directories(libprotobuf PUBLIC ${protobuf_source_dir}/src)
-if(MSVC AND protobuf_BUILD_SHARED_LIBS)
+if(protobuf_BUILD_SHARED_LIBS)
   target_compile_definitions(libprotobuf
     PUBLIC  PROTOBUF_USE_DLLS
     PRIVATE LIBPROTOBUF_EXPORTS)
 endif()
 set_target_properties(libprotobuf PROPERTIES
     VERSION ${protobuf_VERSION}
+    SOVERSION 31
     OUTPUT_NAME ${LIB_PREFIX}protobuf
     DEBUG_POSTFIX "${protobuf_DEBUG_POSTFIX}")
 add_library(protobuf::libprotobuf ALIAS libprotobuf)

@@ -1,4 +1,4 @@
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:61: -1- AC_DEFUN([LT_INIT], [AC_PREREQ([2.62])dnl We use AC_PATH_PROGS_FEATURE_CHECK
+m4trace:/usr/share/aclocal/libtool.m4:61: -1- AC_DEFUN([LT_INIT], [AC_PREREQ([2.62])dnl We use AC_PATH_PROGS_FEATURE_CHECK
 AC_REQUIRE([AC_CONFIG_AUX_DIR_DEFAULT])dnl
 AC_BEFORE([$0], [LT_LANG])dnl
 AC_BEFORE([$0], [LT_OUTPUT])dnl
@@ -33,15 +33,15 @@ _LT_SETUP
 # Only expand once:
 m4_define([LT_INIT])
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:99: -1- AU_DEFUN([AC_PROG_LIBTOOL], [m4_if($#, 0, [LT_INIT], [LT_INIT($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:99: -1- AC_DEFUN([AC_PROG_LIBTOOL], [m4_warn([obsolete], [The macro `AC_PROG_LIBTOOL' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:99: -1- AU_DEFUN([AC_PROG_LIBTOOL], [m4_if($#, 0, [LT_INIT], [LT_INIT($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:99: -1- AC_DEFUN([AC_PROG_LIBTOOL], [AC_DIAGNOSE([obsolete], [The macro `AC_PROG_LIBTOOL' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_INIT], [LT_INIT($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:100: -1- AU_DEFUN([AM_PROG_LIBTOOL], [m4_if($#, 0, [LT_INIT], [LT_INIT($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:100: -1- AC_DEFUN([AM_PROG_LIBTOOL], [m4_warn([obsolete], [The macro `AM_PROG_LIBTOOL' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:100: -1- AU_DEFUN([AM_PROG_LIBTOOL], [m4_if($#, 0, [LT_INIT], [LT_INIT($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:100: -1- AC_DEFUN([AM_PROG_LIBTOOL], [AC_DIAGNOSE([obsolete], [The macro `AM_PROG_LIBTOOL' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_INIT], [LT_INIT($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:619: -1- AC_DEFUN([LT_OUTPUT], [: ${CONFIG_LT=./config.lt}
+m4trace:/usr/share/aclocal/libtool.m4:619: -1- AC_DEFUN([LT_OUTPUT], [: ${CONFIG_LT=./config.lt}
 AC_MSG_NOTICE([creating $CONFIG_LT])
 _LT_GENERATED_FILE_INIT(["$CONFIG_LT"],
 [# Run this file to recreate a libtool stub with the current configuration.])
@@ -126,8 +126,8 @@ $SHELL "$CONFIG_LT" $lt_config_lt_args || lt_cl_success=false
 exec AS_MESSAGE_LOG_FD>>config.log
 $lt_cl_success || AS_EXIT(1)
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:812: -1- AC_DEFUN([LT_SUPPORTED_TAG], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:823: -1- AC_DEFUN([LT_LANG], [AC_BEFORE([$0], [LT_OUTPUT])dnl
+m4trace:/usr/share/aclocal/libtool.m4:811: -1- AC_DEFUN([LT_SUPPORTED_TAG], [])
+m4trace:/usr/share/aclocal/libtool.m4:822: -1- AC_DEFUN([LT_LANG], [AC_BEFORE([$0], [LT_OUTPUT])dnl
 m4_case([$1],
   [C],			[_LT_LANG(C)],
   [C++],		[_LT_LANG(CXX)],
@@ -140,27 +140,27 @@ m4_case([$1],
     [_LT_LANG($1)],
     [m4_fatal([$0: unsupported language: "$1"])])])dnl
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:915: -1- AU_DEFUN([AC_LIBTOOL_CXX], [LT_LANG(C++)])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:915: -1- AC_DEFUN([AC_LIBTOOL_CXX], [m4_warn([obsolete], [The macro `AC_LIBTOOL_CXX' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:914: -1- AU_DEFUN([AC_LIBTOOL_CXX], [LT_LANG(C++)])
+m4trace:/usr/share/aclocal/libtool.m4:914: -1- AC_DEFUN([AC_LIBTOOL_CXX], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_CXX' is obsolete.
 You should run autoupdate.])dnl
 LT_LANG(C++)])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:916: -1- AU_DEFUN([AC_LIBTOOL_F77], [LT_LANG(Fortran 77)])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:916: -1- AC_DEFUN([AC_LIBTOOL_F77], [m4_warn([obsolete], [The macro `AC_LIBTOOL_F77' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:915: -1- AU_DEFUN([AC_LIBTOOL_F77], [LT_LANG(Fortran 77)])
+m4trace:/usr/share/aclocal/libtool.m4:915: -1- AC_DEFUN([AC_LIBTOOL_F77], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_F77' is obsolete.
 You should run autoupdate.])dnl
 LT_LANG(Fortran 77)])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:917: -1- AU_DEFUN([AC_LIBTOOL_FC], [LT_LANG(Fortran)])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:917: -1- AC_DEFUN([AC_LIBTOOL_FC], [m4_warn([obsolete], [The macro `AC_LIBTOOL_FC' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:916: -1- AU_DEFUN([AC_LIBTOOL_FC], [LT_LANG(Fortran)])
+m4trace:/usr/share/aclocal/libtool.m4:916: -1- AC_DEFUN([AC_LIBTOOL_FC], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_FC' is obsolete.
 You should run autoupdate.])dnl
 LT_LANG(Fortran)])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:918: -1- AU_DEFUN([AC_LIBTOOL_GCJ], [LT_LANG(Java)])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:918: -1- AC_DEFUN([AC_LIBTOOL_GCJ], [m4_warn([obsolete], [The macro `AC_LIBTOOL_GCJ' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:917: -1- AU_DEFUN([AC_LIBTOOL_GCJ], [LT_LANG(Java)])
+m4trace:/usr/share/aclocal/libtool.m4:917: -1- AC_DEFUN([AC_LIBTOOL_GCJ], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_GCJ' is obsolete.
 You should run autoupdate.])dnl
 LT_LANG(Java)])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:919: -1- AU_DEFUN([AC_LIBTOOL_RC], [LT_LANG(Windows Resource)])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:919: -1- AC_DEFUN([AC_LIBTOOL_RC], [m4_warn([obsolete], [The macro `AC_LIBTOOL_RC' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:918: -1- AU_DEFUN([AC_LIBTOOL_RC], [LT_LANG(Windows Resource)])
+m4trace:/usr/share/aclocal/libtool.m4:918: -1- AC_DEFUN([AC_LIBTOOL_RC], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_RC' is obsolete.
 You should run autoupdate.])dnl
 LT_LANG(Windows Resource)])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:1242: -1- AC_DEFUN([_LT_WITH_SYSROOT], [AC_MSG_CHECKING([for sysroot])
+m4trace:/usr/share/aclocal/libtool.m4:1246: -1- AC_DEFUN([_LT_WITH_SYSROOT], [AC_MSG_CHECKING([for sysroot])
 AC_ARG_WITH([sysroot],
 [AS_HELP_STRING([--with-sysroot@<:@=DIR@:>@],
   [Search for dependent libraries within DIR (or the compiler's sysroot
@@ -190,7 +190,7 @@ esac
  AC_MSG_RESULT([${lt_sysroot:-no}])
 _LT_DECL([], [lt_sysroot], [0], [The root where to search for ]dnl
 [dependent libraries, and where our libraries should be installed.])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:1573: -1- AC_DEFUN([_LT_COMPILER_OPTION], [m4_require([_LT_FILEUTILS_DEFAULTS])dnl
+m4trace:/usr/share/aclocal/libtool.m4:1577: -1- AC_DEFUN([_LT_COMPILER_OPTION], [m4_require([_LT_FILEUTILS_DEFAULTS])dnl
 m4_require([_LT_DECL_SED])dnl
 AC_CACHE_CHECK([$1], [$2],
   [$2=no
@@ -229,11 +229,11 @@ else
     m4_if([$6], , :, [$6])
 fi
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:1615: -1- AU_DEFUN([AC_LIBTOOL_COMPILER_OPTION], [m4_if($#, 0, [_LT_COMPILER_OPTION], [_LT_COMPILER_OPTION($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:1615: -1- AC_DEFUN([AC_LIBTOOL_COMPILER_OPTION], [m4_warn([obsolete], [The macro `AC_LIBTOOL_COMPILER_OPTION' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:1619: -1- AU_DEFUN([AC_LIBTOOL_COMPILER_OPTION], [m4_if($#, 0, [_LT_COMPILER_OPTION], [_LT_COMPILER_OPTION($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:1619: -1- AC_DEFUN([AC_LIBTOOL_COMPILER_OPTION], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_COMPILER_OPTION' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [_LT_COMPILER_OPTION], [_LT_COMPILER_OPTION($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:1624: -1- AC_DEFUN([_LT_LINKER_OPTION], [m4_require([_LT_FILEUTILS_DEFAULTS])dnl
+m4trace:/usr/share/aclocal/libtool.m4:1628: -1- AC_DEFUN([_LT_LINKER_OPTION], [m4_require([_LT_FILEUTILS_DEFAULTS])dnl
 m4_require([_LT_DECL_SED])dnl
 AC_CACHE_CHECK([$1], [$2],
   [$2=no
@@ -265,11 +265,11 @@ else
     m4_if([$5], , :, [$5])
 fi
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:1659: -1- AU_DEFUN([AC_LIBTOOL_LINKER_OPTION], [m4_if($#, 0, [_LT_LINKER_OPTION], [_LT_LINKER_OPTION($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:1659: -1- AC_DEFUN([AC_LIBTOOL_LINKER_OPTION], [m4_warn([obsolete], [The macro `AC_LIBTOOL_LINKER_OPTION' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:1663: -1- AU_DEFUN([AC_LIBTOOL_LINKER_OPTION], [m4_if($#, 0, [_LT_LINKER_OPTION], [_LT_LINKER_OPTION($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:1663: -1- AC_DEFUN([AC_LIBTOOL_LINKER_OPTION], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_LINKER_OPTION' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [_LT_LINKER_OPTION], [_LT_LINKER_OPTION($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:1666: -1- AC_DEFUN([LT_CMD_MAX_LEN], [AC_REQUIRE([AC_CANONICAL_HOST])dnl
+m4trace:/usr/share/aclocal/libtool.m4:1670: -1- AC_DEFUN([LT_CMD_MAX_LEN], [AC_REQUIRE([AC_CANONICAL_HOST])dnl
 # find the maximum length of command line arguments
 AC_MSG_CHECKING([the maximum length of command line arguments])
 AC_CACHE_VAL([lt_cv_sys_max_cmd_len], [dnl
@@ -405,11 +405,11 @@ max_cmd_len=$lt_cv_sys_max_cmd_len
 _LT_DECL([], [max_cmd_len], [0],
     [What is the maximum length of a command?])
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:1805: -1- AU_DEFUN([AC_LIBTOOL_SYS_MAX_CMD_LEN], [m4_if($#, 0, [LT_CMD_MAX_LEN], [LT_CMD_MAX_LEN($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:1805: -1- AC_DEFUN([AC_LIBTOOL_SYS_MAX_CMD_LEN], [m4_warn([obsolete], [The macro `AC_LIBTOOL_SYS_MAX_CMD_LEN' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:1809: -1- AU_DEFUN([AC_LIBTOOL_SYS_MAX_CMD_LEN], [m4_if($#, 0, [LT_CMD_MAX_LEN], [LT_CMD_MAX_LEN($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:1809: -1- AC_DEFUN([AC_LIBTOOL_SYS_MAX_CMD_LEN], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_SYS_MAX_CMD_LEN' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_CMD_MAX_LEN], [LT_CMD_MAX_LEN($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:1916: -1- AC_DEFUN([LT_SYS_DLOPEN_SELF], [m4_require([_LT_HEADER_DLFCN])dnl
+m4trace:/usr/share/aclocal/libtool.m4:1920: -1- AC_DEFUN([LT_SYS_DLOPEN_SELF], [m4_require([_LT_HEADER_DLFCN])dnl
 if test yes != "$enable_dlopen"; then
   enable_dlopen=unknown
   enable_dlopen_self=unknown
@@ -531,11 +531,11 @@ _LT_DECL([dlopen_self], [enable_dlopen_self], [0],
 _LT_DECL([dlopen_self_static], [enable_dlopen_self_static], [0],
 	 [Whether dlopen of statically linked programs is supported])
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:2041: -1- AU_DEFUN([AC_LIBTOOL_DLOPEN_SELF], [m4_if($#, 0, [LT_SYS_DLOPEN_SELF], [LT_SYS_DLOPEN_SELF($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:2041: -1- AC_DEFUN([AC_LIBTOOL_DLOPEN_SELF], [m4_warn([obsolete], [The macro `AC_LIBTOOL_DLOPEN_SELF' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:2045: -1- AU_DEFUN([AC_LIBTOOL_DLOPEN_SELF], [m4_if($#, 0, [LT_SYS_DLOPEN_SELF], [LT_SYS_DLOPEN_SELF($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:2045: -1- AC_DEFUN([AC_LIBTOOL_DLOPEN_SELF], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_DLOPEN_SELF' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_SYS_DLOPEN_SELF], [LT_SYS_DLOPEN_SELF($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3150: -1- AC_DEFUN([_LT_PATH_TOOL_PREFIX], [m4_require([_LT_DECL_EGREP])dnl
+m4trace:/usr/share/aclocal/libtool.m4:3166: -1- AC_DEFUN([_LT_PATH_TOOL_PREFIX], [m4_require([_LT_DECL_EGREP])dnl
 AC_MSG_CHECKING([for $1])
 AC_CACHE_VAL(lt_cv_path_MAGIC_CMD,
 [case $MAGIC_CMD in
@@ -594,11 +594,11 @@ fi
 _LT_DECL([], [MAGIC_CMD], [0],
 	 [Used to examine libraries when file_magic_cmd begins with "file"])dnl
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3212: -1- AU_DEFUN([AC_PATH_TOOL_PREFIX], [m4_if($#, 0, [_LT_PATH_TOOL_PREFIX], [_LT_PATH_TOOL_PREFIX($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3212: -1- AC_DEFUN([AC_PATH_TOOL_PREFIX], [m4_warn([obsolete], [The macro `AC_PATH_TOOL_PREFIX' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:3228: -1- AU_DEFUN([AC_PATH_TOOL_PREFIX], [m4_if($#, 0, [_LT_PATH_TOOL_PREFIX], [_LT_PATH_TOOL_PREFIX($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:3228: -1- AC_DEFUN([AC_PATH_TOOL_PREFIX], [AC_DIAGNOSE([obsolete], [The macro `AC_PATH_TOOL_PREFIX' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [_LT_PATH_TOOL_PREFIX], [_LT_PATH_TOOL_PREFIX($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3235: -1- AC_DEFUN([LT_PATH_LD], [AC_REQUIRE([AC_PROG_CC])dnl
+m4trace:/usr/share/aclocal/libtool.m4:3251: -1- AC_DEFUN([LT_PATH_LD], [AC_REQUIRE([AC_PROG_CC])dnl
 AC_REQUIRE([AC_CANONICAL_HOST])dnl
 AC_REQUIRE([AC_CANONICAL_BUILD])dnl
 m4_require([_LT_DECL_SED])dnl
@@ -684,15 +684,15 @@ AC_SUBST([LD])
 
 _LT_TAGDECL([], [LD], [1], [The linker used to build libraries])
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3324: -1- AU_DEFUN([AM_PROG_LD], [m4_if($#, 0, [LT_PATH_LD], [LT_PATH_LD($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3324: -1- AC_DEFUN([AM_PROG_LD], [m4_warn([obsolete], [The macro `AM_PROG_LD' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:3340: -1- AU_DEFUN([AM_PROG_LD], [m4_if($#, 0, [LT_PATH_LD], [LT_PATH_LD($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:3340: -1- AC_DEFUN([AM_PROG_LD], [AC_DIAGNOSE([obsolete], [The macro `AM_PROG_LD' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_PATH_LD], [LT_PATH_LD($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3325: -1- AU_DEFUN([AC_PROG_LD], [m4_if($#, 0, [LT_PATH_LD], [LT_PATH_LD($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3325: -1- AC_DEFUN([AC_PROG_LD], [m4_warn([obsolete], [The macro `AC_PROG_LD' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:3341: -1- AU_DEFUN([AC_PROG_LD], [m4_if($#, 0, [LT_PATH_LD], [LT_PATH_LD($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:3341: -1- AC_DEFUN([AC_PROG_LD], [AC_DIAGNOSE([obsolete], [The macro `AC_PROG_LD' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_PATH_LD], [LT_PATH_LD($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3654: -1- AC_DEFUN([LT_PATH_NM], [AC_REQUIRE([AC_PROG_CC])dnl
+m4trace:/usr/share/aclocal/libtool.m4:3670: -1- AC_DEFUN([LT_PATH_NM], [AC_REQUIRE([AC_PROG_CC])dnl
 AC_CACHE_CHECK([for BSD- or MS-compatible name lister (nm)], lt_cv_path_NM,
 [if test -n "$NM"; then
   # Let the user override the test.
@@ -784,15 +784,15 @@ AC_CACHE_CHECK([the name lister ($NM) interface], [lt_cv_nm_interface],
   fi
   rm -f conftest*])
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3749: -1- AU_DEFUN([AM_PROG_NM], [m4_if($#, 0, [LT_PATH_NM], [LT_PATH_NM($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3749: -1- AC_DEFUN([AM_PROG_NM], [m4_warn([obsolete], [The macro `AM_PROG_NM' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:3765: -1- AU_DEFUN([AM_PROG_NM], [m4_if($#, 0, [LT_PATH_NM], [LT_PATH_NM($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:3765: -1- AC_DEFUN([AM_PROG_NM], [AC_DIAGNOSE([obsolete], [The macro `AM_PROG_NM' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_PATH_NM], [LT_PATH_NM($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3750: -1- AU_DEFUN([AC_PROG_NM], [m4_if($#, 0, [LT_PATH_NM], [LT_PATH_NM($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3750: -1- AC_DEFUN([AC_PROG_NM], [m4_warn([obsolete], [The macro `AC_PROG_NM' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:3766: -1- AU_DEFUN([AC_PROG_NM], [m4_if($#, 0, [LT_PATH_NM], [LT_PATH_NM($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:3766: -1- AC_DEFUN([AC_PROG_NM], [AC_DIAGNOSE([obsolete], [The macro `AC_PROG_NM' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_PATH_NM], [LT_PATH_NM($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3821: -1- AC_DEFUN([_LT_DLL_DEF_P], [dnl
+m4trace:/usr/share/aclocal/libtool.m4:3837: -1- AC_DEFUN([_LT_DLL_DEF_P], [dnl
   test DEF = "`$SED -n dnl
     -e '\''s/^[[	 ]]*//'\'' dnl Strip leading whitespace
     -e '\''/^\(;.*\)*$/d'\'' dnl      Delete empty lines and comments
@@ -800,7 +800,7 @@ m4trace:/opt/homebrew/share/aclocal/libtool.m4:3821: -1- AC_DEFUN([_LT_DLL_DEF_P
     -e q dnl                          Only consider the first "real" line
     $1`" dnl
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3835: -1- AC_DEFUN([LT_LIB_M], [AC_REQUIRE([AC_CANONICAL_HOST])dnl
+m4trace:/usr/share/aclocal/libtool.m4:3851: -1- AC_DEFUN([LT_LIB_M], [AC_REQUIRE([AC_CANONICAL_HOST])dnl
 LIBM=
 case $host in
 *-*-beos* | *-*-cegcc* | *-*-cygwin* | *-*-haiku* | *-*-pw32* | *-*-darwin*)
@@ -816,33 +816,33 @@ case $host in
 esac
 AC_SUBST([LIBM])
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3854: -1- AU_DEFUN([AC_CHECK_LIBM], [m4_if($#, 0, [LT_LIB_M], [LT_LIB_M($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:3854: -1- AC_DEFUN([AC_CHECK_LIBM], [m4_warn([obsolete], [The macro `AC_CHECK_LIBM' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:3870: -1- AU_DEFUN([AC_CHECK_LIBM], [m4_if($#, 0, [LT_LIB_M], [LT_LIB_M($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:3870: -1- AC_DEFUN([AC_CHECK_LIBM], [AC_DIAGNOSE([obsolete], [The macro `AC_CHECK_LIBM' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_LIB_M], [LT_LIB_M($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:8117: -1- AC_DEFUN([LT_PROG_GCJ], [m4_ifdef([AC_PROG_GCJ], [AC_PROG_GCJ],
+m4trace:/usr/share/aclocal/libtool.m4:8147: -1- AC_DEFUN([LT_PROG_GCJ], [m4_ifdef([AC_PROG_GCJ], [AC_PROG_GCJ],
   [m4_ifdef([A][M_PROG_GCJ], [A][M_PROG_GCJ],
     [AC_CHECK_TOOL(GCJ, gcj,)
       test set = "${GCJFLAGS+set}" || GCJFLAGS="-g -O2"
       AC_SUBST(GCJFLAGS)])])[]dnl
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:8126: -1- AU_DEFUN([LT_AC_PROG_GCJ], [m4_if($#, 0, [LT_PROG_GCJ], [LT_PROG_GCJ($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:8126: -1- AC_DEFUN([LT_AC_PROG_GCJ], [m4_warn([obsolete], [The macro `LT_AC_PROG_GCJ' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:8156: -1- AU_DEFUN([LT_AC_PROG_GCJ], [m4_if($#, 0, [LT_PROG_GCJ], [LT_PROG_GCJ($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:8156: -1- AC_DEFUN([LT_AC_PROG_GCJ], [AC_DIAGNOSE([obsolete], [The macro `LT_AC_PROG_GCJ' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_PROG_GCJ], [LT_PROG_GCJ($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:8133: -1- AC_DEFUN([LT_PROG_GO], [AC_CHECK_TOOL(GOC, gccgo,)
+m4trace:/usr/share/aclocal/libtool.m4:8163: -1- AC_DEFUN([LT_PROG_GO], [AC_CHECK_TOOL(GOC, gccgo,)
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:8140: -1- AC_DEFUN([LT_PROG_RC], [AC_CHECK_TOOL(RC, windres,)
+m4trace:/usr/share/aclocal/libtool.m4:8170: -1- AC_DEFUN([LT_PROG_RC], [AC_CHECK_TOOL(RC, windres,)
 ])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:8145: -1- AU_DEFUN([LT_AC_PROG_RC], [m4_if($#, 0, [LT_PROG_RC], [LT_PROG_RC($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:8145: -1- AC_DEFUN([LT_AC_PROG_RC], [m4_warn([obsolete], [The macro `LT_AC_PROG_RC' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:8175: -1- AU_DEFUN([LT_AC_PROG_RC], [m4_if($#, 0, [LT_PROG_RC], [LT_PROG_RC($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:8175: -1- AC_DEFUN([LT_AC_PROG_RC], [AC_DIAGNOSE([obsolete], [The macro `LT_AC_PROG_RC' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_PROG_RC], [LT_PROG_RC($@)])])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:8265: -1- AU_DEFUN([LT_AC_PROG_SED], [m4_if($#, 0, [AC_PROG_SED], [AC_PROG_SED($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/libtool.m4:8265: -1- AC_DEFUN([LT_AC_PROG_SED], [m4_warn([obsolete], [The macro `LT_AC_PROG_SED' is obsolete.
+m4trace:/usr/share/aclocal/libtool.m4:8295: -1- AU_DEFUN([LT_AC_PROG_SED], [m4_if($#, 0, [AC_PROG_SED], [AC_PROG_SED($@)])])
+m4trace:/usr/share/aclocal/libtool.m4:8295: -1- AC_DEFUN([LT_AC_PROG_SED], [AC_DIAGNOSE([obsolete], [The macro `LT_AC_PROG_SED' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [AC_PROG_SED], [AC_PROG_SED($@)])])
-m4trace:/opt/homebrew/share/aclocal/ltargz.m4:12: -1- AC_DEFUN([LT_FUNC_ARGZ], [
+m4trace:/usr/share/aclocal/ltargz.m4:12: -1- AC_DEFUN([LT_FUNC_ARGZ], [
 AC_CHECK_HEADERS([argz.h], [], [], [AC_INCLUDES_DEFAULT])
 
 AC_CHECK_TYPES([error_t],
@@ -905,10 +905,10 @@ AS_IF([test -z "$LT_ARGZ_H"],
 
 AC_SUBST([LT_ARGZ_H])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:16: -1- AC_DEFUN([LT_CONFIG_LTDL_DIR], [AC_BEFORE([$0], [LTDL_INIT])
+m4trace:/usr/share/aclocal/ltdl.m4:16: -1- AC_DEFUN([LT_CONFIG_LTDL_DIR], [AC_BEFORE([$0], [LTDL_INIT])
 _$0($*)
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:68: -1- AC_DEFUN([LTDL_CONVENIENCE], [AC_BEFORE([$0], [LTDL_INIT])dnl
+m4trace:/usr/share/aclocal/ltdl.m4:68: -1- AC_DEFUN([LTDL_CONVENIENCE], [AC_BEFORE([$0], [LTDL_INIT])dnl
 dnl Although the argument is deprecated and no longer documented,
 dnl LTDL_CONVENIENCE used to take a DIRECTORY orgument, if we have one
 dnl here make sure it is the same as any other declaration of libltdl's
@@ -917,13 +917,13 @@ dnl not yet using an explicit LT_CONFIG_LTDL_DIR.
 m4_ifval([$1], [_LT_CONFIG_LTDL_DIR([$1])])dnl
 _$0()
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:81: -1- AU_DEFUN([AC_LIBLTDL_CONVENIENCE], [_LT_CONFIG_LTDL_DIR([m4_default([$1], [libltdl])])
+m4trace:/usr/share/aclocal/ltdl.m4:81: -1- AU_DEFUN([AC_LIBLTDL_CONVENIENCE], [_LT_CONFIG_LTDL_DIR([m4_default([$1], [libltdl])])
 _LTDL_CONVENIENCE])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:81: -1- AC_DEFUN([AC_LIBLTDL_CONVENIENCE], [m4_warn([obsolete], [The macro `AC_LIBLTDL_CONVENIENCE' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:81: -1- AC_DEFUN([AC_LIBLTDL_CONVENIENCE], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBLTDL_CONVENIENCE' is obsolete.
 You should run autoupdate.])dnl
 _LT_CONFIG_LTDL_DIR([m4_default([$1], [libltdl])])
 _LTDL_CONVENIENCE])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:124: -1- AC_DEFUN([LTDL_INSTALLABLE], [AC_BEFORE([$0], [LTDL_INIT])dnl
+m4trace:/usr/share/aclocal/ltdl.m4:124: -1- AC_DEFUN([LTDL_INSTALLABLE], [AC_BEFORE([$0], [LTDL_INIT])dnl
 dnl Although the argument is deprecated and no longer documented,
 dnl LTDL_INSTALLABLE used to take a DIRECTORY orgument, if we have one
 dnl here make sure it is the same as any other declaration of libltdl's
@@ -932,17 +932,17 @@ dnl not yet using an explicit LT_CONFIG_LTDL_DIR.
 m4_ifval([$1], [_LT_CONFIG_LTDL_DIR([$1])])dnl
 _$0()
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:137: -1- AU_DEFUN([AC_LIBLTDL_INSTALLABLE], [_LT_CONFIG_LTDL_DIR([m4_default([$1], [libltdl])])
+m4trace:/usr/share/aclocal/ltdl.m4:137: -1- AU_DEFUN([AC_LIBLTDL_INSTALLABLE], [_LT_CONFIG_LTDL_DIR([m4_default([$1], [libltdl])])
 _LTDL_INSTALLABLE])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:137: -1- AC_DEFUN([AC_LIBLTDL_INSTALLABLE], [m4_warn([obsolete], [The macro `AC_LIBLTDL_INSTALLABLE' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:137: -1- AC_DEFUN([AC_LIBLTDL_INSTALLABLE], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBLTDL_INSTALLABLE' is obsolete.
 You should run autoupdate.])dnl
 _LT_CONFIG_LTDL_DIR([m4_default([$1], [libltdl])])
 _LTDL_INSTALLABLE])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:213: -1- AC_DEFUN([_LT_LIBOBJ], [
+m4trace:/usr/share/aclocal/ltdl.m4:213: -1- AC_DEFUN([_LT_LIBOBJ], [
   m4_pattern_allow([^_LT_LIBOBJS$])
   _LT_LIBOBJS="$_LT_LIBOBJS $1.$ac_objext"
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:226: -1- AC_DEFUN([LTDL_INIT], [dnl Parse OPTIONS
+m4trace:/usr/share/aclocal/ltdl.m4:226: -1- AC_DEFUN([LTDL_INIT], [dnl Parse OPTIONS
 _LT_SET_OPTIONS([$0], [$1])
 
 dnl We need to keep our own list of libobjs separate from our parent project,
@@ -1065,19 +1065,19 @@ AC_CONFIG_COMMANDS_PRE([
 # Only expand once:
 m4_define([LTDL_INIT])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:352: -1- AU_DEFUN([AC_LIB_LTDL], [LTDL_INIT($@)])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:352: -1- AC_DEFUN([AC_LIB_LTDL], [m4_warn([obsolete], [The macro `AC_LIB_LTDL' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:352: -1- AU_DEFUN([AC_LIB_LTDL], [LTDL_INIT($@)])
+m4trace:/usr/share/aclocal/ltdl.m4:352: -1- AC_DEFUN([AC_LIB_LTDL], [AC_DIAGNOSE([obsolete], [The macro `AC_LIB_LTDL' is obsolete.
 You should run autoupdate.])dnl
 LTDL_INIT($@)])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:353: -1- AU_DEFUN([AC_WITH_LTDL], [LTDL_INIT($@)])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:353: -1- AC_DEFUN([AC_WITH_LTDL], [m4_warn([obsolete], [The macro `AC_WITH_LTDL' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:353: -1- AU_DEFUN([AC_WITH_LTDL], [LTDL_INIT($@)])
+m4trace:/usr/share/aclocal/ltdl.m4:353: -1- AC_DEFUN([AC_WITH_LTDL], [AC_DIAGNOSE([obsolete], [The macro `AC_WITH_LTDL' is obsolete.
 You should run autoupdate.])dnl
 LTDL_INIT($@)])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:354: -1- AU_DEFUN([LT_WITH_LTDL], [LTDL_INIT($@)])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:354: -1- AC_DEFUN([LT_WITH_LTDL], [m4_warn([obsolete], [The macro `LT_WITH_LTDL' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:354: -1- AU_DEFUN([LT_WITH_LTDL], [LTDL_INIT($@)])
+m4trace:/usr/share/aclocal/ltdl.m4:354: -1- AC_DEFUN([LT_WITH_LTDL], [AC_DIAGNOSE([obsolete], [The macro `LT_WITH_LTDL' is obsolete.
 You should run autoupdate.])dnl
 LTDL_INIT($@)])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:367: -1- AC_DEFUN([_LTDL_SETUP], [AC_REQUIRE([AC_PROG_CC])dnl
+m4trace:/usr/share/aclocal/ltdl.m4:367: -1- AC_DEFUN([_LTDL_SETUP], [AC_REQUIRE([AC_PROG_CC])dnl
 AC_REQUIRE([LT_SYS_MODULE_EXT])dnl
 AC_REQUIRE([LT_SYS_MODULE_PATH])dnl
 AC_REQUIRE([LT_SYS_DLSEARCH_PATH])dnl
@@ -1131,7 +1131,7 @@ name=ltdl
 eval "LTDLOPEN=\"$libname_spec\""
 AC_SUBST([LTDLOPEN])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:443: -1- AC_DEFUN([LT_SYS_DLOPEN_DEPLIBS], [AC_REQUIRE([AC_CANONICAL_HOST])dnl
+m4trace:/usr/share/aclocal/ltdl.m4:443: -1- AC_DEFUN([LT_SYS_DLOPEN_DEPLIBS], [AC_REQUIRE([AC_CANONICAL_HOST])dnl
 AC_CACHE_CHECK([whether deplibs are loaded by dlopen],
   [lt_cv_sys_dlopen_deplibs],
   [# PORTME does your system automatically load deplibs for dlopen?
@@ -1186,7 +1186,7 @@ AC_CACHE_CHECK([whether deplibs are loaded by dlopen],
     # at 6.2 and later dlopen does load deplibs.
     lt_cv_sys_dlopen_deplibs=yes
     ;;
-  netbsd*)
+  netbsd* | netbsdelf*-gnu)
     lt_cv_sys_dlopen_deplibs=yes
     ;;
   openbsd*)
@@ -1230,11 +1230,11 @@ if test yes != "$lt_cv_sys_dlopen_deplibs"; then
     [Define if the OS needs help to load dependent libraries for dlopen().])
 fi
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:545: -1- AU_DEFUN([AC_LTDL_SYS_DLOPEN_DEPLIBS], [m4_if($#, 0, [LT_SYS_DLOPEN_DEPLIBS], [LT_SYS_DLOPEN_DEPLIBS($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:545: -1- AC_DEFUN([AC_LTDL_SYS_DLOPEN_DEPLIBS], [m4_warn([obsolete], [The macro `AC_LTDL_SYS_DLOPEN_DEPLIBS' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:545: -1- AU_DEFUN([AC_LTDL_SYS_DLOPEN_DEPLIBS], [m4_if($#, 0, [LT_SYS_DLOPEN_DEPLIBS], [LT_SYS_DLOPEN_DEPLIBS($@)])])
+m4trace:/usr/share/aclocal/ltdl.m4:545: -1- AC_DEFUN([AC_LTDL_SYS_DLOPEN_DEPLIBS], [AC_DIAGNOSE([obsolete], [The macro `AC_LTDL_SYS_DLOPEN_DEPLIBS' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_SYS_DLOPEN_DEPLIBS], [LT_SYS_DLOPEN_DEPLIBS($@)])])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:552: -1- AC_DEFUN([LT_SYS_MODULE_EXT], [m4_require([_LT_SYS_DYNAMIC_LINKER])dnl
+m4trace:/usr/share/aclocal/ltdl.m4:552: -1- AC_DEFUN([LT_SYS_MODULE_EXT], [m4_require([_LT_SYS_DYNAMIC_LINKER])dnl
 AC_CACHE_CHECK([what extension is used for runtime loadable modules],
   [libltdl_cv_shlibext],
 [
@@ -1259,11 +1259,11 @@ if test -n "$shared_archive_member_spec"; then
     [Define to the shared archive member specification, say "(shr.o)".])
 fi
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:580: -1- AU_DEFUN([AC_LTDL_SHLIBEXT], [m4_if($#, 0, [LT_SYS_MODULE_EXT], [LT_SYS_MODULE_EXT($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:580: -1- AC_DEFUN([AC_LTDL_SHLIBEXT], [m4_warn([obsolete], [The macro `AC_LTDL_SHLIBEXT' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:580: -1- AU_DEFUN([AC_LTDL_SHLIBEXT], [m4_if($#, 0, [LT_SYS_MODULE_EXT], [LT_SYS_MODULE_EXT($@)])])
+m4trace:/usr/share/aclocal/ltdl.m4:580: -1- AC_DEFUN([AC_LTDL_SHLIBEXT], [AC_DIAGNOSE([obsolete], [The macro `AC_LTDL_SHLIBEXT' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_SYS_MODULE_EXT], [LT_SYS_MODULE_EXT($@)])])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:587: -1- AC_DEFUN([LT_SYS_MODULE_PATH], [m4_require([_LT_SYS_DYNAMIC_LINKER])dnl
+m4trace:/usr/share/aclocal/ltdl.m4:587: -1- AC_DEFUN([LT_SYS_MODULE_PATH], [m4_require([_LT_SYS_DYNAMIC_LINKER])dnl
 AC_CACHE_CHECK([what variable specifies run-time module search path],
   [lt_cv_module_path_var], [lt_cv_module_path_var=$shlibpath_var])
 if test -n "$lt_cv_module_path_var"; then
@@ -1272,11 +1272,11 @@ if test -n "$lt_cv_module_path_var"; then
     [Define to the name of the environment variable that determines the run-time module search path.])
 fi
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:599: -1- AU_DEFUN([AC_LTDL_SHLIBPATH], [m4_if($#, 0, [LT_SYS_MODULE_PATH], [LT_SYS_MODULE_PATH($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:599: -1- AC_DEFUN([AC_LTDL_SHLIBPATH], [m4_warn([obsolete], [The macro `AC_LTDL_SHLIBPATH' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:599: -1- AU_DEFUN([AC_LTDL_SHLIBPATH], [m4_if($#, 0, [LT_SYS_MODULE_PATH], [LT_SYS_MODULE_PATH($@)])])
+m4trace:/usr/share/aclocal/ltdl.m4:599: -1- AC_DEFUN([AC_LTDL_SHLIBPATH], [AC_DIAGNOSE([obsolete], [The macro `AC_LTDL_SHLIBPATH' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_SYS_MODULE_PATH], [LT_SYS_MODULE_PATH($@)])])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:606: -1- AC_DEFUN([LT_SYS_DLSEARCH_PATH], [m4_require([_LT_SYS_DYNAMIC_LINKER])dnl
+m4trace:/usr/share/aclocal/ltdl.m4:606: -1- AC_DEFUN([LT_SYS_DLSEARCH_PATH], [m4_require([_LT_SYS_DYNAMIC_LINKER])dnl
 AC_CACHE_CHECK([for the default library search path],
   [lt_cv_sys_dlsearch_path],
   [lt_cv_sys_dlsearch_path=$sys_lib_dlsearch_path_spec])
@@ -1294,11 +1294,11 @@ if test -n "$lt_cv_sys_dlsearch_path"; then
     [Define to the system default library search path.])
 fi
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:627: -1- AU_DEFUN([AC_LTDL_SYSSEARCHPATH], [m4_if($#, 0, [LT_SYS_DLSEARCH_PATH], [LT_SYS_DLSEARCH_PATH($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:627: -1- AC_DEFUN([AC_LTDL_SYSSEARCHPATH], [m4_warn([obsolete], [The macro `AC_LTDL_SYSSEARCHPATH' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:627: -1- AU_DEFUN([AC_LTDL_SYSSEARCHPATH], [m4_if($#, 0, [LT_SYS_DLSEARCH_PATH], [LT_SYS_DLSEARCH_PATH($@)])])
+m4trace:/usr/share/aclocal/ltdl.m4:627: -1- AC_DEFUN([AC_LTDL_SYSSEARCHPATH], [AC_DIAGNOSE([obsolete], [The macro `AC_LTDL_SYSSEARCHPATH' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_SYS_DLSEARCH_PATH], [LT_SYS_DLSEARCH_PATH($@)])])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:653: -1- AC_DEFUN([LT_LIB_DLLOAD], [m4_pattern_allow([^LT_DLLOADERS$])
+m4trace:/usr/share/aclocal/ltdl.m4:653: -1- AC_DEFUN([LT_LIB_DLLOAD], [m4_pattern_allow([^LT_DLLOADERS$])
 LT_DLLOADERS=
 AC_SUBST([LT_DLLOADERS])
 
@@ -1390,11 +1390,11 @@ AC_SUBST([LIBADD_DL])
 LIBS=$lt_dlload_save_LIBS
 AC_LANG_POP
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:748: -1- AU_DEFUN([AC_LTDL_DLLIB], [m4_if($#, 0, [LT_LIB_DLLOAD], [LT_LIB_DLLOAD($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:748: -1- AC_DEFUN([AC_LTDL_DLLIB], [m4_warn([obsolete], [The macro `AC_LTDL_DLLIB' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:748: -1- AU_DEFUN([AC_LTDL_DLLIB], [m4_if($#, 0, [LT_LIB_DLLOAD], [LT_LIB_DLLOAD($@)])])
+m4trace:/usr/share/aclocal/ltdl.m4:748: -1- AC_DEFUN([AC_LTDL_DLLIB], [AC_DIAGNOSE([obsolete], [The macro `AC_LTDL_DLLIB' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_LIB_DLLOAD], [LT_LIB_DLLOAD($@)])])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:756: -1- AC_DEFUN([LT_SYS_SYMBOL_USCORE], [m4_require([_LT_CMD_GLOBAL_SYMBOLS])dnl
+m4trace:/usr/share/aclocal/ltdl.m4:756: -1- AC_DEFUN([LT_SYS_SYMBOL_USCORE], [m4_require([_LT_CMD_GLOBAL_SYMBOLS])dnl
 AC_CACHE_CHECK([for _ prefix in compiled symbols],
   [lt_cv_sys_symbol_underscore],
   [lt_cv_sys_symbol_underscore=no
@@ -1428,11 +1428,11 @@ _LT_EOF
   sys_symbol_underscore=$lt_cv_sys_symbol_underscore
   AC_SUBST([sys_symbol_underscore])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:793: -1- AU_DEFUN([AC_LTDL_SYMBOL_USCORE], [m4_if($#, 0, [LT_SYS_SYMBOL_USCORE], [LT_SYS_SYMBOL_USCORE($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:793: -1- AC_DEFUN([AC_LTDL_SYMBOL_USCORE], [m4_warn([obsolete], [The macro `AC_LTDL_SYMBOL_USCORE' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:793: -1- AU_DEFUN([AC_LTDL_SYMBOL_USCORE], [m4_if($#, 0, [LT_SYS_SYMBOL_USCORE], [LT_SYS_SYMBOL_USCORE($@)])])
+m4trace:/usr/share/aclocal/ltdl.m4:793: -1- AC_DEFUN([AC_LTDL_SYMBOL_USCORE], [AC_DIAGNOSE([obsolete], [The macro `AC_LTDL_SYMBOL_USCORE' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_SYS_SYMBOL_USCORE], [LT_SYS_SYMBOL_USCORE($@)])])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:800: -1- AC_DEFUN([LT_FUNC_DLSYM_USCORE], [AC_REQUIRE([_LT_COMPILER_PIC])dnl	for lt_prog_compiler_wl
+m4trace:/usr/share/aclocal/ltdl.m4:800: -1- AC_DEFUN([LT_FUNC_DLSYM_USCORE], [AC_REQUIRE([_LT_COMPILER_PIC])dnl	for lt_prog_compiler_wl
 AC_REQUIRE([LT_SYS_SYMBOL_USCORE])dnl	for lt_cv_sys_symbol_underscore
 AC_REQUIRE([LT_SYS_MODULE_EXT])dnl	for libltdl_cv_shlibext
 if test yes = "$lt_cv_sys_symbol_underscore"; then
@@ -1536,30 +1536,30 @@ if test yes = "$libltdl_cv_need_uscore"; then
     [Define if dlsym() requires a leading underscore in symbol names.])
 fi
 ])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:907: -1- AU_DEFUN([AC_LTDL_DLSYM_USCORE], [m4_if($#, 0, [LT_FUNC_DLSYM_USCORE], [LT_FUNC_DLSYM_USCORE($@)])], [], [])
-m4trace:/opt/homebrew/share/aclocal/ltdl.m4:907: -1- AC_DEFUN([AC_LTDL_DLSYM_USCORE], [m4_warn([obsolete], [The macro `AC_LTDL_DLSYM_USCORE' is obsolete.
+m4trace:/usr/share/aclocal/ltdl.m4:907: -1- AU_DEFUN([AC_LTDL_DLSYM_USCORE], [m4_if($#, 0, [LT_FUNC_DLSYM_USCORE], [LT_FUNC_DLSYM_USCORE($@)])])
+m4trace:/usr/share/aclocal/ltdl.m4:907: -1- AC_DEFUN([AC_LTDL_DLSYM_USCORE], [AC_DIAGNOSE([obsolete], [The macro `AC_LTDL_DLSYM_USCORE' is obsolete.
 You should run autoupdate.])dnl
 m4_if($#, 0, [LT_FUNC_DLSYM_USCORE], [LT_FUNC_DLSYM_USCORE($@)])])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:14: -1- AC_DEFUN([LTOPTIONS_VERSION], [m4_if([1])])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:113: -1- AU_DEFUN([AC_LIBTOOL_DLOPEN], [_LT_SET_OPTION([LT_INIT], [dlopen])
+m4trace:/usr/share/aclocal/ltoptions.m4:14: -1- AC_DEFUN([LTOPTIONS_VERSION], [m4_if([1])])
+m4trace:/usr/share/aclocal/ltoptions.m4:113: -1- AU_DEFUN([AC_LIBTOOL_DLOPEN], [_LT_SET_OPTION([LT_INIT], [dlopen])
 AC_DIAGNOSE([obsolete],
 [$0: Remove this warning and the call to _LT_SET_OPTION when you
 put the 'dlopen' option into LT_INIT's first parameter.])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:113: -1- AC_DEFUN([AC_LIBTOOL_DLOPEN], [m4_warn([obsolete], [The macro `AC_LIBTOOL_DLOPEN' is obsolete.
+m4trace:/usr/share/aclocal/ltoptions.m4:113: -1- AC_DEFUN([AC_LIBTOOL_DLOPEN], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_DLOPEN' is obsolete.
 You should run autoupdate.])dnl
 _LT_SET_OPTION([LT_INIT], [dlopen])
 AC_DIAGNOSE([obsolete],
 [$0: Remove this warning and the call to _LT_SET_OPTION when you
 put the 'dlopen' option into LT_INIT's first parameter.])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:148: -1- AU_DEFUN([AC_LIBTOOL_WIN32_DLL], [AC_REQUIRE([AC_CANONICAL_HOST])dnl
+m4trace:/usr/share/aclocal/ltoptions.m4:148: -1- AU_DEFUN([AC_LIBTOOL_WIN32_DLL], [AC_REQUIRE([AC_CANONICAL_HOST])dnl
 _LT_SET_OPTION([LT_INIT], [win32-dll])
 AC_DIAGNOSE([obsolete],
 [$0: Remove this warning and the call to _LT_SET_OPTION when you
 put the 'win32-dll' option into LT_INIT's first parameter.])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:148: -1- AC_DEFUN([AC_LIBTOOL_WIN32_DLL], [m4_warn([obsolete], [The macro `AC_LIBTOOL_WIN32_DLL' is obsolete.
+m4trace:/usr/share/aclocal/ltoptions.m4:148: -1- AC_DEFUN([AC_LIBTOOL_WIN32_DLL], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_WIN32_DLL' is obsolete.
 You should run autoupdate.])dnl
 AC_REQUIRE([AC_CANONICAL_HOST])dnl
 _LT_SET_OPTION([LT_INIT], [win32-dll])
@@ -1567,138 +1567,138 @@ AC_DIAGNOSE([obsolete],
 [$0: Remove this warning and the call to _LT_SET_OPTION when you
 put the 'win32-dll' option into LT_INIT's first parameter.])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:197: -1- AC_DEFUN([AC_ENABLE_SHARED], [_LT_SET_OPTION([LT_INIT], m4_if([$1], [no], [disable-])[shared])
+m4trace:/usr/share/aclocal/ltoptions.m4:197: -1- AC_DEFUN([AC_ENABLE_SHARED], [_LT_SET_OPTION([LT_INIT], m4_if([$1], [no], [disable-])[shared])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:201: -1- AC_DEFUN([AC_DISABLE_SHARED], [_LT_SET_OPTION([LT_INIT], [disable-shared])
+m4trace:/usr/share/aclocal/ltoptions.m4:201: -1- AC_DEFUN([AC_DISABLE_SHARED], [_LT_SET_OPTION([LT_INIT], [disable-shared])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:205: -1- AU_DEFUN([AM_ENABLE_SHARED], [AC_ENABLE_SHARED($@)])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:205: -1- AC_DEFUN([AM_ENABLE_SHARED], [m4_warn([obsolete], [The macro `AM_ENABLE_SHARED' is obsolete.
+m4trace:/usr/share/aclocal/ltoptions.m4:205: -1- AU_DEFUN([AM_ENABLE_SHARED], [AC_ENABLE_SHARED($@)])
+m4trace:/usr/share/aclocal/ltoptions.m4:205: -1- AC_DEFUN([AM_ENABLE_SHARED], [AC_DIAGNOSE([obsolete], [The macro `AM_ENABLE_SHARED' is obsolete.
 You should run autoupdate.])dnl
 AC_ENABLE_SHARED($@)])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:206: -1- AU_DEFUN([AM_DISABLE_SHARED], [AC_DISABLE_SHARED($@)])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:206: -1- AC_DEFUN([AM_DISABLE_SHARED], [m4_warn([obsolete], [The macro `AM_DISABLE_SHARED' is obsolete.
+m4trace:/usr/share/aclocal/ltoptions.m4:206: -1- AU_DEFUN([AM_DISABLE_SHARED], [AC_DISABLE_SHARED($@)])
+m4trace:/usr/share/aclocal/ltoptions.m4:206: -1- AC_DEFUN([AM_DISABLE_SHARED], [AC_DIAGNOSE([obsolete], [The macro `AM_DISABLE_SHARED' is obsolete.
 You should run autoupdate.])dnl
 AC_DISABLE_SHARED($@)])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:251: -1- AC_DEFUN([AC_ENABLE_STATIC], [_LT_SET_OPTION([LT_INIT], m4_if([$1], [no], [disable-])[static])
+m4trace:/usr/share/aclocal/ltoptions.m4:251: -1- AC_DEFUN([AC_ENABLE_STATIC], [_LT_SET_OPTION([LT_INIT], m4_if([$1], [no], [disable-])[static])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:255: -1- AC_DEFUN([AC_DISABLE_STATIC], [_LT_SET_OPTION([LT_INIT], [disable-static])
+m4trace:/usr/share/aclocal/ltoptions.m4:255: -1- AC_DEFUN([AC_DISABLE_STATIC], [_LT_SET_OPTION([LT_INIT], [disable-static])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:259: -1- AU_DEFUN([AM_ENABLE_STATIC], [AC_ENABLE_STATIC($@)])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:259: -1- AC_DEFUN([AM_ENABLE_STATIC], [m4_warn([obsolete], [The macro `AM_ENABLE_STATIC' is obsolete.
+m4trace:/usr/share/aclocal/ltoptions.m4:259: -1- AU_DEFUN([AM_ENABLE_STATIC], [AC_ENABLE_STATIC($@)])
+m4trace:/usr/share/aclocal/ltoptions.m4:259: -1- AC_DEFUN([AM_ENABLE_STATIC], [AC_DIAGNOSE([obsolete], [The macro `AM_ENABLE_STATIC' is obsolete.
 You should run autoupdate.])dnl
 AC_ENABLE_STATIC($@)])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:260: -1- AU_DEFUN([AM_DISABLE_STATIC], [AC_DISABLE_STATIC($@)])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:260: -1- AC_DEFUN([AM_DISABLE_STATIC], [m4_warn([obsolete], [The macro `AM_DISABLE_STATIC' is obsolete.
+m4trace:/usr/share/aclocal/ltoptions.m4:260: -1- AU_DEFUN([AM_DISABLE_STATIC], [AC_DISABLE_STATIC($@)])
+m4trace:/usr/share/aclocal/ltoptions.m4:260: -1- AC_DEFUN([AM_DISABLE_STATIC], [AC_DIAGNOSE([obsolete], [The macro `AM_DISABLE_STATIC' is obsolete.
 You should run autoupdate.])dnl
 AC_DISABLE_STATIC($@)])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:305: -1- AU_DEFUN([AC_ENABLE_FAST_INSTALL], [_LT_SET_OPTION([LT_INIT], m4_if([$1], [no], [disable-])[fast-install])
+m4trace:/usr/share/aclocal/ltoptions.m4:305: -1- AU_DEFUN([AC_ENABLE_FAST_INSTALL], [_LT_SET_OPTION([LT_INIT], m4_if([$1], [no], [disable-])[fast-install])
 AC_DIAGNOSE([obsolete],
 [$0: Remove this warning and the call to _LT_SET_OPTION when you put
 the 'fast-install' option into LT_INIT's first parameter.])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:305: -1- AC_DEFUN([AC_ENABLE_FAST_INSTALL], [m4_warn([obsolete], [The macro `AC_ENABLE_FAST_INSTALL' is obsolete.
+m4trace:/usr/share/aclocal/ltoptions.m4:305: -1- AC_DEFUN([AC_ENABLE_FAST_INSTALL], [AC_DIAGNOSE([obsolete], [The macro `AC_ENABLE_FAST_INSTALL' is obsolete.
 You should run autoupdate.])dnl
 _LT_SET_OPTION([LT_INIT], m4_if([$1], [no], [disable-])[fast-install])
 AC_DIAGNOSE([obsolete],
 [$0: Remove this warning and the call to _LT_SET_OPTION when you put
 the 'fast-install' option into LT_INIT's first parameter.])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:312: -1- AU_DEFUN([AC_DISABLE_FAST_INSTALL], [_LT_SET_OPTION([LT_INIT], [disable-fast-install])
+m4trace:/usr/share/aclocal/ltoptions.m4:312: -1- AU_DEFUN([AC_DISABLE_FAST_INSTALL], [_LT_SET_OPTION([LT_INIT], [disable-fast-install])
 AC_DIAGNOSE([obsolete],
 [$0: Remove this warning and the call to _LT_SET_OPTION when you put
 the 'disable-fast-install' option into LT_INIT's first parameter.])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:312: -1- AC_DEFUN([AC_DISABLE_FAST_INSTALL], [m4_warn([obsolete], [The macro `AC_DISABLE_FAST_INSTALL' is obsolete.
+m4trace:/usr/share/aclocal/ltoptions.m4:312: -1- AC_DEFUN([AC_DISABLE_FAST_INSTALL], [AC_DIAGNOSE([obsolete], [The macro `AC_DISABLE_FAST_INSTALL' is obsolete.
 You should run autoupdate.])dnl
 _LT_SET_OPTION([LT_INIT], [disable-fast-install])
 AC_DIAGNOSE([obsolete],
 [$0: Remove this warning and the call to _LT_SET_OPTION when you put
 the 'disable-fast-install' option into LT_INIT's first parameter.])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:411: -1- AU_DEFUN([AC_LIBTOOL_PICMODE], [_LT_SET_OPTION([LT_INIT], [pic-only])
+m4trace:/usr/share/aclocal/ltoptions.m4:411: -1- AU_DEFUN([AC_LIBTOOL_PICMODE], [_LT_SET_OPTION([LT_INIT], [pic-only])
 AC_DIAGNOSE([obsolete],
 [$0: Remove this warning and the call to _LT_SET_OPTION when you
 put the 'pic-only' option into LT_INIT's first parameter.])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltoptions.m4:411: -1- AC_DEFUN([AC_LIBTOOL_PICMODE], [m4_warn([obsolete], [The macro `AC_LIBTOOL_PICMODE' is obsolete.
+m4trace:/usr/share/aclocal/ltoptions.m4:411: -1- AC_DEFUN([AC_LIBTOOL_PICMODE], [AC_DIAGNOSE([obsolete], [The macro `AC_LIBTOOL_PICMODE' is obsolete.
 You should run autoupdate.])dnl
 _LT_SET_OPTION([LT_INIT], [pic-only])
 AC_DIAGNOSE([obsolete],
 [$0: Remove this warning and the call to _LT_SET_OPTION when you
 put the 'pic-only' option into LT_INIT's first parameter.])
 ])
-m4trace:/opt/homebrew/share/aclocal/ltsugar.m4:14: -1- AC_DEFUN([LTSUGAR_VERSION], [m4_if([0.1])])
-m4trace:/opt/homebrew/share/aclocal/ltversion.m4:18: -1- AC_DEFUN([LTVERSION_VERSION], [macro_version='2.4.6'
+m4trace:/usr/share/aclocal/ltsugar.m4:14: -1- AC_DEFUN([LTSUGAR_VERSION], [m4_if([0.1])])
+m4trace:/usr/share/aclocal/ltversion.m4:18: -1- AC_DEFUN([LTVERSION_VERSION], [macro_version='2.4.6'
 macro_revision='2.4.6'
 _LT_DECL(, macro_version, 0, [Which release of libtool.m4 was used?])
 _LT_DECL(, macro_revision, 0)
 ])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:37: -1- AC_DEFUN([LTOBSOLETE_VERSION], [m4_if([1])])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:41: -1- AC_DEFUN([_LT_AC_PROG_ECHO_BACKSLASH])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:42: -1- AC_DEFUN([_LT_AC_SHELL_INIT])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:43: -1- AC_DEFUN([_LT_AC_SYS_LIBPATH_AIX])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:45: -1- AC_DEFUN([_LT_AC_TAGVAR])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:46: -1- AC_DEFUN([AC_LTDL_ENABLE_INSTALL])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:47: -1- AC_DEFUN([AC_LTDL_PREOPEN])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:48: -1- AC_DEFUN([_LT_AC_SYS_COMPILER])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:49: -1- AC_DEFUN([_LT_AC_LOCK])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:50: -1- AC_DEFUN([AC_LIBTOOL_SYS_OLD_ARCHIVE])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:51: -1- AC_DEFUN([_LT_AC_TRY_DLOPEN_SELF])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:52: -1- AC_DEFUN([AC_LIBTOOL_PROG_CC_C_O])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:53: -1- AC_DEFUN([AC_LIBTOOL_SYS_HARD_LINK_LOCKS])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:54: -1- AC_DEFUN([AC_LIBTOOL_OBJDIR])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:55: -1- AC_DEFUN([AC_LTDL_OBJDIR])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:56: -1- AC_DEFUN([AC_LIBTOOL_PROG_LD_HARDCODE_LIBPATH])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:57: -1- AC_DEFUN([AC_LIBTOOL_SYS_LIB_STRIP])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:58: -1- AC_DEFUN([AC_PATH_MAGIC])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:59: -1- AC_DEFUN([AC_PROG_LD_GNU])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:60: -1- AC_DEFUN([AC_PROG_LD_RELOAD_FLAG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:61: -1- AC_DEFUN([AC_DEPLIBS_CHECK_METHOD])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:62: -1- AC_DEFUN([AC_LIBTOOL_PROG_COMPILER_NO_RTTI])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:63: -1- AC_DEFUN([AC_LIBTOOL_SYS_GLOBAL_SYMBOL_PIPE])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:64: -1- AC_DEFUN([AC_LIBTOOL_PROG_COMPILER_PIC])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:65: -1- AC_DEFUN([AC_LIBTOOL_PROG_LD_SHLIBS])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:66: -1- AC_DEFUN([AC_LIBTOOL_POSTDEP_PREDEP])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:67: -1- AC_DEFUN([LT_AC_PROG_EGREP])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:72: -1- AC_DEFUN([_AC_PROG_LIBTOOL])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:73: -1- AC_DEFUN([AC_LIBTOOL_SETUP])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:74: -1- AC_DEFUN([_LT_AC_CHECK_DLFCN])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:75: -1- AC_DEFUN([AC_LIBTOOL_SYS_DYNAMIC_LINKER])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:76: -1- AC_DEFUN([_LT_AC_TAGCONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:78: -1- AC_DEFUN([_LT_AC_LANG_CXX])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:79: -1- AC_DEFUN([_LT_AC_LANG_F77])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:80: -1- AC_DEFUN([_LT_AC_LANG_GCJ])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:81: -1- AC_DEFUN([AC_LIBTOOL_LANG_C_CONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:82: -1- AC_DEFUN([_LT_AC_LANG_C_CONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:83: -1- AC_DEFUN([AC_LIBTOOL_LANG_CXX_CONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:84: -1- AC_DEFUN([_LT_AC_LANG_CXX_CONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:85: -1- AC_DEFUN([AC_LIBTOOL_LANG_F77_CONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:86: -1- AC_DEFUN([_LT_AC_LANG_F77_CONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:87: -1- AC_DEFUN([AC_LIBTOOL_LANG_GCJ_CONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:88: -1- AC_DEFUN([_LT_AC_LANG_GCJ_CONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:89: -1- AC_DEFUN([AC_LIBTOOL_LANG_RC_CONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:90: -1- AC_DEFUN([_LT_AC_LANG_RC_CONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:91: -1- AC_DEFUN([AC_LIBTOOL_CONFIG])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:92: -1- AC_DEFUN([_LT_AC_FILE_LTDLL_C])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:94: -1- AC_DEFUN([_LT_AC_PROG_CXXCPP])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:97: -1- AC_DEFUN([_LT_PROG_F77])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:98: -1- AC_DEFUN([_LT_PROG_FC])
-m4trace:/opt/homebrew/share/aclocal/lt~obsolete.m4:99: -1- AC_DEFUN([_LT_PROG_CXX])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/amversion.m4:14: -1- AC_DEFUN([AM_AUTOMAKE_VERSION], [am__api_version='1.16'
+m4trace:/usr/share/aclocal/lt~obsolete.m4:37: -1- AC_DEFUN([LTOBSOLETE_VERSION], [m4_if([1])])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:41: -1- AC_DEFUN([_LT_AC_PROG_ECHO_BACKSLASH])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:42: -1- AC_DEFUN([_LT_AC_SHELL_INIT])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:43: -1- AC_DEFUN([_LT_AC_SYS_LIBPATH_AIX])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:45: -1- AC_DEFUN([_LT_AC_TAGVAR])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:46: -1- AC_DEFUN([AC_LTDL_ENABLE_INSTALL])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:47: -1- AC_DEFUN([AC_LTDL_PREOPEN])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:48: -1- AC_DEFUN([_LT_AC_SYS_COMPILER])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:49: -1- AC_DEFUN([_LT_AC_LOCK])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:50: -1- AC_DEFUN([AC_LIBTOOL_SYS_OLD_ARCHIVE])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:51: -1- AC_DEFUN([_LT_AC_TRY_DLOPEN_SELF])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:52: -1- AC_DEFUN([AC_LIBTOOL_PROG_CC_C_O])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:53: -1- AC_DEFUN([AC_LIBTOOL_SYS_HARD_LINK_LOCKS])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:54: -1- AC_DEFUN([AC_LIBTOOL_OBJDIR])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:55: -1- AC_DEFUN([AC_LTDL_OBJDIR])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:56: -1- AC_DEFUN([AC_LIBTOOL_PROG_LD_HARDCODE_LIBPATH])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:57: -1- AC_DEFUN([AC_LIBTOOL_SYS_LIB_STRIP])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:58: -1- AC_DEFUN([AC_PATH_MAGIC])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:59: -1- AC_DEFUN([AC_PROG_LD_GNU])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:60: -1- AC_DEFUN([AC_PROG_LD_RELOAD_FLAG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:61: -1- AC_DEFUN([AC_DEPLIBS_CHECK_METHOD])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:62: -1- AC_DEFUN([AC_LIBTOOL_PROG_COMPILER_NO_RTTI])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:63: -1- AC_DEFUN([AC_LIBTOOL_SYS_GLOBAL_SYMBOL_PIPE])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:64: -1- AC_DEFUN([AC_LIBTOOL_PROG_COMPILER_PIC])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:65: -1- AC_DEFUN([AC_LIBTOOL_PROG_LD_SHLIBS])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:66: -1- AC_DEFUN([AC_LIBTOOL_POSTDEP_PREDEP])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:67: -1- AC_DEFUN([LT_AC_PROG_EGREP])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:72: -1- AC_DEFUN([_AC_PROG_LIBTOOL])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:73: -1- AC_DEFUN([AC_LIBTOOL_SETUP])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:74: -1- AC_DEFUN([_LT_AC_CHECK_DLFCN])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:75: -1- AC_DEFUN([AC_LIBTOOL_SYS_DYNAMIC_LINKER])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:76: -1- AC_DEFUN([_LT_AC_TAGCONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:78: -1- AC_DEFUN([_LT_AC_LANG_CXX])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:79: -1- AC_DEFUN([_LT_AC_LANG_F77])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:80: -1- AC_DEFUN([_LT_AC_LANG_GCJ])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:81: -1- AC_DEFUN([AC_LIBTOOL_LANG_C_CONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:82: -1- AC_DEFUN([_LT_AC_LANG_C_CONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:83: -1- AC_DEFUN([AC_LIBTOOL_LANG_CXX_CONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:84: -1- AC_DEFUN([_LT_AC_LANG_CXX_CONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:85: -1- AC_DEFUN([AC_LIBTOOL_LANG_F77_CONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:86: -1- AC_DEFUN([_LT_AC_LANG_F77_CONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:87: -1- AC_DEFUN([AC_LIBTOOL_LANG_GCJ_CONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:88: -1- AC_DEFUN([_LT_AC_LANG_GCJ_CONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:89: -1- AC_DEFUN([AC_LIBTOOL_LANG_RC_CONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:90: -1- AC_DEFUN([_LT_AC_LANG_RC_CONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:91: -1- AC_DEFUN([AC_LIBTOOL_CONFIG])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:92: -1- AC_DEFUN([_LT_AC_FILE_LTDLL_C])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:94: -1- AC_DEFUN([_LT_AC_PROG_CXXCPP])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:97: -1- AC_DEFUN([_LT_PROG_F77])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:98: -1- AC_DEFUN([_LT_PROG_FC])
+m4trace:/usr/share/aclocal/lt~obsolete.m4:99: -1- AC_DEFUN([_LT_PROG_CXX])
+m4trace:/usr/share/aclocal-1.16/amversion.m4:14: -1- AC_DEFUN([AM_AUTOMAKE_VERSION], [am__api_version='1.16'
 dnl Some users find AM_AUTOMAKE_VERSION and mistake it for a way to
 dnl require some minimum version.  Point them to the right macro.
-m4_if([$1], [1.16.5], [],
+m4_if([$1], [1.16.1], [],
       [AC_FATAL([Do not call $0, use AM_INIT_AUTOMAKE([$1]).])])dnl
 ])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/amversion.m4:33: -1- AC_DEFUN([AM_SET_CURRENT_AUTOMAKE_VERSION], [AM_AUTOMAKE_VERSION([1.16.5])dnl
+m4trace:/usr/share/aclocal-1.16/amversion.m4:33: -1- AC_DEFUN([AM_SET_CURRENT_AUTOMAKE_VERSION], [AM_AUTOMAKE_VERSION([1.16.1])dnl
 m4_ifndef([AC_AUTOCONF_VERSION],
   [m4_copy([m4_PACKAGE_VERSION], [AC_AUTOCONF_VERSION])])dnl
 _AM_AUTOCONF_VERSION(m4_defn([AC_AUTOCONF_VERSION]))])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/auxdir.m4:47: -1- AC_DEFUN([AM_AUX_DIR_EXPAND], [AC_REQUIRE([AC_CONFIG_AUX_DIR_DEFAULT])dnl
+m4trace:/usr/share/aclocal-1.16/auxdir.m4:47: -1- AC_DEFUN([AM_AUX_DIR_EXPAND], [AC_REQUIRE([AC_CONFIG_AUX_DIR_DEFAULT])dnl
 # Expand $ac_aux_dir to an absolute path.
 am_aux_dir=`cd "$ac_aux_dir" && pwd`
 ])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/cond.m4:12: -1- AC_DEFUN([AM_CONDITIONAL], [AC_PREREQ([2.52])dnl
+m4trace:/usr/share/aclocal-1.16/cond.m4:12: -1- AC_DEFUN([AM_CONDITIONAL], [AC_PREREQ([2.52])dnl
  m4_if([$1], [TRUE],  [AC_FATAL([$0: invalid condition: $1])],
        [$1], [FALSE], [AC_FATAL([$0: invalid condition: $1])])dnl
 AC_SUBST([$1_TRUE])dnl
@@ -1718,7 +1718,7 @@ AC_CONFIG_COMMANDS_PRE(
   AC_MSG_ERROR([[conditional "$1" was never defined.
 Usually this means the macro was only invoked conditionally.]])
 fi])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/depend.m4:26: -1- AC_DEFUN([_AM_DEPENDENCIES], [AC_REQUIRE([AM_SET_DEPDIR])dnl
+m4trace:/usr/share/aclocal-1.16/depend.m4:26: -1- AC_DEFUN([_AM_DEPENDENCIES], [AC_REQUIRE([AM_SET_DEPDIR])dnl
 AC_REQUIRE([AM_OUTPUT_DEPENDENCY_COMMANDS])dnl
 AC_REQUIRE([AM_MAKE_INCLUDE])dnl
 AC_REQUIRE([AM_DEP_TRACK])dnl
@@ -1848,10 +1848,10 @@ AM_CONDITIONAL([am__fastdep$1], [
   test "x$enable_dependency_tracking" != xno \
   && test "$am_cv_$1_dependencies_compiler_type" = gcc3])
 ])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/depend.m4:163: -1- AC_DEFUN([AM_SET_DEPDIR], [AC_REQUIRE([AM_SET_LEADING_DOT])dnl
+m4trace:/usr/share/aclocal-1.16/depend.m4:163: -1- AC_DEFUN([AM_SET_DEPDIR], [AC_REQUIRE([AM_SET_LEADING_DOT])dnl
 AC_SUBST([DEPDIR], ["${am__leading_dot}deps"])dnl
 ])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/depend.m4:171: -1- AC_DEFUN([AM_DEP_TRACK], [AC_ARG_ENABLE([dependency-tracking], [dnl
+m4trace:/usr/share/aclocal-1.16/depend.m4:171: -1- AC_DEFUN([AM_DEP_TRACK], [AC_ARG_ENABLE([dependency-tracking], [dnl
 AS_HELP_STRING(
   [--enable-dependency-tracking],
   [do not reject slow dependency extractors])
@@ -1869,7 +1869,7 @@ _AM_SUBST_NOTMAKE([AMDEPBACKSLASH])dnl
 AC_SUBST([am__nodep])dnl
 _AM_SUBST_NOTMAKE([am__nodep])dnl
 ])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/depout.m4:11: -1- AC_DEFUN([_AM_OUTPUT_DEPENDENCY_COMMANDS], [{
+m4trace:/usr/share/aclocal-1.16/depout.m4:11: -1- AC_DEFUN([_AM_OUTPUT_DEPENDENCY_COMMANDS], [{
   # Older Autoconf quotes --file arguments for eval, but not when files
   # are listed without --file.  Let's play safe and only enable the eval
   # if we detect the quoting.
@@ -1899,9 +1899,7 @@ m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/depout.m4:11: -1
   done
   if test $am_rc -ne 0; then
     AC_MSG_FAILURE([Something went wrong bootstrapping makefile fragments
-    for automatic dependency tracking.  If GNU make was not used, consider
-    re-running the configure script with MAKE="gmake" (or whatever is
-    necessary).  You can also try re-running configure with the
+    for automatic dependency tracking.  Try re-running configure with the
     '--disable-dependency-tracking' option to at least be able to build
     the package (albeit without support for automatic dependency tracking).])
   fi
@@ -1912,14 +1910,10 @@ m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/depout.m4:11: -1
   rm -f conftest-deps.mk
 }
 ])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/depout.m4:64: -1- AC_DEFUN([AM_OUTPUT_DEPENDENCY_COMMANDS], [AC_CONFIG_COMMANDS([depfiles],
+m4trace:/usr/share/aclocal-1.16/depout.m4:62: -1- AC_DEFUN([AM_OUTPUT_DEPENDENCY_COMMANDS], [AC_CONFIG_COMMANDS([depfiles],
      [test x"$AMDEP_TRUE" != x"" || _AM_OUTPUT_DEPENDENCY_COMMANDS],
      [AMDEP_TRUE="$AMDEP_TRUE" MAKE="${MAKE-make}"])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/init.m4:29: -1- AC_DEFUN([AM_INIT_AUTOMAKE], [AC_PREREQ([2.65])dnl
-m4_ifdef([_$0_ALREADY_INIT],
-  [m4_fatal([$0 expanded multiple times
-]m4_defn([_$0_ALREADY_INIT]))],
-  [m4_define([_$0_ALREADY_INIT], m4_expansion_stack)])dnl
+m4trace:/usr/share/aclocal-1.16/init.m4:29: -1- AC_DEFUN([AM_INIT_AUTOMAKE], [AC_PREREQ([2.65])dnl
 dnl Autoconf wants to disallow AM_ names.  We explicitly allow
 dnl the ones we care about.
 m4_pattern_allow([^AM_[A-Z]+FLAGS$])dnl
@@ -1956,7 +1950,7 @@ m4_ifval([$3], [_AM_SET_OPTION([no-define])])dnl
 [_AM_SET_OPTIONS([$1])dnl
 dnl Diagnose old-style AC_INIT with new-style AM_AUTOMAKE_INIT.
 m4_if(
-  m4_ifset([AC_PACKAGE_NAME], [ok]):m4_ifset([AC_PACKAGE_VERSION], [ok]),
+  m4_ifdef([AC_PACKAGE_NAME], [ok]):m4_ifdef([AC_PACKAGE_VERSION], [ok]),
   [ok:ok],,
   [m4_fatal([AC_INIT should be called with package and version arguments])])dnl
  AC_SUBST([PACKAGE], ['AC_PACKAGE_TARNAME'])dnl
@@ -2008,20 +2002,6 @@ AC_PROVIDE_IFELSE([AC_PROG_OBJCXX],
 		  [m4_define([AC_PROG_OBJCXX],
 			     m4_defn([AC_PROG_OBJCXX])[_AM_DEPENDENCIES([OBJCXX])])])dnl
 ])
-# Variables for tags utilities; see am/tags.am
-if test -z "$CTAGS"; then
-  CTAGS=ctags
-fi
-AC_SUBST([CTAGS])
-if test -z "$ETAGS"; then
-  ETAGS=etags
-fi
-AC_SUBST([ETAGS])
-if test -z "$CSCOPE"; then
-  CSCOPE=cscope
-fi
-AC_SUBST([CSCOPE])
-
 AC_REQUIRE([AM_SILENT_RULES])dnl
 dnl The testsuite driver may need to know about EXEEXT, so add the
 dnl 'am__EXEEXT' conditional if _AM_COMPILER_EXEEXT was seen.  This
@@ -2075,7 +2055,7 @@ dnl The trailing newline in this macro's definition is deliberate, for
 dnl backward compatibility and to allow trailing 'dnl'-style comments
 dnl after the AM_INIT_AUTOMAKE invocation. See automake bug#16841.
 ])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/init.m4:204: -1- AC_DEFUN([_AC_AM_CONFIG_HEADER_HOOK], [# Compute $1's index in $config_headers.
+m4trace:/usr/share/aclocal-1.16/init.m4:186: -1- AC_DEFUN([_AC_AM_CONFIG_HEADER_HOOK], [# Compute $1's index in $config_headers.
 _am_arg=$1
 _am_stamp_count=1
 for _am_header in $config_headers :; do
@@ -2087,7 +2067,7 @@ for _am_header in $config_headers :; do
   esac
 done
 echo "timestamp for $_am_arg" >`AS_DIRNAME(["$_am_arg"])`/stamp-h[]$_am_stamp_count])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/install-sh.m4:11: -1- AC_DEFUN([AM_PROG_INSTALL_SH], [AC_REQUIRE([AM_AUX_DIR_EXPAND])dnl
+m4trace:/usr/share/aclocal-1.16/install-sh.m4:11: -1- AC_DEFUN([AM_PROG_INSTALL_SH], [AC_REQUIRE([AM_AUX_DIR_EXPAND])dnl
 if test x"${install_sh+set}" != xset; then
   case $am_aux_dir in
   *\ * | *\	*)
@@ -2097,7 +2077,7 @@ if test x"${install_sh+set}" != xset; then
   esac
 fi
 AC_SUBST([install_sh])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/lead-dot.m4:10: -1- AC_DEFUN([AM_SET_LEADING_DOT], [rm -rf .tst 2>/dev/null
+m4trace:/usr/share/aclocal-1.16/lead-dot.m4:10: -1- AC_DEFUN([AM_SET_LEADING_DOT], [rm -rf .tst 2>/dev/null
 mkdir .tst 2>/dev/null
 if test -d .tst; then
   am__leading_dot=.
@@ -2106,7 +2086,7 @@ else
 fi
 rmdir .tst 2>/dev/null
 AC_SUBST([am__leading_dot])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/make.m4:13: -1- AC_DEFUN([AM_MAKE_INCLUDE], [AC_MSG_CHECKING([whether ${MAKE-make} supports the include directive])
+m4trace:/usr/share/aclocal-1.16/make.m4:13: -1- AC_DEFUN([AM_MAKE_INCLUDE], [AC_MSG_CHECKING([whether ${MAKE-make} supports the include directive])
 cat > confinc.mk << 'END'
 am__doit:
 	@echo this is the am__doit target >confinc.out
@@ -2134,14 +2114,19 @@ done
 rm -f confinc.* confmf.*
 AC_MSG_RESULT([${_am_result}])
 AC_SUBST([am__include])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/make.m4:42: -1- m4_pattern_allow([^am__quote$])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/missing.m4:11: -1- AC_DEFUN([AM_MISSING_PROG], [AC_REQUIRE([AM_MISSING_HAS_RUN])
+m4trace:/usr/share/aclocal-1.16/make.m4:42: -1- m4_pattern_allow([^am__quote$])
+m4trace:/usr/share/aclocal-1.16/missing.m4:11: -1- AC_DEFUN([AM_MISSING_PROG], [AC_REQUIRE([AM_MISSING_HAS_RUN])
 $1=${$1-"${am_missing_run}$2"}
 AC_SUBST($1)])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/missing.m4:20: -1- AC_DEFUN([AM_MISSING_HAS_RUN], [AC_REQUIRE([AM_AUX_DIR_EXPAND])dnl
+m4trace:/usr/share/aclocal-1.16/missing.m4:20: -1- AC_DEFUN([AM_MISSING_HAS_RUN], [AC_REQUIRE([AM_AUX_DIR_EXPAND])dnl
 AC_REQUIRE_AUX_FILE([missing])dnl
 if test x"${MISSING+set}" != xset; then
-  MISSING="\${SHELL} '$am_aux_dir/missing'"
+  case $am_aux_dir in
+  *\ * | *\	*)
+    MISSING="\${SHELL} \"$am_aux_dir/missing\"" ;;
+  *)
+    MISSING="\${SHELL} $am_aux_dir/missing" ;;
+  esac
 fi
 # Use eval to expand $SHELL
 if eval "$MISSING --is-lightweight"; then
@@ -2151,11 +2136,11 @@ else
   AC_MSG_WARN(['missing' script is too old or missing])
 fi
 ])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/options.m4:11: -1- AC_DEFUN([_AM_MANGLE_OPTION], [[_AM_OPTION_]m4_bpatsubst($1, [[^a-zA-Z0-9_]], [_])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/options.m4:17: -1- AC_DEFUN([_AM_SET_OPTION], [m4_define(_AM_MANGLE_OPTION([$1]), [1])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/options.m4:23: -1- AC_DEFUN([_AM_SET_OPTIONS], [m4_foreach_w([_AM_Option], [$1], [_AM_SET_OPTION(_AM_Option)])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/options.m4:29: -1- AC_DEFUN([_AM_IF_OPTION], [m4_ifset(_AM_MANGLE_OPTION([$1]), [$2], [$3])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/prog-cc-c-o.m4:12: -1- AC_DEFUN([_AM_PROG_CC_C_O], [AC_REQUIRE([AM_AUX_DIR_EXPAND])dnl
+m4trace:/usr/share/aclocal-1.16/options.m4:11: -1- AC_DEFUN([_AM_MANGLE_OPTION], [[_AM_OPTION_]m4_bpatsubst($1, [[^a-zA-Z0-9_]], [_])])
+m4trace:/usr/share/aclocal-1.16/options.m4:17: -1- AC_DEFUN([_AM_SET_OPTION], [m4_define(_AM_MANGLE_OPTION([$1]), [1])])
+m4trace:/usr/share/aclocal-1.16/options.m4:23: -1- AC_DEFUN([_AM_SET_OPTIONS], [m4_foreach_w([_AM_Option], [$1], [_AM_SET_OPTION(_AM_Option)])])
+m4trace:/usr/share/aclocal-1.16/options.m4:29: -1- AC_DEFUN([_AM_IF_OPTION], [m4_ifset(_AM_MANGLE_OPTION([$1]), [$2], [$3])])
+m4trace:/usr/share/aclocal-1.16/prog-cc-c-o.m4:12: -1- AC_DEFUN([_AM_PROG_CC_C_O], [AC_REQUIRE([AM_AUX_DIR_EXPAND])dnl
 AC_REQUIRE_AUX_FILE([compile])dnl
 AC_LANG_PUSH([C])dnl
 AC_CACHE_CHECK(
@@ -2187,8 +2172,8 @@ if test "$am_cv_prog_cc_c_o" != yes; then
    CC="$am_aux_dir/compile $CC"
 fi
 AC_LANG_POP([C])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/prog-cc-c-o.m4:47: -1- AC_DEFUN_ONCE([AM_PROG_CC_C_O], [AC_REQUIRE([AC_PROG_CC])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/python.m4:35: -1- AC_DEFUN([AM_PATH_PYTHON], [
+m4trace:/usr/share/aclocal-1.16/prog-cc-c-o.m4:47: -1- AC_DEFUN_ONCE([AM_PROG_CC_C_O], [AC_REQUIRE([AC_PROG_CC])])
+m4trace:/usr/share/aclocal-1.16/python.m4:35: -1- AC_DEFUN([AM_PATH_PYTHON], [
   dnl Find a Python interpreter.  Python versions prior to 2.0 are not
   dnl supported. (2.0 was released on October 16, 2000).
   m4_define_default([_AM_PYTHON_INTERPRETER_LIST],
@@ -2237,141 +2222,34 @@ m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/python.m4:35: -1
   ])
 
   if test "$PYTHON" = :; then
-    dnl Run any user-specified action, or abort.
+  dnl Run any user-specified action, or abort.
     m4_default([$3], [AC_MSG_ERROR([no suitable Python interpreter found])])
   else
 
-  dnl Query Python for its version number.  Although site.py simply uses
-  dnl sys.version[:3], printing that failed with Python 3.10, since the
-  dnl trailing zero was eliminated. So now we output just the major
-  dnl and minor version numbers, as numbers. Apparently the tertiary
-  dnl version is not of interest.
-  dnl
+  dnl Query Python for its version number.  Getting [:3] seems to be
+  dnl the best way to do this; it's what "site.py" does in the standard
+  dnl library.
+
   AC_CACHE_CHECK([for $am_display_PYTHON version], [am_cv_python_version],
-    [am_cv_python_version=`$PYTHON -c "import sys; print ('%u.%u' % sys.version_info[[:2]])"`])
+    [am_cv_python_version=`$PYTHON -c "import sys; sys.stdout.write(sys.version[[:3]])"`])
   AC_SUBST([PYTHON_VERSION], [$am_cv_python_version])
 
-  dnl At times, e.g., when building shared libraries, you may want
+  dnl Use the values of $prefix and $exec_prefix for the corresponding
+  dnl values of PYTHON_PREFIX and PYTHON_EXEC_PREFIX.  These are made
+  dnl distinct variables so they can be overridden if need be.  However,
+  dnl general consensus is that you shouldn't need this ability.
+
+  AC_SUBST([PYTHON_PREFIX], ['${prefix}'])
+  AC_SUBST([PYTHON_EXEC_PREFIX], ['${exec_prefix}'])
+
+  dnl At times (like when building shared libraries) you may want
   dnl to know which OS platform Python thinks this is.
-  dnl
+
   AC_CACHE_CHECK([for $am_display_PYTHON platform], [am_cv_python_platform],
     [am_cv_python_platform=`$PYTHON -c "import sys; sys.stdout.write(sys.platform)"`])
   AC_SUBST([PYTHON_PLATFORM], [$am_cv_python_platform])
 
-  dnl emacs-page
-  dnl If --with-python-sys-prefix is given, use the values of sys.prefix
-  dnl and sys.exec_prefix for the corresponding values of PYTHON_PREFIX
-  dnl and PYTHON_EXEC_PREFIX. Otherwise, use the GNU ${prefix} and
-  dnl ${exec_prefix} variables.
-  dnl
-  dnl The two are made distinct variables so they can be overridden if
-  dnl need be, although general consensus is that you shouldn't need
-  dnl this separation.
-  dnl
-  dnl Also allow directly setting the prefixes via configure options,
-  dnl overriding any default.
-  dnl
-  if test "x$prefix" = xNONE; then
-    am__usable_prefix=$ac_default_prefix
-  else
-    am__usable_prefix=$prefix
-  fi
-
-  # Allow user to request using sys.* values from Python,
-  # instead of the GNU $prefix values.
-  AC_ARG_WITH([python-sys-prefix],
-  [AS_HELP_STRING([--with-python-sys-prefix],
-                  [use Python's sys.prefix and sys.exec_prefix values])],
-  [am_use_python_sys=:],
-  [am_use_python_sys=false])
-
-  # Allow user to override whatever the default Python prefix is.
-  AC_ARG_WITH([python_prefix],
-  [AS_HELP_STRING([--with-python_prefix],
-                  [override the default PYTHON_PREFIX])],
-  [am_python_prefix_subst=$withval
-   am_cv_python_prefix=$withval
-   AC_MSG_CHECKING([for explicit $am_display_PYTHON prefix])
-   AC_MSG_RESULT([$am_cv_python_prefix])],
-  [
-   if $am_use_python_sys; then
-     # using python sys.prefix value, not GNU
-     AC_CACHE_CHECK([for python default $am_display_PYTHON prefix],
-     [am_cv_python_prefix],
-     [am_cv_python_prefix=`$PYTHON -c "import sys; sys.stdout.write(sys.prefix)"`])
-
-     dnl If sys.prefix is a subdir of $prefix, replace the literal value of
-     dnl $prefix with a variable reference so it can be overridden.
-     case $am_cv_python_prefix in
-     $am__usable_prefix*)
-       am__strip_prefix=`echo "$am__usable_prefix" | sed 's|.|.|g'`
-       am_python_prefix_subst=`echo "$am_cv_python_prefix" | sed "s,^$am__strip_prefix,\\${prefix},"`
-       ;;
-     *)
-       am_python_prefix_subst=$am_cv_python_prefix
-       ;;
-     esac
-   else # using GNU prefix value, not python sys.prefix
-     am_python_prefix_subst='${prefix}'
-     am_python_prefix=$am_python_prefix_subst
-     AC_MSG_CHECKING([for GNU default $am_display_PYTHON prefix])
-     AC_MSG_RESULT([$am_python_prefix])
-   fi])
-  # Substituting python_prefix_subst value.
-  AC_SUBST([PYTHON_PREFIX], [$am_python_prefix_subst])
-
-  # emacs-page Now do it all over again for Python exec_prefix, but with yet
-  # another conditional: fall back to regular prefix if that was specified.
-  AC_ARG_WITH([python_exec_prefix],
-  [AS_HELP_STRING([--with-python_exec_prefix],
-                  [override the default PYTHON_EXEC_PREFIX])],
-  [am_python_exec_prefix_subst=$withval
-   am_cv_python_exec_prefix=$withval
-   AC_MSG_CHECKING([for explicit $am_display_PYTHON exec_prefix])
-   AC_MSG_RESULT([$am_cv_python_exec_prefix])],
-  [
-   # no explicit --with-python_exec_prefix, but if
-   # --with-python_prefix was given, use its value for python_exec_prefix too.
-   AS_IF([test -n "$with_python_prefix"],
-   [am_python_exec_prefix_subst=$with_python_prefix
-    am_cv_python_exec_prefix=$with_python_prefix
-    AC_MSG_CHECKING([for python_prefix-given $am_display_PYTHON exec_prefix])
-    AC_MSG_RESULT([$am_cv_python_exec_prefix])],
-   [
-    # Set am__usable_exec_prefix whether using GNU or Python values,
-    # since we use that variable for pyexecdir.
-    if test "x$exec_prefix" = xNONE; then
-      am__usable_exec_prefix=$am__usable_prefix
-    else
-      am__usable_exec_prefix=$exec_prefix
-    fi
-    #
-    if $am_use_python_sys; then # using python sys.exec_prefix, not GNU
-      AC_CACHE_CHECK([for python default $am_display_PYTHON exec_prefix],
-      [am_cv_python_exec_prefix],
-      [am_cv_python_exec_prefix=`$PYTHON -c "import sys; sys.stdout.write(sys.exec_prefix)"`])
-      dnl If sys.exec_prefix is a subdir of $exec_prefix, replace the
-      dnl literal value of $exec_prefix with a variable reference so it can
-      dnl be overridden.
-      case $am_cv_python_exec_prefix in
-      $am__usable_exec_prefix*)
-        am__strip_prefix=`echo "$am__usable_exec_prefix" | sed 's|.|.|g'`
-        am_python_exec_prefix_subst=`echo "$am_cv_python_exec_prefix" | sed "s,^$am__strip_prefix,\\${exec_prefix},"`
-        ;;
-      *)
-        am_python_exec_prefix_subst=$am_cv_python_exec_prefix
-        ;;
-     esac
-   else # using GNU $exec_prefix, not python sys.exec_prefix
-     am_python_exec_prefix_subst='${exec_prefix}'
-     am_python_exec_prefix=$am_python_exec_prefix_subst
-     AC_MSG_CHECKING([for GNU default $am_display_PYTHON exec_prefix])
-     AC_MSG_RESULT([$am_python_exec_prefix])
-   fi])])
-  # Substituting python_exec_prefix_subst.
-  AC_SUBST([PYTHON_EXEC_PREFIX], [$am_python_exec_prefix_subst])
-
-  # Factor out some code duplication into this shell variable.
+  # Just factor out some code duplication.
   am_python_setup_sysconfig="\
 import sys
 # Prefer sysconfig over distutils.sysconfig, for better compatibility
@@ -2391,97 +2269,98 @@ try:
 except ImportError:
     pass"
 
-  dnl emacs-page Set up 4 directories:
+  dnl Set up 4 directories:
 
-  dnl 1. pythondir: where to install python scripts.  This is the
-  dnl    site-packages directory, not the python standard library
-  dnl    directory like in previous automake betas.  This behavior
-  dnl    is more consistent with lispdir.m4 for example.
+  dnl pythondir -- where to install python scripts.  This is the
+  dnl   site-packages directory, not the python standard library
+  dnl   directory like in previous automake betas.  This behavior
+  dnl   is more consistent with lispdir.m4 for example.
   dnl Query distutils for this directory.
-  dnl
-  AC_CACHE_CHECK([for $am_display_PYTHON script directory (pythondir)],
-  [am_cv_python_pythondir],
-  [if test "x$am_cv_python_prefix" = x; then
-     am_py_prefix=$am__usable_prefix
-   else
-     am_py_prefix=$am_cv_python_prefix
-   fi
-   am_cv_python_pythondir=`$PYTHON -c "
+  AC_CACHE_CHECK([for $am_display_PYTHON script directory],
+    [am_cv_python_pythondir],
+    [if test "x$prefix" = xNONE
+     then
+       am_py_prefix=$ac_default_prefix
+     else
+       am_py_prefix=$prefix
+     fi
+     am_cv_python_pythondir=`$PYTHON -c "
 $am_python_setup_sysconfig
 if can_use_sysconfig:
-  sitedir = sysconfig.get_path('purelib', vars={'base':'$am_py_prefix'})
+    sitedir = sysconfig.get_path('purelib', vars={'base':'$am_py_prefix'})
 else:
-  from distutils import sysconfig
-  sitedir = sysconfig.get_python_lib(0, 0, prefix='$am_py_prefix')
+    from distutils import sysconfig
+    sitedir = sysconfig.get_python_lib(0, 0, prefix='$am_py_prefix')
 sys.stdout.write(sitedir)"`
-   #
-   case $am_cv_python_pythondir in
-   $am_py_prefix*)
-     am__strip_prefix=`echo "$am_py_prefix" | sed 's|.|.|g'`
-     am_cv_python_pythondir=`echo "$am_cv_python_pythondir" | sed "s,^$am__strip_prefix,\\${PYTHON_PREFIX},"`
-     ;;
-   *)
-     case $am_py_prefix in
-       /usr|/System*) ;;
-       *) am_cv_python_pythondir="\${PYTHON_PREFIX}/lib/python$PYTHON_VERSION/site-packages"
-          ;;
+     case $am_cv_python_pythondir in
+     $am_py_prefix*)
+       am__strip_prefix=`echo "$am_py_prefix" | sed 's|.|.|g'`
+       am_cv_python_pythondir=`echo "$am_cv_python_pythondir" | sed "s,^$am__strip_prefix,$PYTHON_PREFIX,"`
+       ;;
+     *)
+       case $am_py_prefix in
+         /usr|/System*) ;;
+         *)
+	  am_cv_python_pythondir=$PYTHON_PREFIX/lib/python$PYTHON_VERSION/site-packages
+	  ;;
+       esac
+       ;;
      esac
-     ;;
-   esac
-  ])
+    ])
   AC_SUBST([pythondir], [$am_cv_python_pythondir])
 
-  dnl 2. pkgpythondir: $PACKAGE directory under pythondir.  Was
-  dnl    PYTHON_SITE_PACKAGE in previous betas, but this naming is
-  dnl    more consistent with the rest of automake.
-  dnl
+  dnl pkgpythondir -- $PACKAGE directory under pythondir.  Was
+  dnl   PYTHON_SITE_PACKAGE in previous betas, but this naming is
+  dnl   more consistent with the rest of automake.
+
   AC_SUBST([pkgpythondir], [\${pythondir}/$PACKAGE])
 
-  dnl 3. pyexecdir: directory for installing python extension modules
-  dnl    (shared libraries).
+  dnl pyexecdir -- directory for installing python extension modules
+  dnl   (shared libraries)
   dnl Query distutils for this directory.
-  dnl
-  AC_CACHE_CHECK([for $am_display_PYTHON extension module directory (pyexecdir)],
-  [am_cv_python_pyexecdir],
-  [if test "x$am_cv_python_exec_prefix" = x; then
-     am_py_exec_prefix=$am__usable_exec_prefix
-   else
-     am_py_exec_prefix=$am_cv_python_exec_prefix
-   fi
-   am_cv_python_pyexecdir=`$PYTHON -c "
+  AC_CACHE_CHECK([for $am_display_PYTHON extension module directory],
+    [am_cv_python_pyexecdir],
+    [if test "x$exec_prefix" = xNONE
+     then
+       am_py_exec_prefix=$am_py_prefix
+     else
+       am_py_exec_prefix=$exec_prefix
+     fi
+     am_cv_python_pyexecdir=`$PYTHON -c "
 $am_python_setup_sysconfig
 if can_use_sysconfig:
-  sitedir = sysconfig.get_path('platlib', vars={'platbase':'$am_py_exec_prefix'})
+    sitedir = sysconfig.get_path('platlib', vars={'platbase':'$am_py_prefix'})
 else:
-  from distutils import sysconfig
-  sitedir = sysconfig.get_python_lib(1, 0, prefix='$am_py_exec_prefix')
+    from distutils import sysconfig
+    sitedir = sysconfig.get_python_lib(1, 0, prefix='$am_py_prefix')
 sys.stdout.write(sitedir)"`
-   #
-   case $am_cv_python_pyexecdir in
-   $am_py_exec_prefix*)
-     am__strip_prefix=`echo "$am_py_exec_prefix" | sed 's|.|.|g'`
-     am_cv_python_pyexecdir=`echo "$am_cv_python_pyexecdir" | sed "s,^$am__strip_prefix,\\${PYTHON_EXEC_PREFIX},"`
-     ;;
-   *)
-     case $am_py_exec_prefix in
-       /usr|/System*) ;;
-       *) am_cv_python_pyexecdir="\${PYTHON_EXEC_PREFIX}/lib/python$PYTHON_VERSION/site-packages"
-          ;;
+     case $am_cv_python_pyexecdir in
+     $am_py_exec_prefix*)
+       am__strip_prefix=`echo "$am_py_exec_prefix" | sed 's|.|.|g'`
+       am_cv_python_pyexecdir=`echo "$am_cv_python_pyexecdir" | sed "s,^$am__strip_prefix,$PYTHON_EXEC_PREFIX,"`
+       ;;
+     *)
+       case $am_py_exec_prefix in
+         /usr|/System*) ;;
+         *)
+	   am_cv_python_pyexecdir=$PYTHON_EXEC_PREFIX/lib/python$PYTHON_VERSION/site-packages
+	   ;;
+       esac
+       ;;
      esac
-     ;;
-   esac
-  ])
+    ])
   AC_SUBST([pyexecdir], [$am_cv_python_pyexecdir])
 
-  dnl 4. pkgpyexecdir: $(pyexecdir)/$(PACKAGE)
-  dnl
+  dnl pkgpyexecdir -- $(pyexecdir)/$(PACKAGE)
+
   AC_SUBST([pkgpyexecdir], [\${pyexecdir}/$PACKAGE])
 
   dnl Run any user-specified action.
   $2
   fi
+
 ])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/python.m4:338: -1- AC_DEFUN([AM_PYTHON_CHECK_VERSION], [prog="import sys
+m4trace:/usr/share/aclocal-1.16/python.m4:232: -1- AC_DEFUN([AM_PYTHON_CHECK_VERSION], [prog="import sys
 # split strings by '.' and convert to numeric.  Append some zeros
 # because we need at least 4 digits for the hex conversion.
 # map returns an iterator in Python 3.0 and a list in 2.x
@@ -2491,12 +2370,12 @@ minverhex = 0
 for i in list(range(0, 4)): minverhex = (minverhex << 8) + minver[[i]]
 sys.exit(sys.hexversion < minverhex)"
   AS_IF([AM_RUN_LOG([$1 -c "$prog"])], [$3], [$4])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/runlog.m4:12: -1- AC_DEFUN([AM_RUN_LOG], [{ echo "$as_me:$LINENO: $1" >&AS_MESSAGE_LOG_FD
+m4trace:/usr/share/aclocal-1.16/runlog.m4:12: -1- AC_DEFUN([AM_RUN_LOG], [{ echo "$as_me:$LINENO: $1" >&AS_MESSAGE_LOG_FD
    ($1) >&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
    ac_status=$?
    echo "$as_me:$LINENO: \$? = $ac_status" >&AS_MESSAGE_LOG_FD
    (exit $ac_status); }])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/sanity.m4:11: -1- AC_DEFUN([AM_SANITY_CHECK], [AC_MSG_CHECKING([whether build environment is sane])
+m4trace:/usr/share/aclocal-1.16/sanity.m4:11: -1- AC_DEFUN([AM_SANITY_CHECK], [AC_MSG_CHECKING([whether build environment is sane])
 # Reject unsafe characters in $srcdir or the absolute working directory
 # name.  Accept space and tab only in the latter.
 am_lf='
@@ -2567,7 +2446,7 @@ AC_CONFIG_COMMANDS_PRE(
    AC_MSG_RESULT([done])])
 rm -f conftest.file
 ])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/silent.m4:12: -1- AC_DEFUN([AM_SILENT_RULES], [AC_ARG_ENABLE([silent-rules], [dnl
+m4trace:/usr/share/aclocal-1.16/silent.m4:12: -1- AC_DEFUN([AM_SILENT_RULES], [AC_ARG_ENABLE([silent-rules], [dnl
 AS_HELP_STRING(
   [--enable-silent-rules],
   [less verbose build output (undo: "make V=1")])
@@ -2615,7 +2494,7 @@ AM_BACKSLASH='\'
 AC_SUBST([AM_BACKSLASH])dnl
 _AM_SUBST_NOTMAKE([AM_BACKSLASH])dnl
 ])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/strip.m4:17: -1- AC_DEFUN([AM_PROG_INSTALL_STRIP], [AC_REQUIRE([AM_PROG_INSTALL_SH])dnl
+m4trace:/usr/share/aclocal-1.16/strip.m4:17: -1- AC_DEFUN([AM_PROG_INSTALL_STRIP], [AC_REQUIRE([AM_PROG_INSTALL_SH])dnl
 # Installed binaries are usually stripped using 'strip' when the user
 # run "make install-strip".  However 'strip' might not be the right
 # tool to use in cross-compilation environments, therefore Automake
@@ -2626,9 +2505,9 @@ if test "$cross_compiling" != no; then
 fi
 INSTALL_STRIP_PROGRAM="\$(install_sh) -c -s"
 AC_SUBST([INSTALL_STRIP_PROGRAM])])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/substnot.m4:12: -1- AC_DEFUN([_AM_SUBST_NOTMAKE])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/substnot.m4:17: -1- AC_DEFUN([AM_SUBST_NOTMAKE], [_AM_SUBST_NOTMAKE($@)])
-m4trace:/opt/homebrew/Cellar/automake/1.16.5/share/aclocal-1.16/tar.m4:23: -1- AC_DEFUN([_AM_PROG_TAR], [# Always define AMTAR for backward compatibility.  Yes, it's still used
+m4trace:/usr/share/aclocal-1.16/substnot.m4:12: -1- AC_DEFUN([_AM_SUBST_NOTMAKE])
+m4trace:/usr/share/aclocal-1.16/substnot.m4:17: -1- AC_DEFUN([AM_SUBST_NOTMAKE], [_AM_SUBST_NOTMAKE($@)])
+m4trace:/usr/share/aclocal-1.16/tar.m4:23: -1- AC_DEFUN([_AM_PROG_TAR], [# Always define AMTAR for backward compatibility.  Yes, it's still used
 # in the wild :-(  We should find a proper way to deprecate it ...
 AC_SUBST([AMTAR], ['$${TAR-tar}'])
 
@@ -3094,8 +2973,8 @@ m4trace:configure.ac:3: -1- m4_pattern_allow([^target_alias$])
 m4trace:configure.ac:19: -1- AM_INIT_AUTOMAKE([1.9 dist-bzip2 dist-zip foreign subdir-objects])
 m4trace:configure.ac:19: -1- m4_pattern_allow([^AM_[A-Z]+FLAGS$])
 m4trace:configure.ac:19: -1- AM_SET_CURRENT_AUTOMAKE_VERSION
-m4trace:configure.ac:19: -1- AM_AUTOMAKE_VERSION([1.16.5])
-m4trace:configure.ac:19: -1- _AM_AUTOCONF_VERSION([2.71])
+m4trace:configure.ac:19: -1- AM_AUTOMAKE_VERSION([1.16.1])
+m4trace:configure.ac:19: -1- _AM_AUTOCONF_VERSION([2.69])
 m4trace:configure.ac:19: -1- m4_pattern_allow([^INSTALL_PROGRAM$])
 m4trace:configure.ac:19: -1- m4_pattern_allow([^INSTALL_SCRIPT$])
 m4trace:configure.ac:19: -1- m4_pattern_allow([^INSTALL_DATA$])
@@ -3171,9 +3050,6 @@ AC_PROVIDE_IFELSE([AC_PROG_OBJCXX],
 			     m4_defn([AC_PROG_OBJCXX])[_AM_DEPENDENCIES([OBJCXX])])])dnl
 ])
 m4trace:configure.ac:19: -2- _AM_MANGLE_OPTION([no-dependencies])
-m4trace:configure.ac:19: -1- m4_pattern_allow([^CTAGS$])
-m4trace:configure.ac:19: -1- m4_pattern_allow([^ETAGS$])
-m4trace:configure.ac:19: -1- m4_pattern_allow([^CSCOPE$])
 m4trace:configure.ac:19: -1- AM_SILENT_RULES
 m4trace:configure.ac:19: -1- m4_pattern_allow([^AM_V$])
 m4trace:configure.ac:19: -1- AM_SUBST_NOTMAKE([AM_V])
@@ -3194,7 +3070,6 @@ m4trace:configure.ac:22: -1- m4_pattern_allow([^CC$])
 m4trace:configure.ac:22: -1- m4_pattern_allow([^CC$])
 m4trace:configure.ac:22: -1- m4_pattern_allow([^CC$])
 m4trace:configure.ac:22: -1- m4_pattern_allow([^ac_ct_CC$])
-m4trace:configure.ac:22: -1- m4_pattern_allow([^CC$])
 m4trace:configure.ac:22: -1- m4_pattern_allow([^EXEEXT$])
 m4trace:configure.ac:22: -1- m4_pattern_allow([^OBJEXT$])
 m4trace:configure.ac:22: -1- _AM_PROG_CC_C_O
@@ -3242,7 +3117,7 @@ m4trace:configure.ac:23: -1- _AM_SUBST_NOTMAKE([am__fastdepCXX_TRUE])
 m4trace:configure.ac:23: -1- _AM_SUBST_NOTMAKE([am__fastdepCXX_FALSE])
 m4trace:configure.ac:25: -1- AC_PROG_LIBTOOL
 m4trace:configure.ac:25: -1- _m4_warn([obsolete], [The macro `AC_PROG_LIBTOOL' is obsolete.
-You should run autoupdate.], [/opt/homebrew/share/aclocal/libtool.m4:99: AC_PROG_LIBTOOL is expanded from...
+You should run autoupdate.], [/usr/share/aclocal/libtool.m4:99: AC_PROG_LIBTOOL is expanded from...
 configure.ac:25: the top level])
 m4trace:configure.ac:25: -1- LT_INIT
 m4trace:configure.ac:25: -1- m4_pattern_forbid([^_?LT_[A-Z_]+$])
@@ -3314,33 +3189,9 @@ m4trace:configure.ac:25: -1- m4_pattern_allow([^OTOOL64$])
 m4trace:configure.ac:25: -1- _LT_LINKER_OPTION([if $CC understands -b], [lt_cv_prog_compiler__b], [-b], [_LT_TAGVAR(archive_cmds, )='$CC -b $wl+h $wl$soname $wl+b $wl$install_libdir -o $lib $libobjs $deplibs $compiler_flags'], [_LT_TAGVAR(archive_cmds, )='$LD -b +h $soname +b $install_libdir -o $lib $libobjs $deplibs $linker_flags'])
 m4trace:configure.ac:25: -1- m4_pattern_allow([^LT_SYS_LIBRARY_PATH$])
 m4trace:configure.ac:25: -1- LT_SYS_DLOPEN_SELF
-m4trace:configure.ac:25: -1- AC_DEFUN([_AC_Header_stdio_h], [m4_divert_text([INIT_PREPARE],
-  [AS_VAR_APPEND([ac_header_]]_AC_LANG_ABBREV[[_list],
-  [" stdio.h ]AS_TR_SH([stdio.h]) AS_TR_CPP([HAVE_stdio.h])["])])_AC_HEADERS_EXPANSION(_AC_LANG_ABBREV)])
-m4trace:configure.ac:25: -1- AC_DEFUN([_AC_Header_stdlib_h], [m4_divert_text([INIT_PREPARE],
-  [AS_VAR_APPEND([ac_header_]]_AC_LANG_ABBREV[[_list],
-  [" stdlib.h ]AS_TR_SH([stdlib.h]) AS_TR_CPP([HAVE_stdlib.h])["])])_AC_HEADERS_EXPANSION(_AC_LANG_ABBREV)])
-m4trace:configure.ac:25: -1- AC_DEFUN([_AC_Header_string_h], [m4_divert_text([INIT_PREPARE],
-  [AS_VAR_APPEND([ac_header_]]_AC_LANG_ABBREV[[_list],
-  [" string.h ]AS_TR_SH([string.h]) AS_TR_CPP([HAVE_string.h])["])])_AC_HEADERS_EXPANSION(_AC_LANG_ABBREV)])
-m4trace:configure.ac:25: -1- AC_DEFUN([_AC_Header_inttypes_h], [m4_divert_text([INIT_PREPARE],
-  [AS_VAR_APPEND([ac_header_]]_AC_LANG_ABBREV[[_list],
-  [" inttypes.h ]AS_TR_SH([inttypes.h]) AS_TR_CPP([HAVE_inttypes.h])["])])_AC_HEADERS_EXPANSION(_AC_LANG_ABBREV)])
-m4trace:configure.ac:25: -1- AC_DEFUN([_AC_Header_stdint_h], [m4_divert_text([INIT_PREPARE],
-  [AS_VAR_APPEND([ac_header_]]_AC_LANG_ABBREV[[_list],
-  [" stdint.h ]AS_TR_SH([stdint.h]) AS_TR_CPP([HAVE_stdint.h])["])])_AC_HEADERS_EXPANSION(_AC_LANG_ABBREV)])
-m4trace:configure.ac:25: -1- AC_DEFUN([_AC_Header_strings_h], [m4_divert_text([INIT_PREPARE],
-  [AS_VAR_APPEND([ac_header_]]_AC_LANG_ABBREV[[_list],
-  [" strings.h ]AS_TR_SH([strings.h]) AS_TR_CPP([HAVE_strings.h])["])])_AC_HEADERS_EXPANSION(_AC_LANG_ABBREV)])
-m4trace:configure.ac:25: -1- AC_DEFUN([_AC_Header_sys_stat_h], [m4_divert_text([INIT_PREPARE],
-  [AS_VAR_APPEND([ac_header_]]_AC_LANG_ABBREV[[_list],
-  [" sys/stat.h ]AS_TR_SH([sys/stat.h]) AS_TR_CPP([HAVE_sys/stat.h])["])])_AC_HEADERS_EXPANSION(_AC_LANG_ABBREV)])
-m4trace:configure.ac:25: -1- AC_DEFUN([_AC_Header_sys_types_h], [m4_divert_text([INIT_PREPARE],
-  [AS_VAR_APPEND([ac_header_]]_AC_LANG_ABBREV[[_list],
-  [" sys/types.h ]AS_TR_SH([sys/types.h]) AS_TR_CPP([HAVE_sys/types.h])["])])_AC_HEADERS_EXPANSION(_AC_LANG_ABBREV)])
-m4trace:configure.ac:25: -1- AC_DEFUN([_AC_Header_unistd_h], [m4_divert_text([INIT_PREPARE],
-  [AS_VAR_APPEND([ac_header_]]_AC_LANG_ABBREV[[_list],
-  [" unistd.h ]AS_TR_SH([unistd.h]) AS_TR_CPP([HAVE_unistd.h])["])])_AC_HEADERS_EXPANSION(_AC_LANG_ABBREV)])
+m4trace:configure.ac:25: -1- m4_pattern_allow([^CPP$])
+m4trace:configure.ac:25: -1- m4_pattern_allow([^CPPFLAGS$])
+m4trace:configure.ac:25: -1- m4_pattern_allow([^CPP$])
 m4trace:configure.ac:25: -1- m4_pattern_allow([^STDC_HEADERS$])
 m4trace:configure.ac:25: -1- m4_pattern_allow([^HAVE_DLFCN_H$])
 m4trace:configure.ac:25: -1- LT_LANG([CXX])
@@ -3373,48 +3224,58 @@ m4trace:configure.ac:36: -1- _AM_SUBST_NOTMAKE([HAVE_PYTHON_FALSE])
 m4trace:configure.ac:48: -1- ACX_PTHREAD([], [AS_IF([test "x$with_pthreads" != "xcheck"],
                [AC_MSG_FAILURE(
                  [--with-pthreads was specified, but unable to be used])])])
-m4trace:configure.ac:48: -1- _m4_warn([obsolete], [The macro `AC_LANG_C' is obsolete.
-You should run autoupdate.], [./lib/autoconf/c.m4:72: AC_LANG_C is expanded from...
+m4trace:configure.ac:48: -1- _m4_warn([obsolete], [The macro `AC_LANG_SAVE' is obsolete.
+You should run autoupdate.], [../../lib/autoconf/lang.m4:125: AC_LANG_SAVE is expanded from...
 ../googletest/m4/acx_pthread.m4:63: ACX_PTHREAD is expanded from...
-lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
+configure.ac:48: the top level])
+m4trace:configure.ac:48: -1- _m4_warn([obsolete], [The macro `AC_LANG_C' is obsolete.
+You should run autoupdate.], [../../lib/autoconf/c.m4:72: AC_LANG_C is expanded from...
+../googletest/m4/acx_pthread.m4:63: ACX_PTHREAD is expanded from...
+../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
 configure.ac:48: the top level])
 m4trace:configure.ac:48: -1- m4_pattern_allow([^acx_pthread_config$])
 m4trace:configure.ac:48: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
-You should run autoupdate.], [./lib/autoconf/general.m4:2920: AC_TRY_LINK is expanded from...
+You should run autoupdate.], [../../lib/autoconf/general.m4:2698: AC_TRY_LINK is expanded from...
 ../googletest/m4/acx_pthread.m4:63: ACX_PTHREAD is expanded from...
-lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
 configure.ac:48: the top level])
 m4trace:configure.ac:48: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
-You should run autoupdate.], [./lib/autoconf/general.m4:2920: AC_TRY_LINK is expanded from...
+You should run autoupdate.], [../../lib/autoconf/general.m4:2698: AC_TRY_LINK is expanded from...
 ../googletest/m4/acx_pthread.m4:63: ACX_PTHREAD is expanded from...
-lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
 configure.ac:48: the top level])
 m4trace:configure.ac:48: -1- m4_pattern_allow([^PTHREAD_CREATE_JOINABLE$])
 m4trace:configure.ac:48: -1- m4_pattern_allow([^PTHREAD_CC$])
 m4trace:configure.ac:48: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
-You should run autoupdate.], [./lib/autoconf/general.m4:2920: AC_TRY_LINK is expanded from...
+You should run autoupdate.], [../../lib/autoconf/general.m4:2698: AC_TRY_LINK is expanded from...
 ../googletest/m4/acx_pthread.m4:63: ACX_PTHREAD is expanded from...
-lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
 configure.ac:48: the top level])
 m4trace:configure.ac:48: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
-You should run autoupdate.], [./lib/autoconf/general.m4:2920: AC_TRY_LINK is expanded from...
+You should run autoupdate.], [../../lib/autoconf/general.m4:2698: AC_TRY_LINK is expanded from...
 ../googletest/m4/acx_pthread.m4:63: ACX_PTHREAD is expanded from...
-lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
 configure.ac:48: the top level])
 m4trace:configure.ac:48: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
-You should run autoupdate.], [./lib/autoconf/general.m4:2920: AC_TRY_LINK is expanded from...
+You should run autoupdate.], [../../lib/autoconf/general.m4:2698: AC_TRY_LINK is expanded from...
 ../googletest/m4/acx_pthread.m4:63: ACX_PTHREAD is expanded from...
-lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
 configure.ac:48: the top level])
 m4trace:configure.ac:48: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
-You should run autoupdate.], [./lib/autoconf/general.m4:2920: AC_TRY_LINK is expanded from...
+You should run autoupdate.], [../../lib/autoconf/general.m4:2698: AC_TRY_LINK is expanded from...
 ../googletest/m4/acx_pthread.m4:63: ACX_PTHREAD is expanded from...
-lib/m4sugar/m4sh.m4:699: AS_IF is expanded from...
+../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
 configure.ac:48: the top level])
 m4trace:configure.ac:48: -1- m4_pattern_allow([^PTHREAD_LIBS$])
 m4trace:configure.ac:48: -1- m4_pattern_allow([^PTHREAD_CFLAGS$])
 m4trace:configure.ac:48: -1- m4_pattern_allow([^PTHREAD_CC$])
 m4trace:configure.ac:48: -2- m4_pattern_allow([^HAVE_PTHREAD$])
+m4trace:configure.ac:48: -1- _m4_warn([obsolete], [The macro `AC_LANG_RESTORE' is obsolete.
+You should run autoupdate.], [../../lib/autoconf/lang.m4:134: AC_LANG_RESTORE is expanded from...
+../googletest/m4/acx_pthread.m4:63: ACX_PTHREAD is expanded from...
+../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
+configure.ac:48: the top level])
 m4trace:configure.ac:55: -1- AM_CONDITIONAL([HAVE_PTHREADS], [test "x$have_pthreads" == "xyes"])
 m4trace:configure.ac:55: -1- m4_pattern_allow([^HAVE_PTHREADS_TRUE$])
 m4trace:configure.ac:55: -1- m4_pattern_allow([^HAVE_PTHREADS_FALSE$])
