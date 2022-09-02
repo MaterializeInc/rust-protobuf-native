@@ -57,8 +57,9 @@
 //! instead:
 //!
 //! ```
+//! # use std::pin::Pin;
 //! # use protobuf_native::io::ZeroCopyInputStream;
-//! # fn f(input: &mut dyn ZeroCopyInputStream) {
+//! # fn f(input: Pin<&mut dyn ZeroCopyInputStream>) {
 //! let buffer = input.next();
 //! // Do something with `buffer`.
 //! # }
@@ -213,7 +214,7 @@ pub(crate) mod ffi {
 ///
 /// let mut f = File::open("myfile")?;
 /// let mut input = ReaderStream::new(&mut f);
-/// while let Ok(buf) = input.next() {
+/// while let Ok(buf) = input.as_mut().next() {
 ///     io::stdout().write_all(buf)?;
 /// }
 /// # Ok::<_, io::Error>(())

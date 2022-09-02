@@ -420,16 +420,17 @@ impl DiskSourceTree {
     /// use protobuf_native::compiler::DiskSourceTree;
     ///
     /// let mut source_tree = DiskSourceTree::new();
-    /// source_tree.map_path(Path::new("bar"), Path::new("foo/bar"));
-    /// source_tree.map_path(Path::new(""), Path::new("baz"));
+    /// source_tree.as_mut().map_path(Path::new("bar"), Path::new("foo/bar"));
+    /// source_tree.as_mut().map_path(Path::new(""), Path::new("baz"));
     /// ```
     ///
     /// and then you do:
     ///
     /// ```
     /// # use std::path::Path;
+    /// # use std::pin::Pin;
     /// # use protobuf_native::compiler::{SourceTree, DiskSourceTree};
-    /// # fn f(mut source_tree: DiskSourceTree) {
+    /// # fn f(mut source_tree: Pin<&mut DiskSourceTree>) {
     /// source_tree.open(Path::new("bar/qux"));
     /// # }
     /// ```
