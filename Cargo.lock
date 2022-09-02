@@ -45,22 +45,28 @@ dependencies = [
 ]
 
 [[package]]
-name = "autocxx"
-version = "0.14.0"
+name = "autocfg"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "797c7a5124a155d23e3678fbb9deb71bf8f9d3787ae2e1db88bf0e330b76b546"
+checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
+
+[[package]]
+name = "autocxx"
+version = "0.22.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "74c1d2306a6312ef38a0b8b75be898b45590bc46fd7bc00309bcefe95b71d2fe"
 dependencies = [
  "aquamarine",
- "autocxx-engine",
  "autocxx-macro",
  "cxx",
+ "moveit",
 ]
 
 [[package]]
 name = "autocxx-bindgen"
-version = "0.59.4"
+version = "0.59.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bb7dc200dec3b5bc1539595d17be3fbc5552ac5b160aaa77caf08b62de8f2086"
+checksum = "f9a9a26dd38d385d23b1bf61bd231b77f690c4368aef4c77cee1b7a6da2e2042"
 dependencies = [
  "bitflags",
  "cexpr",
@@ -82,46 +88,49 @@ dependencies = [
 
 [[package]]
 name = "autocxx-build"
-version = "0.14.0"
+version = "0.22.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f001e85f02dc04faecf11f5ed9507b08d39f3b0ad0f2ed979d857491e96cae30"
+checksum = "d5ac4a5b959ff7d996ce8719dd8421d07edcd6e8ee9c8f5168dc35175f2ea37f"
 dependencies = [
  "autocxx-engine",
  "env_logger",
+ "indexmap",
  "syn",
 ]
 
 [[package]]
 name = "autocxx-engine"
-version = "0.14.0"
+version = "0.22.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e9f68b7f8d2a4581c8466a139741a7c88dcad3c8d2ed2e55ed0b25de78de93ea"
+checksum = "10fa9abd4f95b85723a3e71457e60ed9a9fc48a55cd5dfd2c467a29e1b074d70"
 dependencies = [
  "aquamarine",
  "autocxx-bindgen",
  "autocxx-parser",
  "cc",
- "cxx",
  "cxx-gen",
+ "indexmap",
  "indoc",
  "itertools 0.10.3",
  "log",
+ "miette",
  "once_cell",
  "proc-macro2",
  "quote",
+ "regex",
  "serde_json",
  "strum_macros",
  "syn",
  "tempfile",
- "unzip-n",
+ "thiserror",
  "version_check",
 ]
 
 [[package]]
 name = "autocxx-macro"
-version = "0.14.0"
+version = "0.22.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bff9e1155bf7983b7dd3b17a0fc10439106cb6fc6b1a74a6eb35758321ccd7ba"
+checksum = "8bf9474546eb661af79b5d291f39dc7661902b07b3433840679a6318c0b7f6be"
 dependencies = [
  "autocxx-parser",
  "proc-macro-error",
@@ -132,16 +141,20 @@ dependencies = [
 
 [[package]]
 name = "autocxx-parser"
-version = "0.14.0"
+version = "0.22.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4a9dee6ace8bfcf377c87fe963268781c3cdf7a859df2db00b8dde6489c448d2"
+checksum = "51ce4f7c3bbd7d1369400b24f7e77abadfdd9ce9848a42ab33171a9c0d548046"
 dependencies = [
+ "indexmap",
+ "itertools 0.10.3",
  "log",
+ "once_cell",
  "proc-macro2",
  "quote",
  "serde",
- "serde_derive",
+ "serde_json",
  "syn",
+ "thiserror",
 ]
 
 [[package]]
@@ -228,9 +241,9 @@ dependencies = [
 
 [[package]]
 name = "cxx"
-version = "1.0.62"
+version = "1.0.74"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5beeee74e023d146e6fb933296b3b5e07de146ff3c9498c5af6e53cabc986d51"
+checksum = "1d32d767d2d7d8126dc126b959f5bb3ddb07f7f5c4c21351983444c9826786b1"
 dependencies = [
  "cc",
  "cxxbridge-flags",
@@ -255,9 +268,9 @@ dependencies = [
 
 [[package]]
 name = "cxx-gen"
-version = "0.7.60"
+version = "0.7.74"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7a7f6be7682ad36965fbbaca428c118cc36d9a191ebb4433b11e129c47f9808f"
+checksum = "7ef0ef97778a72b6f87aba1583443ce71daa701b6aff82ae9e86b22b81afae56"
 dependencies = [
  "codespan-reporting",
  "proc-macro2",
@@ -267,15 +280,15 @@ dependencies = [
 
 [[package]]
 name = "cxxbridge-flags"
-version = "1.0.62"
+version = "1.0.74"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4d2033701dc9a0cd15c14bb24d4423b6ba57f6eba079b65b7049b95288dad6b3"
+checksum = "53253a86460ad0d1f851f49ab57b45bfb5cfddf558ff714994fb599a64f0fc7a"
 
 [[package]]
 name = "cxxbridge-macro"
-version = "1.0.62"
+version = "1.0.74"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "94d7ddcc58b10f23413d3fef111d1bd64b2bfb76af53f31611e02e9d0b6537be"
+checksum = "0e0e3dabc3f3f2c071a64cb39066234442bc0c15c7dbb64762e228cf0431589f"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -325,13 +338,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9b919933a397b79c37e33b77bb2aa3dc8eb6e165ad809e58ff75bc7db2e34574"
 
 [[package]]
-name = "heck"
-version = "0.3.3"
+name = "hashbrown"
+version = "0.12.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6d621efb26863f0e9924c6ac577e8275e5e6b77455db64ffa6c65c904e9e132c"
-dependencies = [
- "unicode-segmentation",
-]
+checksum = "8a9ee70c43aaf417c914396645a0fa852624801b24ebb7ae78fe8272889ac888"
+
+[[package]]
+name = "heck"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2540771e65fc8cb83cd6e8a237f70c319bd5c29f78ed1084ba5d50eeac86f7f9"
 
 [[package]]
 name = "hermit-abi"
@@ -347,6 +363,17 @@ name = "humantime"
 version = "2.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9a3a5bfb195931eeb336b2a7b4d761daec841b97f947d34394601737a7bba5e4"
+
+[[package]]
+name = "indexmap"
+version = "1.9.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "10a35a97730320ffe8e2d410b5d3b69279b98d2c14bdb8b70ea89ecf7888d41e"
+dependencies = [
+ "autocfg",
+ "hashbrown",
+ "serde",
+]
 
 [[package]]
 name = "indoc"
@@ -434,10 +461,42 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "308cc39be01b73d0d18f82a0e7b2a3df85245f84af96fdddc5d202d27e47b86a"
 
 [[package]]
+name = "miette"
+version = "4.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1c90329e44f9208b55f45711f9558cec15d7ef8295cc65ecd6d4188ae8edc58c"
+dependencies = [
+ "miette-derive",
+ "once_cell",
+ "thiserror",
+ "unicode-width",
+]
+
+[[package]]
+name = "miette-derive"
+version = "4.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6b5bc45b761bcf1b5e6e6c4128cd93b84c218721a8d9b894aa0aff4ed180174c"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "minimal-lexical"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "68354c5c6bd36d73ff3feceb05efa59b6acb7626617f4962be322a825e61f79a"
+
+[[package]]
+name = "moveit"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d7d756ffe4e38013507d35bf726a93fcdae2cae043ab5ce477f13857a335030d"
+dependencies = [
+ "cxx",
+]
 
 [[package]]
 name = "nom"
@@ -452,9 +511,9 @@ dependencies = [
 
 [[package]]
 name = "once_cell"
-version = "1.9.0"
+version = "1.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "da32515d9f6e6e489d7bc9d84c71b060db7247dc035bbe44eac88cf87486d8d5"
+checksum = "2f7254b99e31cad77da24b08ebf628882739a608578bb1bcdfc1f9c21260d7c0"
 
 [[package]]
 name = "output_vt100"
@@ -521,11 +580,11 @@ dependencies = [
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.34"
+version = "1.0.43"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f84e92c0f7c9d58328b85a78557813e4bd845130db68d7184635344399423b1"
+checksum = "0a2ca2c61bc9f3d74d2886294ab7b9853abd9c1ad903a3ac7815c58989bb7bab"
 dependencies = [
- "unicode-xid",
+ "unicode-ident",
 ]
 
 [[package]]
@@ -648,6 +707,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "08d43f7aa6b08d49f382cde6a7982047c3426db949b1424bc4b7ec9ae12c6ce2"
 
 [[package]]
+name = "rustversion"
+version = "1.0.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "97477e48b4cf8603ad5f7aaf897467cf42ab4218a38ef76fb14c2d6773a6d6a8"
+
+[[package]]
 name = "ryu"
 version = "1.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -664,6 +729,9 @@ name = "serde"
 version = "1.0.132"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b9875c23cf305cd1fd7eb77234cbb705f21ea6a72c637a5c6db5fe4b8e7f008"
+dependencies = [
+ "serde_derive",
+]
 
 [[package]]
 name = "serde_derive"
@@ -701,25 +769,26 @@ checksum = "8ea5119cdb4c55b55d432abb513a0429384878c15dde60cc77b1c99de1a95a6a"
 
 [[package]]
 name = "strum_macros"
-version = "0.20.1"
+version = "0.24.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee8bc6b87a5112aeeab1f4a9f7ab634fe6cbefc4850006df31267f4cfb9e3149"
+checksum = "1e385be0d24f186b4ce2f9982191e7101bb737312ad61c1f2f984f34bcf85d59"
 dependencies = [
  "heck",
  "proc-macro2",
  "quote",
+ "rustversion",
  "syn",
 ]
 
 [[package]]
 name = "syn"
-version = "1.0.83"
+version = "1.0.99"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "23a1dfb999630e338648c83e91c59a4e9fb7620f520c3194b6b89e276f2f1959"
+checksum = "58dbef6ec655055e20b86b15a8cc6d439cca19b667537ac6a1369572d151ab13"
 dependencies = [
  "proc-macro2",
  "quote",
- "unicode-xid",
+ "unicode-ident",
 ]
 
 [[package]]
@@ -755,10 +824,30 @@ dependencies = [
 ]
 
 [[package]]
-name = "unicode-segmentation"
-version = "1.8.0"
+name = "thiserror"
+version = "1.0.33"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8895849a949e7845e06bd6dc1aa51731a103c42707010a5b591c0038fb73385b"
+checksum = "3d0a539a918745651435ac7db7a18761589a94cd7e94cd56999f828bf73c8a57"
+dependencies = [
+ "thiserror-impl",
+]
+
+[[package]]
+name = "thiserror-impl"
+version = "1.0.33"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c251e90f708e16c49a16f4917dc2131e75222b72edfa9cb7f7c58ae56aae0c09"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "unicode-ident"
+version = "1.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c4f5b37a154999a8f3f98cc23a628d850e154479cd94decf3414696e12e31aaf"
 
 [[package]]
 name = "unicode-width"
@@ -767,27 +856,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3ed742d4ea2bd1176e236172c8429aaf54486e7ac098db29ffe6529e0ce50973"
 
 [[package]]
-name = "unicode-xid"
-version = "0.2.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3"
-
-[[package]]
 name = "unindent"
 version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f14ee04d9415b52b3aeab06258a3f07093182b88ba0f9b8d203f211a7a7d41c7"
-
-[[package]]
-name = "unzip-n"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c2e7e85a0596447f0f2ac090e16bc4c516c6fe91771fb0c0ccf7fa3dae896b9c"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
 
 [[package]]
 name = "vec_map"

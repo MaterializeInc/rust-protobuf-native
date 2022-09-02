@@ -14,15 +14,16 @@
 // limitations under the License.
 
 use std::env;
+use std::error::Error;
 use std::path::PathBuf;
 
-fn main() {
+fn main() -> Result<(), Box<dyn Error>> {
     let include_paths = [
         PathBuf::from(env::var("DEP_PROTOBUF_SRC_ROOT").unwrap()).join("include"),
         PathBuf::from("src"),
     ];
     autocxx_build::Builder::new("src/lib.rs", &include_paths)
-        .expect_build()
+        .build()?
         .flag_if_supported("-std=c++14")
         .compile("protobuf-sys");
     println!("cargo:rerun-if-changed=src/lib.rs");
@@ -31,4 +32,6 @@ fn main() {
         env::var("DEP_PROTOBUF_SRC_ROOT").unwrap()
     );
     println!("cargo:rustc-link-lib=static=protobuf");
+
+    Ok(())
 }

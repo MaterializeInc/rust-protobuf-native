@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Upgrade to libprotobuf v21.5.
+
 ## [0.1.2+3.19.1] - 2021-12-24
 
 * Generate bindings for the following additional types:

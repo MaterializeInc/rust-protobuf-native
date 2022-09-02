@@ -323,6 +323,7 @@ EGREP = @EGREP@
 ETAGS = @ETAGS@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
+FILECMD = @FILECMD@
 GREP = @GREP@
 HAVE_CXX11 = @HAVE_CXX11@
 INSTALL = @INSTALL@
@@ -1445,18 +1446,18 @@ google-protobuf:
 
 # Some implementations include pre-generated versions of well-known types.
 @USE_EXTERNAL_PROTOC_TRUE@protoc_middleman: $(conformance_protoc_inputs) $(conformance_proto2_protoc_inputs) $(well_known_type_protoc_inputs) google-protobuf
-@USE_EXTERNAL_PROTOC_TRUE@	$(PROTOC) -I$(srcdir) -I$(top_srcdir) --cpp_out=. --java_out=. --ruby_out=. --objc_out=. --python_out=. --php_out=. --js_out=import_style=commonjs,binary:. $(conformance_protoc_inputs)
-@USE_EXTERNAL_PROTOC_TRUE@	$(PROTOC) -I$(srcdir) -I$(top_srcdir) --cpp_out=. --java_out=. --ruby_out=. --objc_out=. --python_out=. --js_out=import_style=commonjs,binary:. $(conformance_proto2_protoc_inputs)
-@USE_EXTERNAL_PROTOC_TRUE@	$(PROTOC) -I$(srcdir) -I$(top_srcdir) --cpp_out=. --java_out=. --ruby_out=. --python_out=. --js_out=import_style=commonjs,binary:google-protobuf $(well_known_type_protoc_inputs)
+@USE_EXTERNAL_PROTOC_TRUE@	$(PROTOC) -I$(srcdir) -I$(top_srcdir) --cpp_out=. --java_out=. --ruby_out=. --objc_out=. --python_out=. --php_out=. $(conformance_protoc_inputs)
+@USE_EXTERNAL_PROTOC_TRUE@	$(PROTOC) -I$(srcdir) -I$(top_srcdir) --cpp_out=. --java_out=. --ruby_out=. --objc_out=. --python_out=. $(conformance_proto2_protoc_inputs)
+@USE_EXTERNAL_PROTOC_TRUE@	$(PROTOC) -I$(srcdir) -I$(top_srcdir) --cpp_out=. --java_out=. --ruby_out=. --python_out=. $(well_known_type_protoc_inputs)
 @USE_EXTERNAL_PROTOC_TRUE@	touch protoc_middleman
 
 # We have to cd to $(srcdir) before executing protoc because $(protoc_inputs) is
 # relative to srcdir, which may not be the same as the current directory when
 # building out-of-tree.
 @USE_EXTERNAL_PROTOC_FALSE@protoc_middleman: $(top_srcdir)/src/protoc$(EXEEXT) $(conformance_protoc_inputs) $(conformance_proto2_protoc_inputs) $(well_known_type_protoc_inputs) google-protobuf
-@USE_EXTERNAL_PROTOC_FALSE@	oldpwd=`pwd` && ( cd $(srcdir) && $$oldpwd/../src/protoc$(EXEEXT) -I. -I$(top_srcdir)/src --cpp_out=$$oldpwd --java_out=$$oldpwd --ruby_out=$$oldpwd --objc_out=$$oldpwd --python_out=$$oldpwd --php_out=$$oldpwd --js_out=import_style=commonjs,binary:$$oldpwd $(conformance_protoc_inputs) )
-@USE_EXTERNAL_PROTOC_FALSE@	oldpwd=`pwd` && ( cd $(srcdir) && $$oldpwd/../src/protoc$(EXEEXT) -I. -I$(top_srcdir)/src --cpp_out=$$oldpwd --java_out=$$oldpwd --ruby_out=$$oldpwd --objc_out=$$oldpwd --python_out=$$oldpwd --js_out=import_style=commonjs,binary:$$oldpwd $(conformance_proto2_protoc_inputs) )
-@USE_EXTERNAL_PROTOC_FALSE@	oldpwd=`pwd` && ( cd $(srcdir) && $$oldpwd/../src/protoc$(EXEEXT) -I. -I$(top_srcdir)/src --cpp_out=$$oldpwd --java_out=$$oldpwd --ruby_out=$$oldpwd --python_out=$$oldpwd --js_out=import_style=commonjs,binary:$$oldpwd/google-protobuf $(well_known_type_protoc_inputs) )
+@USE_EXTERNAL_PROTOC_FALSE@	oldpwd=`pwd` && ( cd $(srcdir) && $$oldpwd/../src/protoc$(EXEEXT) -I. -I$(top_srcdir)/src --cpp_out=$$oldpwd --java_out=$$oldpwd --ruby_out=$$oldpwd --objc_out=$$oldpwd --python_out=$$oldpwd --php_out=$$oldpwd $(conformance_protoc_inputs) )
+@USE_EXTERNAL_PROTOC_FALSE@	oldpwd=`pwd` && ( cd $(srcdir) && $$oldpwd/../src/protoc$(EXEEXT) -I. -I$(top_srcdir)/src --cpp_out=$$oldpwd --java_out=$$oldpwd --ruby_out=$$oldpwd --objc_out=$$oldpwd --python_out=$$oldpwd $(conformance_proto2_protoc_inputs) )
+@USE_EXTERNAL_PROTOC_FALSE@	oldpwd=`pwd` && ( cd $(srcdir) && $$oldpwd/../src/protoc$(EXEEXT) -I. -I$(top_srcdir)/src --cpp_out=$$oldpwd --java_out=$$oldpwd --ruby_out=$$oldpwd --python_out=$$oldpwd $(well_known_type_protoc_inputs) )
 @USE_EXTERNAL_PROTOC_FALSE@	touch protoc_middleman
 
 $(protoc_outputs): protoc_middleman
@@ -1489,7 +1490,7 @@ conformance-java-lite: javac_middleman_lite
 conformance-csharp: $(other_language_protoc_outputs)
 	@echo "Writing shortcut script conformance-csharp..."
 	@echo '#! /bin/sh' > conformance-csharp
-	@echo 'dotnet ../csharp/src/Google.Protobuf.Conformance/bin/Release/netcoreapp2.1/Google.Protobuf.Conformance.dll "$$@"' >> conformance-csharp
+	@echo 'dotnet ../csharp/src/Google.Protobuf.Conformance/bin/Release/netcoreapp3.1/Google.Protobuf.Conformance.dll "$$@"' >> conformance-csharp
 	@chmod +x conformance-csharp
 
 conformance-php:
@@ -1536,9 +1537,6 @@ test_python: protoc_middleman conformance-test-runner
 
 test_python_cpp: protoc_middleman conformance-test-runner
 	./conformance-test-runner --enforce_recommended --failure_list failure_list_python_cpp.txt --text_format_failure_list text_format_failure_list_python_cpp.txt ./conformance_python.py
-
-test_nodejs: protoc_middleman conformance-test-runner $(other_language_protoc_outputs)
-	NODE_PATH=../js:. ./conformance-test-runner --enforce_recommended --failure_list failure_list_js.txt ./conformance_nodejs.js
 
 @OBJC_CONFORMANCE_TEST_TRUE@test_objc: protoc_middleman conformance-test-runner conformance-objc
 @OBJC_CONFORMANCE_TEST_TRUE@	./conformance-test-runner --enforce_recommended --failure_list failure_list_objc.txt ./conformance-objc
