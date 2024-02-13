@@ -108,5 +108,7 @@ CodedInputStream* NewCodedInputStream(ZeroCopyInputStream* input) {
 
 void DeleteCodedInputStream(CodedInputStream* stream) { delete stream; }
 
+void DeleteCodedOutputStream(CodedOutputStream* stream) { delete stream; }
+
 }  // namespace io
 }  // namespace protobuf_native
