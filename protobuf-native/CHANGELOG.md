@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+## [0.2.2] - 2024-02-13
+
 * Fix linking by adding the `DeleteCodedOutputStream` function
 
 ## [0.2.1+3.19.1] - 2022-01-18
@@ -29,7 +31,8 @@ Versioning].
 Initial release.
 
 <!-- #release:next-url -->
-[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.1+3.19.1...HEAD
+[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.2...HEAD
+[0.2.2]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.1+3.19.1...protobuf-native-v0.2.2
 [0.2.1+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.0+3.19.1...protobuf-native-v0.2.1+3.19.1
 [0.2.0+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.1.0+3.19.1...protobuf-native-v0.2.0+3.19.1
 
