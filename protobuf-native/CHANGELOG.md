@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Fix linking by adding the `DeleteCodedOutputStream` function
+
 ## [0.2.1+3.19.1] - 2022-01-18
 
 * Fix the file descriptor traversal in
