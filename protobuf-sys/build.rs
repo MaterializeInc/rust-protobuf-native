@@ -31,6 +31,10 @@ fn main() -> Result<(), Box<dyn Error>> {
         "cargo:rustc-link-search=native={}/lib",
         env::var("DEP_PROTOBUF_SRC_ROOT").unwrap()
     );
+    println!(
+        "cargo:rustc-link-search=native={}/lib64",
+        env::var("DEP_PROTOBUF_SRC_ROOT").unwrap()
+    );
     println!("cargo:rustc-link-lib=static=protobuf");
 
     Ok(())

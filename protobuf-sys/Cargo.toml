@@ -26,9 +26,9 @@ version = "0.1.2+3.19.1"
 edition = "2021"
 
 [dependencies]
-autocxx = "0.22.3"
+autocxx = "0.25"
 cxx = "1.0.54"
 protobuf-src = { path = "../protobuf-src", version = "1.0.0" }
 
 [build-dependencies]
-autocxx-build = "0.22.3"
+autocxx-build = "0.25"
