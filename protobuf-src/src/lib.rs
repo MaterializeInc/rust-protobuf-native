@@ -51,14 +51,20 @@
 
 use std::path::PathBuf;
 
+// Note: Keep this environment variable in sync with the build script.
+static OVERRIDE_PATH: Option<&'static str> = option_env!("RUST_PROTOBUF_SRC_PROTOC");
+static INSTALL_DIR: Option<&'static str> = option_env!("INSTALL_DIR");
+
 /// Returns the path to the vendored protoc binary.
 pub fn protoc() -> PathBuf {
-    PathBuf::from(env!("INSTALL_DIR"))
-        .join("bin")
-        .join("protoc")
+    match (OVERRIDE_PATH, INSTALL_DIR) {
+        (Some(override_path), _) => PathBuf::from(override_path),
+        (_, Some(install_dir)) => PathBuf::from(install_dir).join("bin").join("protoc"),
+        (None, None) => panic!("An override path was not specified, nor was the build script run!"),
+    }
 }
 
 /// Returns the path to the vendored include directory.
-pub fn include() -> PathBuf {
-    PathBuf::from(env!("INSTALL_DIR")).join("include")
+pub fn include() -> Option<PathBuf> {
+    INSTALL_DIR.map(|path| PathBuf::from(path).join("include"))
 }

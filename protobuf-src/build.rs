@@ -19,6 +19,12 @@ use std::fs;
 use std::path::PathBuf;
 
 fn main() -> Result<(), Box<dyn Error>> {
+    // Note: Keep this environment variable in sync with the library.
+    if let Some(path) = option_env!("RUST_PROTOBUF_SRC_PROTOC") {
+        eprintln!("Skipping build of protoc, override path provided: '{path}'");
+        return Ok(());
+    }
+
     let out_dir = PathBuf::from(env::var("OUT_DIR")?);
     let install_dir = out_dir.join("install");
     fs::create_dir_all(&install_dir)?;
