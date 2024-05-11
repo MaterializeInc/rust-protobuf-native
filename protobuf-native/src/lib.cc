@@ -19,10 +19,6 @@ using namespace google::protobuf;
 
 namespace protobuf_native {
 
-// Disable libprotobuf's logging to stderr. Libraries should not log to
-// stderr.
-static LogHandler* default_log_handler = SetLogHandler(nullptr);
-
 MessageLite* NewMessageLite(const MessageLite& message) { return message.New(); }
 
 void DeleteMessageLite(MessageLite* message) { delete message; }

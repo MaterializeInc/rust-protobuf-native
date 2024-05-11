@@ -29,15 +29,15 @@ struct FileLoadError;
 
 class SimpleErrorCollector : public MultiFileErrorCollector {
    public:
-    void AddError(const std::string& filename, int line, int column,
-                  const std::string& message) override;
-    void AddWarning(const std::string& filename, int line, int column,
-                    const std::string& message) override;
+    void RecordError(absl::string_view filename, int line, int column,
+                     absl::string_view message) override;
+    void RecordWarning(absl::string_view filename, int line, int column,
+                       absl::string_view message) override;
     std::vector<FileLoadError>& Errors();
 
    private:
-    void AddErrorOrWarning(const std::string& filename, int line, int column,
-                           const std::string& message, bool warning);
+    void RecordErrorOrWarning(absl::string_view filename, int line, int column,
+                              absl::string_view message, bool warning);
     std::vector<FileLoadError> errors_;
 };
 
@@ -48,12 +48,12 @@ rust::String SourceTreeGetLastErrorMessage(SourceTree&);
 
 class VirtualSourceTree : public SourceTree {
    public:
-    void AddFile(const std::string& name, rust::Vec<rust::u8> contents);
-    io::ZeroCopyInputStream* Open(const std::string& filename);
+    void AddFile(absl::string_view name, rust::Vec<rust::u8> contents);
+    io::ZeroCopyInputStream* Open(absl::string_view filename);
     std::string GetLastErrorMessage();
 
    private:
-    std::unordered_map<std::string, rust::Vec<rust::u8>> files_;
+    absl::flat_hash_map<std::string, rust::Vec<rust::u8>> files_;
 };
 
 VirtualSourceTree* NewVirtualSourceTree();

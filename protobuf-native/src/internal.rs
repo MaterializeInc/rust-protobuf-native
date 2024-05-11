@@ -44,6 +44,30 @@ unsafe fn vec_u8_set_len(v: &mut Vec<u8>, new_len: usize) {
     v.set_len(new_len)
 }
 
+// Abseil types.
+
+pub struct StringView {
+    pub ptr: *const u8,
+    pub length: usize,
+}
+
+impl<S> From<S> for StringView
+where
+    S: AsRef<[u8]>
+{
+    fn from(s: S) -> StringView {
+        StringView {
+            ptr: s.as_ref().as_ptr(),
+            length: s.as_ref().len(),
+        }
+    }
+}
+
+unsafe impl ExternType for StringView {
+    type Id = type_id!("absl::string_view");
+    type Kind = Trivial;
+}
+
 // Variable-width integer types.
 // See: https://github.com/google/autocxx/issues/422#issuecomment-826987408
 

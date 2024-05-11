@@ -22,13 +22,13 @@ documentation = "https://docs.rs/protobuf-sys"
 repository = "https://github.com/MaterializeInc/rust-protobuf-native"
 license = "Apache-2.0"
 categories = ["external-ffi-bindings"]
-version = "0.1.2+3.19.1"
+version = "0.2.0+26.1"
 edition = "2021"
 
 [dependencies]
-autocxx = "0.22.3"
-cxx = "1.0.54"
-protobuf-src = { path = "../protobuf-src", version = "1.0.0" }
+autocxx = "0.26.0"
+cxx = "1.0.122"
+protobuf-src = { path = "../protobuf-src", version = "2.0.0" }
 
 [build-dependencies]
-autocxx-build = "0.22.3"
+autocxx-build = "0.26.0"

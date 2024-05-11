@@ -18,11 +18,10 @@ use autocxx::moveit::Emplace;
 use protobuf_sys::google::protobuf::util::TimeUtil;
 
 // Currently segfaults.
-#[ignore]
 #[test]
 fn test_linkage() {
     // Simple test that calls a function to verify that linking has occurred.
-    let time = Box::emplace(TimeUtil::SecondsToDuration(42));
-    let s = TimeUtil::ToString1(&time);
-    assert_eq!(s.to_str().unwrap(), "42s");
+    let time = Box::emplace(TimeUtil::SecondsToTimestamp(42));
+    let s = TimeUtil::ToString(&time);
+    assert_eq!(s.to_str().unwrap(), "1970-01-01T00:00:42Z");
 }

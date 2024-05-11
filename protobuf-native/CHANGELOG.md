@@ -9,9 +9,11 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Upgrade to protobuf-src v2.0.0+26.1.
+
 ## [0.2.2] - 2024-02-13
 
-* Fix linking by adding the `DeleteCodedOutputStream` function
+* Fix linking by adding the `DeleteCodedOutputStream` function.
 
 ## [0.2.1+3.19.1] - 2022-01-18
 

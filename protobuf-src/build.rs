@@ -13,24 +13,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::env;
 use std::error::Error;
-use std::fs;
-use std::path::PathBuf;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let out_dir = PathBuf::from(env::var("OUT_DIR")?);
-    let install_dir = out_dir.join("install");
-    fs::create_dir_all(&install_dir)?;
-
-    autotools::Config::new("protobuf")
-        .disable("maintainer-mode", None)
-        .out_dir(&install_dir)
+    let install_dir = cmake::Config::new("protobuf")
+        .define("ABSL_PROPAGATE_CXX_STD", "ON")
+        .define("protobuf_BUILD_TESTS", "OFF")
+        .define("protobuf_DEBUG_POSTFIX", "")
+        .define("CMAKE_CXX_STANDARD", "14")
         .build();
-
-    // Move the build directory out of the installation directory.
-    let _ = fs::remove_dir_all(out_dir.join("build"));
-    fs::rename(install_dir.join("build"), out_dir.join("build"))?;
 
     println!("cargo:rustc-env=INSTALL_DIR={}", install_dir.display());
     println!("cargo:CXXBRIDGE_DIR0={}/include", install_dir.display());

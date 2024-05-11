@@ -52,6 +52,9 @@ pub(crate) mod ffi {
         #[namespace = "protobuf_native::internal"]
         type CInt = crate::internal::CInt;
 
+        #[namespace = "absl"]
+        type string_view = crate::internal::StringView;
+
         #[namespace = "google::protobuf"]
         type FileDescriptorProto = crate::ffi::FileDescriptorProto;
 
@@ -65,24 +68,24 @@ pub(crate) mod ffi {
 
         #[namespace = "google::protobuf::compiler"]
         type MultiFileErrorCollector;
-        fn AddError(
+        fn RecordError(
             self: Pin<&mut MultiFileErrorCollector>,
-            filename: &CxxString,
+            filename: string_view,
             line: CInt,
             column: CInt,
-            message: &CxxString,
+            message: string_view,
         );
-        fn AddWarning(
+        fn RecordWarning(
             self: Pin<&mut MultiFileErrorCollector>,
-            filename: &CxxString,
+            filename: string_view,
             line: CInt,
             column: CInt,
-            message: &CxxString,
+            message: string_view,
         );
 
         #[namespace = "google::protobuf::compiler"]
         type SourceTree;
-        fn Open(self: Pin<&mut SourceTree>, filename: &CxxString) -> *mut ZeroCopyInputStream;
+        fn Open(self: Pin<&mut SourceTree>, filename: string_view) -> *mut ZeroCopyInputStream;
         fn SourceTreeGetLastErrorMessage(source_tree: Pin<&mut SourceTree>) -> String;
 
         #[namespace = "google::protobuf::compiler"]
@@ -106,13 +109,13 @@ pub(crate) mod ffi {
         type VirtualSourceTree;
         fn NewVirtualSourceTree() -> *mut VirtualSourceTree;
         unsafe fn DeleteVirtualSourceTree(tree: *mut VirtualSourceTree);
-        fn AddFile(self: Pin<&mut VirtualSourceTree>, filename: &CxxString, contents: Vec<u8>);
+        fn AddFile(self: Pin<&mut VirtualSourceTree>, filename: string_view, contents: Vec<u8>);
 
         #[namespace = "google::protobuf::compiler"]
         type DiskSourceTree;
         fn NewDiskSourceTree() -> *mut DiskSourceTree;
         unsafe fn DeleteDiskSourceTree(tree: *mut DiskSourceTree);
-        fn MapPath(self: Pin<&mut DiskSourceTree>, virtual_path: &CxxString, disk_path: &CxxString);
+        fn MapPath(self: Pin<&mut DiskSourceTree>, virtual_path: string_view, disk_path: string_view);
     }
 }
 
@@ -124,13 +127,11 @@ pub trait MultiFileErrorCollector: multi_file_error_collector::Sealed {
     /// Line and column numbers are zero-based. A line number of -1 indicates
     /// an error with the entire file (e.g., "not found").
     fn add_error(self: Pin<&mut Self>, filename: &str, line: i32, column: i32, message: &str) {
-        let_cxx_string!(filename = filename);
-        let_cxx_string!(message = message);
-        self.upcast_mut().AddError(
-            &filename,
+        self.upcast_mut().RecordError(
+            filename.into(),
             CInt::expect_from(line),
             CInt::expect_from(column),
-            &message,
+            message.into(),
         )
     }
 
@@ -141,13 +142,11 @@ pub trait MultiFileErrorCollector: multi_file_error_collector::Sealed {
     ///
     /// [`add_error`]: MultiFileErrorCollector::add_error
     fn add_warning(self: Pin<&mut Self>, filename: &str, line: i32, column: i32, message: &str) {
-        let_cxx_string!(filename = filename);
-        let_cxx_string!(message = message);
-        self.upcast_mut().AddWarning(
-            &filename,
+        self.upcast_mut().RecordWarning(
+            filename.into(),
             CInt::expect_from(line),
             CInt::expect_from(column),
-            &message,
+            message.into(),
         )
     }
 }
@@ -318,9 +317,9 @@ pub trait SourceTree: source_tree::Sealed {
         self: Pin<&'a mut Self>,
         filename: &Path,
     ) -> Result<Pin<Box<DynZeroCopyInputStream<'a>>>, FileOpenError> {
-        let_cxx_string!(filename = ProtobufPath::from(filename));
+        let filename = ProtobufPath::from(filename);
         let mut source_tree = self.upcast_mut();
-        let stream = source_tree.as_mut().Open(&filename);
+        let stream = source_tree.as_mut().Open(filename.into());
         if stream.is_null() {
             Err(FileOpenError(ffi::SourceTreeGetLastErrorMessage(
                 source_tree,
@@ -365,8 +364,8 @@ impl VirtualSourceTree {
 
     /// Adds a file to the source tree with the specified name and contents.
     pub fn add_file(self: Pin<&mut Self>, filename: &Path, contents: Vec<u8>) {
-        let_cxx_string!(filename = ProtobufPath::from(filename));
-        self.as_ffi_mut().AddFile(&filename, contents)
+        let filename = ProtobufPath::from(filename);
+        self.as_ffi_mut().AddFile(filename.into(), contents)
     }
 
     unsafe_ffi_conversions!(ffi::VirtualSourceTree);
@@ -443,9 +442,9 @@ impl DiskSourceTree {
     ///
     /// [`File::open`]: std::fs::File::open
     pub fn map_path(self: Pin<&mut Self>, virtual_path: &Path, disk_path: &Path) {
-        let_cxx_string!(virtual_path = ProtobufPath::from(virtual_path));
-        let_cxx_string!(disk_path = ProtobufPath::from(disk_path));
-        self.as_ffi_mut().MapPath(&virtual_path, &disk_path)
+        let virtual_path = ProtobufPath::from(virtual_path);
+        let disk_path = ProtobufPath::from(disk_path);
+        self.as_ffi_mut().MapPath(virtual_path.into(), disk_path.into())
     }
 
     unsafe_ffi_conversions!(ffi::DiskSourceTree);

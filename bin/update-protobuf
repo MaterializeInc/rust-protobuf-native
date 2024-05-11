@@ -27,7 +27,7 @@ fi
 version=$1
 
 set -x
-curl -fsSL "https://github.com/protocolbuffers/protobuf/releases/download/v$version/protobuf-cpp-3.$version.tar.gz" > protobuf.tar.gz
+curl -fsSL "https://github.com/protocolbuffers/protobuf/releases/download/v$version/protobuf-$version.tar.gz" > protobuf.tar.gz
 
 rm -rf protobuf
 mkdir -p protobuf
@@ -81,9 +81,9 @@ index 3bcb0c90c2..e5f57e60ba 100644
      had_errors_ = true;
    }
 
-+  void AddWarning(int line, int column, const std::string& message) override {
++  void RecordWarning(int line, int column, absl::string_view message) override {
 +    if (multi_file_error_collector_ != NULL) {
-+      multi_file_error_collector_->AddWarning(filename_, line, column, message);
++      multi_file_error_collector_->RecordWarning(filename_, line, column, message);
 +    }
 +  }
 +
@@ -109,15 +109,16 @@ diff --git a/src/google/protobuf/compiler/parser.cc b/src/google/protobuf/compil
 index 49ddfceb1a..19dbdbb753 100644
 --- a/src/google/protobuf/compiler/parser.cc
 +++ b/src/google/protobuf/compiler/parser.cc
-@@ -646,10 +646,11 @@ bool Parser::Parse(io::Tokenizer* input, FileDescriptorProto* file) {
+@@ -646,11 +646,11 @@ bool Parser::Parse(io::Tokenizer* input, FileDescriptorProto* file) {
        // Store the syntax into the file.
        if (file != NULL) file->set_syntax(syntax_identifier_);
      } else if (!stop_after_syntax_identifier_) {
--      GOOGLE_LOG(WARNING) << "No syntax specified for the proto file: " << file->name()
--                   << ". Please use 'syntax = \"proto2\";' "
--                   << "or 'syntax = \"proto3\";' to specify a syntax "
--                   << "version. (Defaulted to proto2 syntax.)";
-+      AddWarning(
+-      ABSL_LOG(WARNING) << "No syntax specified for the proto file: "
+-                        << file->name()
+-                        << ". Please use 'syntax = \"proto2\";' "
+-                        << "or 'syntax = \"proto3\";' to specify a syntax "
+-                        << "version. (Defaulted to proto2 syntax.)";
++      RecordWarning(
 +        "No syntax specified. Please use 'syntax = \"proto2\";' or "
 +        "'syntax = \"proto3\";' to specify a syntax version. "
 +        "(Defaulted to proto2 syntax.)"
@@ -140,4 +141,10 @@ index 6973bc993d..122218fb81 100644
 
 EOF
 
-(cd protobuf && autoreconf -ivf)
+curl -fsSL "https://github.com/abseil/abseil-cpp/releases/download/20240116.2/abseil-cpp-20240116.2.tar.gz" > abseil.tar.gz
+rm -rf protobuf/third_party/abseil-cpp
+mkdir -p protobuf/third_party/abseil-cpp
+tar --strip-components=1 -C protobuf/third_party/abseil-cpp -xf abseil.tar.gz
+rm abseil.tar.gz
+
+find protobuf -name '*.orig' -delete

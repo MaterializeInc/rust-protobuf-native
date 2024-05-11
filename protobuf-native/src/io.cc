@@ -89,8 +89,8 @@ bool VecOutputStream::Next(void** data, int* size) {
 }
 
 void VecOutputStream::BackUp(int count) {
-    GOOGLE_CHECK_GE(count, 0);
-    GOOGLE_CHECK_LE(static_cast<int64_t>(count), ByteCount());
+    ABSL_CHECK_GE(count, 0);
+    ABSL_CHECK_LE(static_cast<int64_t>(count), ByteCount());
     position_ -= count;
 }
 

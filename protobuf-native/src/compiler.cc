@@ -23,22 +23,22 @@ namespace compiler {
 
 using namespace google::protobuf::compiler;
 
-void SimpleErrorCollector::AddError(const std::string& filename, int line, int column,
-                                    const std::string& message) {
-    AddErrorOrWarning(filename, line, column, message, false);
+void SimpleErrorCollector::RecordError(absl::string_view filename, int line, int column,
+                                       absl::string_view message) {
+    RecordErrorOrWarning(filename, line, column, message, false);
 }
 
-void SimpleErrorCollector::AddWarning(const std::string& filename, int line, int column,
-                                      const std::string& message) {
-    AddErrorOrWarning(filename, line, column, message, true);
+void SimpleErrorCollector::RecordWarning(absl::string_view filename, int line, int column,
+                                         absl::string_view message) {
+    RecordErrorOrWarning(filename, line, column, message, true);
 }
 
-void SimpleErrorCollector::AddErrorOrWarning(const std::string& filename, int line, int column,
-                                             const std::string& message, bool warning) {
-    errors_.push_back(FileLoadError{.filename = filename,
+void SimpleErrorCollector::RecordErrorOrWarning(absl::string_view filename, int line, int column,
+                                                absl::string_view message, bool warning) {
+    errors_.push_back(FileLoadError{.filename = rust::String(filename.data(), filename.size()),
                                     .line = line,
                                     .column = column,
-                                    .message = message,
+                                    .message = rust::String(message.data(), message.size()),
                                     .warning = warning});
 }
 
@@ -56,11 +56,11 @@ VirtualSourceTree* NewVirtualSourceTree() { return new VirtualSourceTree(); }
 
 void DeleteVirtualSourceTree(VirtualSourceTree* tree) { delete tree; }
 
-void VirtualSourceTree::AddFile(const std::string& name, rust::Vec<rust::u8> contents) {
-    files_[name] = contents;
+void VirtualSourceTree::AddFile(absl::string_view name, rust::Vec<rust::u8> contents) {
+    files_[std::string(name)] = contents;
 }
 
-io::ZeroCopyInputStream* VirtualSourceTree::Open(const std::string& filename) {
+io::ZeroCopyInputStream* VirtualSourceTree::Open(absl::string_view filename) {
     auto entry = files_.find(filename);
     if (entry == files_.end()) {
         return nullptr;

@@ -9,6 +9,11 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Upgrade to libprotobuf v26.1.
+
+  This release notably replaces use of autotools with CMake, as upstream
+  no longer provides an autotools-based build system.
+
 ## [1.1.0] - 2022-09-02
 
 * Upgrade to libprotobuf v21.5.

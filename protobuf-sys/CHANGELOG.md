@@ -9,7 +9,7 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
-* Upgrade to libprotobuf v21.5.
+* Upgrade to libprotobuf v26.1.
 
 ## [0.1.2+3.19.1] - 2021-12-24
 

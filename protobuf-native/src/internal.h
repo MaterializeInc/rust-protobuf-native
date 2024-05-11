@@ -13,6 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#pragma once
+
+#include <absl/strings/string_view.h>
+
 namespace protobuf_native {
 namespace internal {
 
