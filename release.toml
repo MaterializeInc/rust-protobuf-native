@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+consolidate-commits = false
 pre-release-commit-message = "{{crate_name}}: release {{version}}"
 pre-release-replacements = [
   { file="README.md", search = "protobuf-[a-z]+ = .*", replace = "{{crate_name}} = \"{{version}}\"" },
