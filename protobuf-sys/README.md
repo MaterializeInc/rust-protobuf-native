@@ -14,8 +14,8 @@ Google's data interchange format.
 ```toml
 # Cargo.toml
 [dependencies]
-protobuf-sys = "0.1.2+3.19.1"
+protobuf-sys = "0.2.0"
 ```
 
-[docs]: https://docs.rs/protobuf-sys/0.1.2+3.19.1/protobuf_sys
+[docs]: https://docs.rs/protobuf-sys/0.2.0/protobuf_sys
 [Protocol Buffers]: https://github.com/google/protobuf
