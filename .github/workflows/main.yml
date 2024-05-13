@@ -15,6 +15,7 @@ jobs:
         - ubuntu
         - ubuntu-old
         - macos
+        - windows
         include:
           - build: ubuntu
             os: ubuntu-latest
