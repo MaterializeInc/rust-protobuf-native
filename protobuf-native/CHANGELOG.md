@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+## [0.3.0] - 2024-05-13
+
 * Upgrade to protobuf-src v2.0.0+26.1.
 
 ## [0.2.2] - 2024-02-13
@@ -33,7 +35,8 @@ Versioning].
 Initial release.
 
 <!-- #release:next-url -->
-[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.2...HEAD
+[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.3.0...HEAD
+[0.3.0]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.2...protobuf-native-v0.3.0
 [0.2.2]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.1+3.19.1...protobuf-native-v0.2.2
 [0.2.1+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.0+3.19.1...protobuf-native-v0.2.1+3.19.1
 [0.2.0+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.1.0+3.19.1...protobuf-native-v0.2.0+3.19.1
