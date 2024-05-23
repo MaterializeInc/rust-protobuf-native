@@ -115,7 +115,11 @@ pub(crate) mod ffi {
         type DiskSourceTree;
         fn NewDiskSourceTree() -> *mut DiskSourceTree;
         unsafe fn DeleteDiskSourceTree(tree: *mut DiskSourceTree);
-        fn MapPath(self: Pin<&mut DiskSourceTree>, virtual_path: string_view, disk_path: string_view);
+        fn MapPath(
+            self: Pin<&mut DiskSourceTree>,
+            virtual_path: string_view,
+            disk_path: string_view,
+        );
     }
 }
 
@@ -444,7 +448,8 @@ impl DiskSourceTree {
     pub fn map_path(self: Pin<&mut Self>, virtual_path: &Path, disk_path: &Path) {
         let virtual_path = ProtobufPath::from(virtual_path);
         let disk_path = ProtobufPath::from(disk_path);
-        self.as_ffi_mut().MapPath(virtual_path.into(), disk_path.into())
+        self.as_ffi_mut()
+            .MapPath(virtual_path.into(), disk_path.into())
     }
 
     unsafe_ffi_conversions!(ffi::DiskSourceTree);

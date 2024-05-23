@@ -53,7 +53,7 @@ pub struct StringView {
 
 impl<S> From<S> for StringView
 where
-    S: AsRef<[u8]>
+    S: AsRef<[u8]>,
 {
     fn from(s: S) -> StringView {
         StringView {
