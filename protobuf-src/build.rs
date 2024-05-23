@@ -21,6 +21,11 @@ fn main() -> Result<(), Box<dyn Error>> {
         .define("protobuf_BUILD_TESTS", "OFF")
         .define("protobuf_DEBUG_POSTFIX", "")
         .define("CMAKE_CXX_STANDARD", "14")
+        // CMAKE_INSTALL_LIBDIR is inferred as "lib64" on some platforms, but we
+        // want a stable location that we can add to the linker search path.
+        // Since we're not actually installing to /usr or /usr/local, there's no
+        // harm to always using "lib" here.
+        .define("CMAKE_INSTALL_LIBDIR", "lib")
         .build();
 
     println!("cargo:rustc-env=INSTALL_DIR={}", install_dir.display());
