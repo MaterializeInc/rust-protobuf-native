@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+## [2.0.1] - 2024-05-23
+
 * Fix build on systems where CMake prefers to install libraries to a directory
   named `lib64` rather than `lib`.
 
@@ -60,7 +62,8 @@ Versioning].
 Initial release.
 
 <!-- #release:next-url -->
-[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.0.0...HEAD
+[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.0.1...HEAD
+[2.0.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.0.0...protobuf-src-v2.0.1
 [2.0.0]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.1.0...protobuf-src-v2.0.0
 [1.1.0]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.5+3.19.3...protobuf-src-v1.1.0
 [1.0.5+3.19.3]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.4+3.19.1...protobuf-src-v1.0.5+3.19.3
