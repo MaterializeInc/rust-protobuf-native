@@ -16,7 +16,6 @@
 #pragma once
 
 #include "google/protobuf/compiler/importer.h"
-
 #include "rust/cxx.h"
 
 namespace protobuf_native {

@@ -20,7 +20,7 @@ jobs:
             os: ubuntu-latest
             rust: stable
           - build: ubuntu-old
-            os: ubuntu-18.04
+            os: ubuntu-20.04
             rust: stable
           - build: macos
             os: macos-latest
@@ -29,6 +29,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install Rust (rustup)
       run: rustup update ${{ matrix.rust }} --no-self-update && rustup default ${{ matrix.rust }}
+    - run: clang --version
     - run: cargo test
 
   lint:

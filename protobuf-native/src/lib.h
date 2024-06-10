@@ -15,10 +15,10 @@
 
 #pragma once
 
+#include <memory>
+
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/descriptor.pb.h"
-
-#include <memory>
 
 using namespace google::protobuf;
 
