@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Use double-quotes for `#include` statements in C headers for non-system files.
+
 ## [0.3.0] - 2024-05-13
 
 * Upgrade to protobuf-src v2.0.0+26.1.
