@@ -15,7 +15,7 @@
 
 #pragma once
 
-#include <absl/strings/string_view.h>
+#include "absl/strings/string_view.h"
 
 namespace protobuf_native {
 namespace internal {
