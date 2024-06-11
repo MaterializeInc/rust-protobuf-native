@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+## [0.3.1] - 2024-06-11
+
 * Use double-quotes for `#include` statements in C headers for non-system files.
 
 ## [0.3.0] - 2024-05-13
@@ -37,7 +39,8 @@ Versioning].
 Initial release.
 
 <!-- #release:next-url -->
-[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.3.0...HEAD
+[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.3.1...HEAD
+[0.3.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.3.0...protobuf-native-v0.3.1
 [0.3.0]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.2...protobuf-native-v0.3.0
 [0.2.2]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.1+3.19.1...protobuf-native-v0.2.2
 [0.2.1+3.19.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.0+3.19.1...protobuf-native-v0.2.1+3.19.1

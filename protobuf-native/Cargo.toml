@@ -22,7 +22,7 @@ documentation = "https://docs.rs/protobuf-native"
 repository = "https://github.com/MaterializeInc/rust-protobuf-native"
 license = "Apache-2.0"
 categories = ["api-bindings"]
-version = "0.3.0+26.1"
+version = "0.3.1+26.1"
 edition = "2021"
 
 [dependencies]
