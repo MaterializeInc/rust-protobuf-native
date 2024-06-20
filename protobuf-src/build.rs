@@ -15,8 +15,23 @@
 
 use std::error::Error;
 
+fn wrapper() -> Option<String> {
+    if let Ok(wrapper) = std::env::var("PROTOBUF_SRC_WRAPPER") {
+        return Some(wrapper);
+    }
+    if let Ok(rustc_wrapper) = std::env::var("RUSTC_WRAPPER") {
+        // only pass through wrappers that we know are able to handle both
+        // rust and c/c++ code
+        if rustc_wrapper == "sccache" || rustc_wrapper.ends_with("/sccache") {
+            return Some(rustc_wrapper);
+        }
+    }
+    None
+}
+
 fn main() -> Result<(), Box<dyn Error>> {
-    let install_dir = cmake::Config::new("protobuf")
+    let mut config = cmake::Config::new("protobuf");
+    config
         .define("ABSL_PROPAGATE_CXX_STD", "ON")
         .define("protobuf_BUILD_TESTS", "OFF")
         .define("protobuf_DEBUG_POSTFIX", "")
@@ -25,8 +40,13 @@ fn main() -> Result<(), Box<dyn Error>> {
         // want a stable location that we can add to the linker search path.
         // Since we're not actually installing to /usr or /usr/local, there's no
         // harm to always using "lib" here.
-        .define("CMAKE_INSTALL_LIBDIR", "lib")
-        .build();
+        .define("CMAKE_INSTALL_LIBDIR", "lib");
+    if let Some(wrapper) = wrapper() {
+        config
+            .define("CMAKE_C_COMPILER_LAUNCHER", &wrapper)
+            .define("CMAKE_CXX_COMPILER_LAUNCHER", &wrapper);
+    }
+    let install_dir = config.build();
 
     println!("cargo:rustc-env=INSTALL_DIR={}", install_dir.display());
     println!("cargo:CXXBRIDGE_DIR0={}/include", install_dir.display());
