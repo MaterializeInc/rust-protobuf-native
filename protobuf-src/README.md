@@ -14,8 +14,8 @@ Rust build system integration with libprotobuf, the C++ implementation of
 ```toml
 # Cargo.toml
 [dependencies]
-protobuf-src = "2.0.1"
+protobuf-src = "2.1.0"
 ```
 
-[docs]: https://docs.rs/protobuf-src/2.0.1/protobuf_src
+[docs]: https://docs.rs/protobuf-src/
 [Protocol Buffers]: https://github.com/google/protobuf

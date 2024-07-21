@@ -27,12 +27,14 @@
 //!
 //! # Details
 //!
-//! This crate builds a vendored copy of libprotobuf and protoc using Cargo's
-//! support for custom build scripts. It is not intended for direct consumption,
-//! but as a dependency for other crates that need libprotobuf or protoc
-//! available, like [prost-build].
+//! This crate builds libprotobuf and protoc from Google's C++ implementation,
+//! supporting version 3 of the [Protocol Buffers] specification. The source is
+//! checked out at build time from the GitHub repository, using Cargo's support
+//! for custom build scripts. It is not intended for direct consumption, but as
+//! a dependency for other crates that need libprotobuf or protoc available,
+//! like [prost-build].
 //!
-//! protobuf-src is currently bundling protobuf [v3.19.1].
+//! protobuf-src is currently bundling protobuf [v27.2].
 //!
 //! To use this crate, declare a `dependency` or `dev-dependency` on
 //! `protobuf-src`. Then, in the build script for your crate, the environment
@@ -46,7 +48,7 @@
 //!
 //! [Materialize]: https://materialize.com
 //! [Protocol Buffers]: https://developers.google.com/protocol-buffers
-//! [v3.19.1]: https://github.com/protocolbuffers/protobuf/releases/tag/v3.19.1
+//! [v27.2]: https://github.com/protocolbuffers/protobuf/releases/tag/v27.2
 //! [prost-build]: https://docs.rs/prost-build/latest/prost_build/
 
 use std::path::PathBuf;

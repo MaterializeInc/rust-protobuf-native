@@ -9,6 +9,14 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+## [2.1.0] - Unreleased
+
+* Update to protobuf v27.2.
+
+* Check out protobuf source code from upstream repository at build time instead
+  of vendoring it.
+
+
 ## [2.0.1] - 2024-05-23
 
 * Fix build on systems where CMake prefers to install libraries to a directory
