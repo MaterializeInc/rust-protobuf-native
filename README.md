@@ -8,8 +8,9 @@ The following crates are available:
   `libprotobuf`.
 * [**protobuf-sys**](./protobuf-sys) provides automatically-generated Rust
   bindings to `libprotobuf` via [autocxx].
-* [**protobuf-src**](./protobuf-src) vendors the upstream Protobuf source code
-  and builds the `libprotobuf` library and `protoc` binary.
+* [**protobuf-src**](./protobuf-src) builds the `libprotobuf` library and
+  `protoc` binary from the C++ source code checked out at build time from
+  the GitHub repository.
 
 ## Related projects
 
