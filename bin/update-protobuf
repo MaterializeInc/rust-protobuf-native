@@ -141,7 +141,9 @@ index 6973bc993d..122218fb81 100644
 
 EOF
 
-curl -fsSL "https://github.com/abseil/abseil-cpp/releases/download/20240116.2/abseil-cpp-20240116.2.tar.gz" > abseil.tar.gz
+# TODO: switch back to Abseil LTS once https://github.com/abseil/abseil-cpp/pull/1536
+# makes it into a release.
+curl -fsSL "https://github.com/abseil/abseil-cpp/archive/3cb4988999d2f16e11d86f9921e9526486ef1960.tar.gz" > abseil.tar.gz
 rm -rf protobuf/third_party/abseil-cpp
 mkdir -p protobuf/third_party/abseil-cpp
 tar --strip-components=1 -C protobuf/third_party/abseil-cpp -xf abseil.tar.gz

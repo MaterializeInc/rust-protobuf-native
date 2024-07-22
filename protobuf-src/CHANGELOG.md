@@ -10,6 +10,9 @@ Versioning].
 ## [Unreleased] <!-- #release:date -->
 
 * Upgrade to libprotobuf v27.2.
+* Upgrade to Abseil [3cb498899](https://github.com/abseil/abseil-cpp/commit/3cb4988999d2f16e11d86f9921e9526486ef1960).
+
+  This fixes an incompatibility with CMake 3.30.
 
 ## [2.0.1] - 2024-05-23
 
