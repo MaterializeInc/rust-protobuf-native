@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Upgrade to libprotobuf v27.2.
+
 ## [2.0.1] - 2024-05-23
 
 * Fix build on systems where CMake prefers to install libraries to a directory

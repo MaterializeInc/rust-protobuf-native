@@ -10,7 +10,7 @@
 #include "absl/strings/string_view.h"
 #include "google/protobuf/compiler/cpp/helpers.h"
 #include "google/protobuf/compiler/rust/accessors/accessor_case.h"
-#include "google/protobuf/compiler/rust/accessors/accessor_generator.h"
+#include "google/protobuf/compiler/rust/accessors/generator.h"
 #include "google/protobuf/compiler/rust/context.h"
 #include "google/protobuf/compiler/rust/naming.h"
 #include "google/protobuf/descriptor.h"
@@ -52,7 +52,7 @@ void RepeatedField::InMsgImpl(Context& ctx, const FieldDescriptor& field,
                       unsafe {
                         $pb$::RepeatedView::from_raw(
                           $pbi$::Private,
-                          unsafe { $getter_thunk$(self.raw_msg()) },
+                          $getter_thunk$(self.raw_msg()),
                         )
                       }
                     }
@@ -115,26 +115,26 @@ void RepeatedField::InExternC(Context& ctx,
                if (ctx.is_upb()) {
                  ctx.Emit(R"rs(
                     fn $getter_mut_thunk$(
-                      raw_msg: $pbi$::RawMessage,
+                      raw_msg: $pbr$::RawMessage,
                       size: *const usize,
-                      arena: $pbi$::RawArena,
-                    ) -> $pbi$::RawRepeatedField;
+                      arena: $pbr$::RawArena,
+                    ) -> $pbr$::RawRepeatedField;
                     //  Returns `None` when returned array pointer is NULL.
                     fn $getter_thunk$(
-                      raw_msg: $pbi$::RawMessage,
+                      raw_msg: $pbr$::RawMessage,
                       size: *const usize,
-                    ) -> Option<$pbi$::RawRepeatedField>;
+                    ) -> Option<$pbr$::RawRepeatedField>;
                   )rs");
                } else {
                  ctx.Emit(R"rs(
-                    fn $getter_mut_thunk$(raw_msg: $pbi$::RawMessage) -> $pbi$::RawRepeatedField;
-                    fn $getter_thunk$(raw_msg: $pbi$::RawMessage) -> $pbi$::RawRepeatedField;
+                    fn $getter_mut_thunk$(raw_msg: $pbr$::RawMessage) -> $pbr$::RawRepeatedField;
+                    fn $getter_thunk$(raw_msg: $pbr$::RawMessage) -> $pbr$::RawRepeatedField;
                   )rs");
                }
              }},
             {"clearer_thunk", ThunkName(ctx, field, "clear")}},
            R"rs(
-          fn $clearer_thunk$(raw_msg: $pbi$::RawMessage);
+          fn $clearer_thunk$(raw_msg: $pbr$::RawMessage);
           $getter$
         )rs");
 }
