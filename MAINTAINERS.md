@@ -1,5 +1,12 @@
 # Maintainer instructions
 
+## Upgrading the vendored copies of libprotobuf and Abseil
+
+Run `bin/update-protobuf $VERSION` .
+
+If you need to upgrade Abseil, you'll need to edit the hardcoded version in
+`bin/update-protobuf` directly.
+
 ## Cutting new releases
 
 1. `cargo install cargo-release`, if you don't have it already.
