@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+## [2.1.0] - 2024-07-22
+
 * Upgrade to libprotobuf v27.2.
 * Upgrade to Abseil [3cb498899](https://github.com/abseil/abseil-cpp/commit/3cb4988999d2f16e11d86f9921e9526486ef1960).
 
@@ -67,7 +69,8 @@ Versioning].
 Initial release.
 
 <!-- #release:next-url -->
-[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.0.1...HEAD
+[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.1.0...HEAD
+[2.1.0]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.0.1...protobuf-src-v2.1.0
 [2.0.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.0.0...protobuf-src-v2.0.1
 [2.0.0]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.1.0...protobuf-src-v2.0.0
 [1.1.0]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.0.5+3.19.3...protobuf-src-v1.1.0
