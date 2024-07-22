@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("//bazel:cc_proto_library.bzl", "cc_proto_library")
 load(
     "//rust:defs.bzl",
     "rust_cc_proto_library",
@@ -15,9 +15,7 @@ UNITTEST_PROTO3_OPTIONAL_TARGET = "//src/google/protobuf:test_protos"
 rust_proto_library(
     name = "unittest_rust_proto",
     testonly = True,
-    visibility = [
-        "//visibility:private",  # Only private by automation, not intent. Owner may accept CLs adding visibility. See go/scheuklappen#explicit-private.
-    ],
+    visibility = ["//visibility:private"],
     deps = [UNITTEST_PROTO_TARGET],
 )
 
@@ -41,9 +39,7 @@ rust_cc_proto_library(
 rust_proto_library(
     name = "unittest_proto3_rust_proto",
     testonly = True,
-    visibility = [
-        "//visibility:private",  # Only private by automation, not intent. Owner may accept CLs adding visibility. See go/scheuklappen#explicit-private.
-    ],
+    visibility = ["//visibility:private"],
     deps = [
         UNITTEST_PROTO3_TARGET,
     ],
@@ -66,9 +62,7 @@ rust_upb_proto_library(
 rust_proto_library(
     name = "unittest_proto3_optional_rust_proto",
     testonly = True,
-    visibility = [
-        "//visibility:private",  # Only private by automation, not intent. Owner may accept CLs adding visibility. See go/scheuklappen#explicit-private.
-    ],
+    visibility = ["//visibility:private"],
     deps = [
         UNITTEST_PROTO3_OPTIONAL_TARGET,
     ],
@@ -439,4 +433,66 @@ rust_upb_proto_library(
         "//rust/test/shared:__subpackages__",
     ],
     deps = [":struct"],
+)
+
+proto_library(
+    name = "imported_types_proto",
+    testonly = True,
+    srcs = ["imported_types.proto"],
+)
+
+cc_proto_library(
+    name = "imported_types_cc_proto",
+    testonly = True,
+    deps = [":imported_types_proto"],
+)
+
+rust_cc_proto_library(
+    name = "imported_types_cc_rust_proto",
+    testonly = True,
+    visibility = [
+        "//rust/test/shared:__subpackages__",
+    ],
+    deps = [":imported_types_cc_proto"],
+)
+
+rust_upb_proto_library(
+    name = "imported_types_upb_rust_proto",
+    testonly = True,
+    visibility = [
+        "//rust/test/shared:__subpackages__",
+    ],
+    deps = [":imported_types_proto"],
+)
+
+proto_library(
+    # Test '-' occurrences are replaced with '_'.
+    name = "fields-with-imported-types_proto",
+    testonly = True,
+    srcs = ["fields_with_imported_types.proto"],
+    deps = [":imported_types_proto"],
+)
+
+cc_proto_library(
+    name = "fields_with_imported_types_cc_proto",
+    testonly = True,
+    deps = [":fields-with-imported-types_proto"],
+)
+
+rust_cc_proto_library(
+    name = "fields_with_imported_types_cc_rust_proto",
+    testonly = True,
+    visibility = [
+        "//rust/test/shared:__subpackages__",
+    ],
+    deps = [":fields_with_imported_types_cc_proto"],
+)
+
+rust_upb_proto_library(
+    name = "fields_with_imported_types_upb_rust_proto",
+    testonly = True,
+    visibility = [
+        "//rust/test/shared:__subpackages__",
+    ],
+    deps = [":fields-with-imported-types_proto"],
 )

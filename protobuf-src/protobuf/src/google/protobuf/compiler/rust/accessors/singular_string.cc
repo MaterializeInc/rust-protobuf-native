@@ -5,12 +5,10 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
-#include <string>
-
 #include "absl/strings/string_view.h"
 #include "google/protobuf/compiler/cpp/helpers.h"
 #include "google/protobuf/compiler/rust/accessors/accessor_case.h"
-#include "google/protobuf/compiler/rust/accessors/accessor_generator.h"
+#include "google/protobuf/compiler/rust/accessors/generator.h"
 #include "google/protobuf/compiler/rust/accessors/helpers.h"
 #include "google/protobuf/compiler/rust/context.h"
 #include "google/protobuf/compiler/rust/naming.h"
@@ -26,37 +24,116 @@ void SingularString::InMsgImpl(Context& ctx, const FieldDescriptor& field,
   ctx.Emit(
       {
           {"field", RsSafeName(field.name())},
+          {"raw_field_name", field.name()},
           {"hazzer_thunk", ThunkName(ctx, field, "has")},
           {"getter_thunk", ThunkName(ctx, field, "get")},
           {"setter_thunk", ThunkName(ctx, field, "set")},
           {"clearer_thunk", ThunkName(ctx, field, "clear")},
           {"proxied_type", RsTypePath(ctx, field)},
-          {"transform_view",
+          io::Printer::Sub("transform_view",
+                           [&] {
+                             if (field.type() == FieldDescriptor::TYPE_STRING) {
+                               ctx.Emit(R"rs(
+              // SAFETY: The runtime doesn't require ProtoStr to be UTF-8.
+              unsafe { $pb$::ProtoStr::from_utf8_unchecked(view) }
+            )rs");
+                             } else {
+                               ctx.Emit("view");
+                             }
+                           })
+              .WithSuffix(""),  // This lets `$transform_view$,` work.
+          {"transform_field_entry",
            [&] {
              if (field.type() == FieldDescriptor::TYPE_STRING) {
                ctx.Emit(R"rs(
-                // SAFETY: The runtime doesn't require ProtoStr to be UTF-8.
-                unsafe { $pb$::ProtoStr::from_utf8_unchecked(view) }
+                $pb$::ProtoStrMut::field_entry_from_bytes(
+                  $pbi$::Private, out
+                )
               )rs");
              } else {
-               ctx.Emit("view");
+               ctx.Emit("out");
              }
            }},
           {"view_lifetime", ViewLifetime(accessor_case)},
           {"view_self", ViewReceiver(accessor_case)},
-          {"field_optional_getter",
+          {"getter",
            [&] {
-             if (!field.is_optional()) return;
+             ctx.Emit(R"rs(
+                pub fn $field$($view_self$) -> &$view_lifetime$ $proxied_type$ {
+                  let view = unsafe { $getter_thunk$(self.raw_msg()).as_ref() };
+                  $transform_view$
+                })rs");
+           }},
+          {"getter_opt",
+           [&] {
              if (!field.has_presence()) return;
              ctx.Emit(R"rs(
-            pub fn $field$_opt($view_self$) -> $pb$::Optional<&$view_lifetime$ $proxied_type$> {
-                let view = unsafe { $getter_thunk$(self.raw_msg()).as_ref() };
+            pub fn $raw_field_name$_opt($view_self$) -> $pb$::Optional<&$view_lifetime$ $proxied_type$> {
                 $pb$::Optional::new(
-                  $transform_view$ ,
-                  unsafe { $hazzer_thunk$(self.raw_msg()) }
+                  self.$field$(),
+                  self.has_$raw_field_name$()
                 )
               }
           )rs");
+           }},
+          {"setter",
+           [&] {
+             if (accessor_case == AccessorCase::VIEW) return;
+             ctx.Emit(R"rs(
+                pub fn set_$raw_field_name$(&mut self, val: impl $pb$::SettableValue<$proxied_type$>) {
+                  //~ TODO: Optimize this to not go through the
+                  //~ FieldEntry.
+                  self.$raw_field_name$_mut().set(val);
+                }
+              )rs");
+           }},
+          {"hazzer",
+           [&] {
+             if (!field.has_presence()) return;
+             ctx.Emit({}, R"rs(
+                pub fn has_$raw_field_name$($view_self$) -> bool {
+                  unsafe { $hazzer_thunk$(self.raw_msg()) }
+                })rs");
+           }},
+          {"clearer",
+           [&] {
+             if (accessor_case == AccessorCase::VIEW) return;
+             if (!field.has_presence()) return;
+             ctx.Emit({}, R"rs(
+                pub fn clear_$raw_field_name$(&mut self) {
+                  unsafe { $clearer_thunk$(self.raw_msg()) }
+                })rs");
+           }},
+          {"vtable_name", VTableName(field)},
+          {"vtable",
+           [&] {
+             if (accessor_case != AccessorCase::OWNED) {
+               return;
+             }
+             if (field.has_presence()) {
+               ctx.Emit({{"default_value", DefaultValue(ctx, field)}},
+                        R"rs(
+                // SAFETY: for `string` fields, the default value is verified as valid UTF-8
+                const $vtable_name$: &'static $pbi$::BytesOptionalMutVTable = &unsafe {
+                    $pbi$::BytesOptionalMutVTable::new(
+                      $pbi$::Private,
+                      $getter_thunk$,
+                      $setter_thunk$,
+                      $clearer_thunk$,
+                      $default_value$,
+                    )
+                  };
+              )rs");
+             } else {
+               ctx.Emit(R"rs(
+                const $vtable_name$: &'static $pbi$::BytesMutVTable =
+                  &$pbi$::BytesMutVTable::new(
+                    $pbi$::Private,
+                    $getter_thunk$,
+                    $setter_thunk$,
+                  );
+              )rs");
+             }
            }},
           {"field_mutator_getter",
            [&] {
@@ -64,39 +141,14 @@ void SingularString::InMsgImpl(Context& ctx, const FieldDescriptor& field,
                return;
              }
              if (field.has_presence()) {
-               ctx.Emit(
-                   {
-                       {"default_val", DefaultValue(ctx, field)},
-                       {"transform_field_entry",
-                        [&] {
-                          if (field.type() == FieldDescriptor::TYPE_STRING) {
-                            ctx.Emit(R"rs(
-                              $pb$::ProtoStrMut::field_entry_from_bytes(
-                                $pbi$::Private, out
-                              )
-                            )rs");
-                          } else {
-                            ctx.Emit("out");
-                          }
-                        }},
-                   },
-                   R"rs(
-            pub fn $field$_mut(&mut self) -> $pb$::FieldEntry<'_, $proxied_type$> {
-              static VTABLE: $pbi$::BytesOptionalMutVTable = unsafe {
-                $pbi$::BytesOptionalMutVTable::new(
-                  $pbi$::Private,
-                  $getter_thunk$,
-                  $setter_thunk$,
-                  $clearer_thunk$,
-                  $default_val$,
-                )
-              };
+               ctx.Emit(R"rs(
+            fn $raw_field_name$_mut(&mut self) -> $pb$::FieldEntry<'_, $proxied_type$> {
               let out = unsafe {
                 let has = $hazzer_thunk$(self.raw_msg());
                 $pbi$::new_vtable_field_entry(
                   $pbi$::Private,
                   self.as_mutator_message_ref(),
-                  &VTABLE,
+                  $Msg$::$vtable_name$,
                   has,
                 )
               };
@@ -105,20 +157,14 @@ void SingularString::InMsgImpl(Context& ctx, const FieldDescriptor& field,
           )rs");
              } else {
                ctx.Emit(R"rs(
-              pub fn $field$_mut(&mut self) -> $pb$::Mut<'_, $proxied_type$> {
-                static VTABLE: $pbi$::BytesMutVTable =
-                  $pbi$::BytesMutVTable::new(
-                    $pbi$::Private,
-                    $getter_thunk$,
-                    $setter_thunk$,
-                  );
+              fn $raw_field_name$_mut(&mut self) -> $pb$::Mut<'_, $proxied_type$> {
                 unsafe {
                   <$pb$::Mut<$proxied_type$>>::from_inner(
                     $pbi$::Private,
                     $pbi$::RawVTableMutator::new(
                       $pbi$::Private,
                       self.as_mutator_message_ref(),
-                      &VTABLE,
+                      $Msg$::$vtable_name$,
                     )
                   )
                 }
@@ -128,12 +174,12 @@ void SingularString::InMsgImpl(Context& ctx, const FieldDescriptor& field,
            }},
       },
       R"rs(
-        pub fn $field$($view_self$) -> &$view_lifetime$ $proxied_type$ {
-          let view = unsafe { $getter_thunk$(self.raw_msg()).as_ref() };
-          $transform_view$
-        }
-
-        $field_optional_getter$
+        $getter$
+        $getter_opt$
+        $setter$
+        $hazzer$
+        $clearer$
+        $vtable$
         $field_mutator_getter$
       )rs");
 }
@@ -148,15 +194,15 @@ void SingularString::InExternC(Context& ctx,
              [&] {
                if (field.has_presence()) {
                  ctx.Emit(R"rs(
-                     fn $hazzer_thunk$(raw_msg: $pbi$::RawMessage) -> bool;
-                     fn $clearer_thunk$(raw_msg: $pbi$::RawMessage);
+                     fn $hazzer_thunk$(raw_msg: $pbr$::RawMessage) -> bool;
+                     fn $clearer_thunk$(raw_msg: $pbr$::RawMessage);
                    )rs");
                }
              }}},
            R"rs(
           $with_presence_fields_thunks$
-          fn $getter_thunk$(raw_msg: $pbi$::RawMessage) -> $pbi$::PtrAndLen;
-          fn $setter_thunk$(raw_msg: $pbi$::RawMessage, val: $pbi$::PtrAndLen);
+          fn $getter_thunk$(raw_msg: $pbr$::RawMessage) -> $pbr$::PtrAndLen;
+          fn $setter_thunk$(raw_msg: $pbr$::RawMessage, val: $pbr$::PtrAndLen);
         )rs");
 }
 

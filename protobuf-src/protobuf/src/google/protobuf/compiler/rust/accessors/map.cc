@@ -5,9 +5,11 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
+#include <string>
+
 #include "google/protobuf/compiler/cpp/helpers.h"
 #include "google/protobuf/compiler/rust/accessors/accessor_case.h"
-#include "google/protobuf/compiler/rust/accessors/accessor_generator.h"
+#include "google/protobuf/compiler/rust/accessors/generator.h"
 #include "google/protobuf/compiler/rust/context.h"
 #include "google/protobuf/compiler/rust/naming.h"
 #include "google/protobuf/descriptor.h"
@@ -17,6 +19,21 @@ namespace google {
 namespace protobuf {
 namespace compiler {
 namespace rust {
+namespace {
+
+std::string MapElementTypeName(const FieldDescriptor& field) {
+  auto cpp_type = field.cpp_type();
+  switch (cpp_type) {
+    case FieldDescriptor::CPPTYPE_MESSAGE:
+      return cpp::QualifiedClassName(field.message_type());
+    case FieldDescriptor::CPPTYPE_ENUM:
+      return cpp::QualifiedClassName(field.enum_type());
+    default:
+      return cpp::PrimitiveTypeName(cpp_type);
+  }
+}
+
+}  // namespace
 
 void Map::InMsgImpl(Context& ctx, const FieldDescriptor& field,
                     AccessorCase accessor_case) const {
@@ -69,7 +86,7 @@ void Map::InMsgImpl(Context& ctx, const FieldDescriptor& field,
                                            self.arena().raw())
                       };
                       let inner = $pbr$::InnerMapMut::new($pbi$::Private,
-                        raw, self.arena().raw());
+                        raw, self.arena());
                       unsafe { $pb$::MapMut::from_inner($pbi$::Private, inner) }
                     })rs");
                } else {
@@ -97,15 +114,15 @@ void Map::InExternC(Context& ctx, const FieldDescriptor& field) const {
            [&] {
              if (ctx.is_upb()) {
                ctx.Emit({}, R"rs(
-                fn $getter_thunk$(raw_msg: $pbi$::RawMessage)
-                  -> Option<$pbi$::RawMap>;
-                fn $getter_mut_thunk$(raw_msg: $pbi$::RawMessage,
-                  arena: $pbi$::RawArena) -> $pbi$::RawMap;
+                fn $getter_thunk$(raw_msg: $pbr$::RawMessage)
+                  -> Option<$pbr$::RawMap>;
+                fn $getter_mut_thunk$(raw_msg: $pbr$::RawMessage,
+                  arena: $pbr$::RawArena) -> $pbr$::RawMap;
               )rs");
              } else {
                ctx.Emit({}, R"rs(
-                fn $getter_thunk$(msg: $pbi$::RawMessage) -> $pbi$::RawMap;
-                fn $getter_mut_thunk$(msg: $pbi$::RawMessage,) -> $pbi$::RawMap;
+                fn $getter_thunk$(msg: $pbr$::RawMessage) -> $pbr$::RawMap;
+                fn $getter_mut_thunk$(msg: $pbr$::RawMessage,) -> $pbr$::RawMap;
               )rs");
              }
            }},
@@ -116,26 +133,23 @@ void Map::InExternC(Context& ctx, const FieldDescriptor& field) const {
 }
 
 void Map::InThunkCc(Context& ctx, const FieldDescriptor& field) const {
-  ctx.Emit(
-      {{"field", cpp::FieldName(&field)},
-       {"Key",
-        cpp::PrimitiveTypeName(field.message_type()->map_key()->cpp_type())},
-       {"Value",
-        cpp::PrimitiveTypeName(field.message_type()->map_value()->cpp_type())},
-       {"QualifiedMsg", cpp::QualifiedClassName(field.containing_type())},
-       {"getter_thunk", ThunkName(ctx, field, "get")},
-       {"getter_mut_thunk", ThunkName(ctx, field, "get_mut")},
-       {"impls",
-        [&] {
-          ctx.Emit(
-              R"cc(
-                const void* $getter_thunk$(const $QualifiedMsg$* msg) {
-                  return &msg->$field$();
-                }
-                void* $getter_mut_thunk$($QualifiedMsg$* msg) { return msg->mutable_$field$(); }
-              )cc");
-        }}},
-      "$impls$");
+  ctx.Emit({{"field", cpp::FieldName(&field)},
+            {"Key", MapElementTypeName(*field.message_type()->map_key())},
+            {"Value", MapElementTypeName(*field.message_type()->map_value())},
+            {"QualifiedMsg", cpp::QualifiedClassName(field.containing_type())},
+            {"getter_thunk", ThunkName(ctx, field, "get")},
+            {"getter_mut_thunk", ThunkName(ctx, field, "get_mut")},
+            {"impls",
+             [&] {
+               ctx.Emit(
+                   R"cc(
+                     const void* $getter_thunk$(const $QualifiedMsg$* msg) {
+                       return &msg->$field$();
+                     }
+                     void* $getter_mut_thunk$($QualifiedMsg$* msg) { return msg->mutable_$field$(); }
+                   )cc");
+             }}},
+           "$impls$");
 }
 
 }  // namespace rust

@@ -68,8 +68,6 @@
 
 namespace google {
 namespace protobuf {
-
-
 // Defined in this file.
 class Descriptor;
 class FieldDescriptor;
@@ -286,6 +284,8 @@ class PROTOBUF_EXPORT InternalFeatureHelper {
 
 PROTOBUF_EXPORT absl::string_view ShortEditionName(Edition edition);
 
+bool IsEnumFullySequential(const EnumDescriptor* enum_desc);
+
 }  // namespace internal
 
 // Provide an Abseil formatter for edition names.
@@ -338,6 +338,12 @@ class PROTOBUF_EXPORT Descriptor : private internal::SymbolBase {
   // The target DescriptorProto must be clear before calling this; if it
   // isn't, the result may be garbage.
   void CopyTo(DescriptorProto* proto) const;
+
+  // Fills in the message-level settings of this message (e.g. name, reserved
+  // fields, message options) to `proto`.  This is essentially all of the
+  // metadata owned exclusively by this descriptor, and not any nested
+  // descriptors.
+  void CopyHeadingTo(DescriptorProto* proto) const;
 
   // Write the contents of this descriptor in a human-readable form. Output
   // will be suitable for re-parsing.
@@ -494,11 +500,11 @@ class PROTOBUF_EXPORT Descriptor : private internal::SymbolBase {
       return containing_type_->full_name();
     }
 
-    // Returns the .proto file in which this oneof was defined.
+    // Returns the .proto file in which this range was defined.
     // Never nullptr.
     const FileDescriptor* file() const { return containing_type_->file(); }
 
-    // Returns the Descriptor for the message containing this oneof.
+    // Returns the Descriptor for the message containing this range.
     // Never nullptr.
     const Descriptor* containing_type() const { return containing_type_; }
 
@@ -1078,6 +1084,7 @@ class PROTOBUF_EXPORT FieldDescriptor : private internal::SymbolBase,
   bool has_json_name_ : 1;
   bool is_extension_ : 1;
   bool is_oneof_ : 1;
+  bool is_repeated_ : 1;  // Redundant with label_, but it is queried a lot.
 
   // Actually a `Label` but stored as uint8_t to save space.
   uint8_t label_ : 2;
@@ -1383,6 +1390,7 @@ class PROTOBUF_EXPORT EnumDescriptor : private internal::SymbolBase {
 
  private:
   friend class Symbol;
+  friend bool internal::IsEnumFullySequential(const EnumDescriptor* enum_desc);
   typedef EnumOptions OptionsType;
 
   // Allows access to GetLocationPath for annotations.
@@ -1924,12 +1932,6 @@ class PROTOBUF_EXPORT FileDescriptor : private internal::SymbolBase {
   bool GetSourceLocation(const std::vector<int>& path,
                          SourceLocation* out_location) const;
 
-
- private:
-  // Returns edition of this file.  For legacy proto2/proto3 files, special
-  // EDITION_PROTO2 and EDITION_PROTO3 values are used.
-  Edition edition() const;
-
  private:
   friend class Symbol;
   friend class FileDescriptorLegacy;
@@ -1947,6 +1949,10 @@ class PROTOBUF_EXPORT FileDescriptor : private internal::SymbolBase {
   const std::string* package_;
   const DescriptorPool* pool_;
   Edition edition_;
+
+  // Returns edition of this file.  For legacy proto2/proto3 files, special
+  // EDITION_PROTO2 and EDITION_PROTO3 values are used.
+  Edition edition() const;
 
   // Get the merged features that apply to this file.  These are specified in
   // the .proto file through the feature options in the message definition.
@@ -2239,9 +2245,13 @@ class PROTOBUF_EXPORT DescriptorPool {
   // Asynchronous execution is undefined behavior.
   void SetRecursiveBuildDispatcher(
       absl::AnyInvocable<void(absl::FunctionRef<void()>) const> dispatcher) {
-    dispatcher_ = std::make_unique<
-        absl::AnyInvocable<void(absl::FunctionRef<void()>) const>>(
-        std::move(dispatcher));
+    if (dispatcher != nullptr) {
+      dispatcher_ = std::make_unique<
+          absl::AnyInvocable<void(absl::FunctionRef<void()>) const>>(
+          std::move(dispatcher));
+    } else {
+      dispatcher_.reset(nullptr);
+    }
   }
 #endif  // SWIG
 
@@ -2346,6 +2356,7 @@ class PROTOBUF_EXPORT DescriptorPool {
   friend class DescriptorBuilder;
   friend class FileDescriptorTables;
   friend class google::protobuf::descriptor_unittest::ValidationErrorTest;
+  friend class ::google::protobuf::compiler::CommandLineInterface;
 
   // Return true if the given name is a sub-symbol of any non-package
   // descriptor that already exists in the descriptor pool.  (The full
@@ -2356,10 +2367,17 @@ class PROTOBUF_EXPORT DescriptorPool {
   // corresponding proto file.  Returns true if successful, in which case
   // the caller should search for the thing again.  These are declared
   // const because they are called by (semantically) const methods.
-  bool TryFindFileInFallbackDatabase(absl::string_view name) const;
-  bool TryFindSymbolInFallbackDatabase(absl::string_view name) const;
-  bool TryFindExtensionInFallbackDatabase(const Descriptor* containing_type,
-                                          int field_number) const;
+  // DeferredValidation stores temporary information necessary to run validation
+  // checks that can't be done inside the database lock.  This is generally
+  // reflective operations that also require the lock to do safely.
+  class DeferredValidation;
+  bool TryFindFileInFallbackDatabase(
+      absl::string_view name, DeferredValidation& deferred_validation) const;
+  bool TryFindSymbolInFallbackDatabase(
+      absl::string_view name, DeferredValidation& deferred_validation) const;
+  bool TryFindExtensionInFallbackDatabase(
+      const Descriptor* containing_type, int field_number,
+      DeferredValidation& deferred_validation) const;
 
   // This internal find extension method only check with its table and underlay
   // descriptor_pool's table. It does not check with fallback DB and no
@@ -2371,7 +2389,8 @@ class PROTOBUF_EXPORT DescriptorPool {
   // fallback_database_.  Declared const because it is called by (semantically)
   // const methods.
   const FileDescriptor* BuildFileFromDatabase(
-      const FileDescriptorProto& proto) const;
+      const FileDescriptorProto& proto,
+      DeferredValidation& deferred_validation) const;
 
   // Helper for when lazily_build_dependencies_ is set, can look up a symbol
   // after the file's descriptor is built, and can build the file where that
@@ -2435,7 +2454,8 @@ class PROTOBUF_EXPORT DescriptorPool {
   std::unique_ptr<FeatureSetDefaults> feature_set_defaults_spec_;
 
   // Returns true if the field extends an option message of descriptor.proto.
-  bool IsExtendingDescriptor(const FieldDescriptor& field) const;
+  bool IsReadyForCheckingDescriptorExtDecl(
+      absl::string_view message_name) const;
 
 };
 
@@ -2667,7 +2687,8 @@ inline bool FieldDescriptor::is_optional() const {
 }
 
 inline bool FieldDescriptor::is_repeated() const {
-  return label() == LABEL_REPEATED;
+  ABSL_DCHECK_EQ(is_repeated_, label() == LABEL_REPEATED);
+  return is_repeated_;
 }
 
 inline bool FieldDescriptor::is_packable() const {
@@ -2789,6 +2810,10 @@ inline const FileDescriptor* FileDescriptor::weak_dependency(int index) const {
 
 namespace internal {
 
+inline bool IsEnumFullySequential(const EnumDescriptor* enum_desc) {
+  return enum_desc->sequential_value_limit_ == enum_desc->value_count() - 1;
+}
+
 // FieldRange(desc) provides an iterable range for the fields of a
 // descriptor type, appropriate for range-for loops.
 
@@ -2843,6 +2868,11 @@ bool ParseNoReflection(absl::string_view from, google::protobuf::MessageLite& to
 // In particular, questions like "does this field have a has bit?" have a
 // different answer depending on the language.
 namespace cpp {
+
+// The maximum allowed nesting for message declarations.
+// Going over this limit will make the proto definition invalid.
+constexpr int MaxMessageDeclarationNestingDepth() { return 32; }
+
 // Returns true if 'enum' semantics are such that unknown values are preserved
 // in the enum field itself, rather than going to the UnknownFieldSet.
 PROTOBUF_EXPORT bool HasPreservingUnknownEnumSemantics(
@@ -2866,19 +2896,54 @@ typename FieldOpts::CType EffectiveStringCType(const FieldDesc* field) {
 }
 
 #ifndef SWIG
-enum class Utf8CheckMode {
+enum class Utf8CheckMode : uint8_t {
   kStrict = 0,  // Parsing will fail if non UTF-8 data is in string fields.
   kVerify = 1,  // Only log an error but parsing will succeed.
   kNone = 2,    // No UTF-8 check.
 };
 PROTOBUF_EXPORT Utf8CheckMode GetUtf8CheckMode(const FieldDescriptor* field,
                                                bool is_lite);
-#endif  // !SWIG
+
+// Returns true if the field is a "group-like field" consistent with a proto2
+// group:
+//  - Message encoding is DELIMITED (synonymous with type TYPE_GROUP)
+//  - Field name is exactly the message name lowercased
+//  - Message is defined within the same scope as the field
+PROTOBUF_EXPORT bool IsGroupLike(const FieldDescriptor& field);
 
 // Returns whether or not this file is lazily initialized rather than
 // pre-main via static initialization.  This has to be done for our bootstrapped
 // protos to avoid linker bloat in lite runtimes.
 PROTOBUF_EXPORT bool IsLazilyInitializedFile(absl::string_view filename);
+
+template <typename F>
+auto VisitDescriptorsInFileOrder(const Descriptor* desc,
+                                 F& f) -> decltype(f(desc)) {
+  for (int i = 0; i < desc->nested_type_count(); i++) {
+    if (auto res = VisitDescriptorsInFileOrder(desc->nested_type(i), f)) {
+      return res;
+    }
+  }
+  if (auto res = f(desc)) return res;
+  return {};
+}
+
+// Visit the messages in post-order traversal.
+// We need several pieces of code to follow the same order because we use the
+// index of types during array lookups.
+// If any call returns a "truthy" value, it stops visitation and returns that
+// value right away. Otherwise returns `{}` after visiting all types.
+template <typename F>
+auto VisitDescriptorsInFileOrder(const FileDescriptor* file,
+                                 F f) -> decltype(f(file->message_type(0))) {
+  for (int i = 0; i < file->message_type_count(); i++) {
+    if (auto res = VisitDescriptorsInFileOrder(file->message_type(i), f)) {
+      return res;
+    }
+  }
+  return {};
+}
+#endif  // !SWIG
 
 }  // namespace cpp
 }  // namespace internal

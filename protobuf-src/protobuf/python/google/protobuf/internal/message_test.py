@@ -549,6 +549,15 @@ class MessageTest(unittest.TestCase):
     self.assertEqual([4, 3, 2, 1],
                      [m.bb for m in msg.repeated_nested_message[::-1]])
 
+  def testSortEmptyRepeated(self, message_module):
+    message = message_module.NestedTestAllTypes()
+    self.assertFalse(message.HasField('child'))
+    self.assertFalse(message.HasField('payload'))
+    message.child.repeated_child.sort()
+    message.payload.repeated_int32.sort()
+    self.assertFalse(message.HasField('child'))
+    self.assertFalse(message.HasField('payload'))
+
   def testSortingRepeatedScalarFieldsDefaultComparator(self, message_module):
     """Check some different types with the default comparator."""
     message = message_module.TestAllTypes()
@@ -1868,6 +1877,9 @@ class Proto3Test(unittest.TestCase):
     with self.assertRaises(TypeError):
       123 in msg.map_string_string
 
+    with self.assertRaises(TypeError):
+      msg.map_string_string.__contains__(123)
+
   def testScalarMapComparison(self):
     msg1 = map_unittest_pb2.TestMap()
     msg2 = map_unittest_pb2.TestMap()
@@ -2006,6 +2018,12 @@ class Proto3Test(unittest.TestCase):
     # Bad key.
     with self.assertRaises(TypeError):
       msg.map_int32_foreign_message['123']
+
+    with self.assertRaises(TypeError):
+      '123' in msg.map_int32_foreign_message
+
+    with self.assertRaises(TypeError):
+      msg.map_int32_foreign_message.__contains__('123')
 
     # Can't assign directly to submessage.
     with self.assertRaises(ValueError):

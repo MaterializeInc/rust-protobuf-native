@@ -5,9 +5,10 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
-use crate::__internal::{Private, PtrAndLen, RawMessage};
+use crate::__internal::Private;
 use crate::__runtime::{
-    copy_bytes_in_arena_if_needed_by_runtime, InnerPrimitiveMut, MutatorMessageRef,
+    copy_bytes_in_arena_if_needed_by_runtime, InnerPrimitiveMut, MutatorMessageRef, PtrAndLen,
+    RawMessage,
 };
 use crate::{
     AbsentField, FieldEntry, Mut, MutProxy, Optional, PresentField, PrimitiveMut, Proxied,
@@ -512,11 +513,4 @@ impl<'msg, T: PrimitiveWithRawVTable> RawVTableOptionalMutatorData<'msg, T> {
         unsafe { (self.optional_vtable().clearer)(self.msg_ref.msg()) }
         self
     }
-}
-
-#[derive(Debug)]
-pub struct MessageVTable {
-    pub getter: unsafe extern "C" fn(msg: RawMessage) -> RawMessage,
-    pub mut_getter: unsafe extern "C" fn(msg: RawMessage) -> RawMessage,
-    pub clearer: unsafe extern "C" fn(msg: RawMessage),
 }

@@ -53,9 +53,9 @@
 //
 // Please avoid changing them manually, as they should be updated automatically
 // by Protobuf release process.
-#define PROTOBUF_CPP_VERSION_STRING "5.26.1"
-#define PROTOBUF_JAVA_VERSION_STRING "4.26.1"
-#define PROTOBUF_PYTHON_VERSION_STRING "5.26.1"
+#define PROTOBUF_CPP_VERSION_STRING "5.27.2"
+#define PROTOBUF_JAVA_VERSION_STRING "4.27.2"
+#define PROTOBUF_PYTHON_VERSION_STRING "5.27.2"
 
 
 namespace google {
@@ -67,9 +67,9 @@ PROTOC_EXPORT Version ParseProtobufVersion(absl::string_view version);
 }  // namespace internal
 
 // Gets the version message according to the version strings defined above.
-const Version& GetProtobufCPPVersion();
-const Version& GetProtobufJavaVersion();
-const Version& GetProtobufPythonVersion();
+const Version& GetProtobufCPPVersion(bool oss_runtime);
+const Version& GetProtobufJavaVersion(bool oss_runtime);
+const Version& GetProtobufPythonVersion(bool oss_runtime);
 }  // namespace compiler
 }  // namespace protobuf
 }  // namespace google

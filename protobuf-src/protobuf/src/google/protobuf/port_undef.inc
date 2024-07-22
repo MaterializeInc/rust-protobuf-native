@@ -34,8 +34,6 @@
 #undef PROTOBUF_IGNORE_DEPRECATION_START
 #undef PROTOBUF_IGNORE_DEPRECATION_STOP
 #undef PROTOBUF_RTTI
-#undef PROTOBUF_VERSION
-#undef PROTOBUF_VERSION_SUFFIX
 #undef PROTOBUF_MINIMUM_EDITION
 #undef PROTOBUF_MAXIMUM_EDITION
 #undef PROTOBUF_FIELD_OFFSET
@@ -70,12 +68,11 @@
 #undef PROTOBUF_MSAN
 #undef PROTOBUF_TSAN
 #undef PROTOBUF_TSAN_DECLARE_MEMBER
-#undef PROTOBUF_TSAN_READ
-#undef PROTOBUF_TSAN_WRITE
 #undef PROTOBUF_USE_TABLE_PARSER_ON_REFLECTION
 #undef PROTOBUF_BUILTIN_CONSTANT_P
 #undef PROTOBUF_DESCRIPTOR_WEAK_MESSAGES_ALLOWED
 #undef PROTOBUF_PREFETCH_PARSE_TABLE
+#undef PROTOBUF_PREFETCH_WITH_OFFSET
 #undef PROTOBUF_TC_PARAM_DECL
 #undef PROTOBUF_DEBUG
 #undef PROTO2_IS_OSS
@@ -137,6 +134,7 @@
 #pragma pop_macro("NO_ERROR")
 #pragma pop_macro("REASON_UNKNOWN")
 #pragma pop_macro("SERVICE_DISABLED")
+#pragma pop_macro("SERVICE_STOP")
 #pragma pop_macro("SEVERITY_ERROR")
 #pragma pop_macro("STRICT")
 #pragma pop_macro("STATUS_PENDING")
@@ -152,6 +150,11 @@
 #pragma pop_macro("GID_MAX")
 #pragma pop_macro("TYPE_BOOL")
 #endif  // __APPLE__
+
+#if defined(ANDROID) || defined(__ANDROID__)
+#pragma pop_macro("UID_MAX")
+#pragma pop_macro("GID_MAX")
+#endif  // defined(ANDROID) || defined(__ANDROID__)
 
 #ifdef __FreeBSD__
 #pragma pop_macro("TRUE")
