@@ -17,9 +17,9 @@
 use std::ffi::OsStr;
 use std::fmt;
 use std::io::{Read, Write};
-#[cfg(windows)]
 use std::marker::PhantomData;
-use std::os::raw::{c_int, c_void};
+use std::mem::MaybeUninit;
+use std::os::raw::{c_char, c_int, c_void};
 #[cfg(unix)]
 use std::os::unix::prelude::OsStrExt;
 use std::path::Path;
@@ -38,32 +38,43 @@ mod ffi {
     extern "Rust" {
         unsafe fn vec_u8_set_len(v: &mut Vec<u8>, new_len: usize);
     }
+
+    unsafe extern "C++" {
+        include!("protobuf-native/src/internal.h");
+
+        #[namespace = "absl"]
+        #[cxx_name = "string_view"]
+        type StringView<'a> = crate::internal::StringView<'a>;
+
+        #[namespace = "protobuf_native::internal"]
+        fn string_view_from_bytes(bytes: &[u8]) -> StringView;
+    }
 }
 
 unsafe fn vec_u8_set_len(v: &mut Vec<u8>, new_len: usize) {
     v.set_len(new_len)
 }
 
-// Abseil types.
-
-pub struct StringView {
-    pub ptr: *const u8,
-    pub length: usize,
+#[derive(Debug, Copy, Clone)]
+#[repr(C)]
+pub struct StringView<'a> {
+    repr: MaybeUninit<[*const c_void; 2]>,
+    borrow: PhantomData<&'a [c_char]>,
 }
 
-impl<S> From<S> for StringView
-where
-    S: AsRef<[u8]>,
-{
-    fn from(s: S) -> StringView {
-        StringView {
-            ptr: s.as_ref().as_ptr(),
-            length: s.as_ref().len(),
-        }
+impl<'a> From<&'a str> for StringView<'a> {
+    fn from(s: &'a str) -> StringView<'a> {
+        ffi::string_view_from_bytes(s.as_bytes())
     }
 }
 
-unsafe impl ExternType for StringView {
+impl<'a> From<ProtobufPath<'a>> for StringView<'a> {
+    fn from(path: ProtobufPath<'a>) -> StringView<'a> {
+        ffi::string_view_from_bytes(path.as_bytes())
+    }
+}
+
+unsafe impl<'a> ExternType for StringView<'a> {
     type Id = type_id!("absl::string_view");
     type Kind = Trivial;
 }
@@ -219,8 +230,8 @@ impl<'a> From<&'a Path> for ProtobufPath<'a> {
 }
 
 #[cfg(unix)]
-impl<'a> AsRef<[u8]> for ProtobufPath<'a> {
-    fn as_ref(&self) -> &[u8] {
+impl<'a> ProtobufPath<'a> {
+    pub fn as_bytes(&self) -> &'a [u8] {
         self.0.as_os_str().as_bytes()
     }
 }
@@ -253,8 +264,8 @@ impl<'a> From<Path> for ProtobufPath<'a> {
 }
 
 #[cfg(windows)]
-impl<'a> AsRef<[u8]> for ProtobufPath<'a> {
-    fn as_ref(&self) -> &[u8] {
+impl<'a> ProtobufPath<'a> {
+    pub fn as_bytes(&self) -> &'a [u8] {
         &self.inner
     }
 }

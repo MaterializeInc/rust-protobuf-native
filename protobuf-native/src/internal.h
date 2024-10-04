@@ -16,12 +16,21 @@
 #pragma once
 
 #include "absl/strings/string_view.h"
+#include "rust/cxx.h"
 
 namespace protobuf_native {
 namespace internal {
 
 typedef int CInt;
 typedef void CVoid;
+
+static_assert(sizeof(absl::string_view) == 2 * sizeof(void *), "");
+static_assert(alignof(absl::string_view) == alignof(void *), "");
+
+inline absl::string_view string_view_from_bytes(rust::Slice<const uint8_t> s) {
+    const char *data = reinterpret_cast<const char *>(s.data());
+    return {data, s.size()};
+}
 
 }  // namespace internal
 }  // namespace protobuf_native
