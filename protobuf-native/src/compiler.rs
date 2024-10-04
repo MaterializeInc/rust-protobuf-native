@@ -53,7 +53,7 @@ pub(crate) mod ffi {
         type CInt = crate::internal::CInt;
 
         #[namespace = "absl"]
-        type string_view = crate::internal::StringView;
+        type string_view<'a> = crate::internal::StringView<'a>;
 
         #[namespace = "google::protobuf"]
         type FileDescriptorProto = crate::ffi::FileDescriptorProto;
@@ -265,18 +265,18 @@ impl<'a> SourceTreeDescriptorDatabase<'a> {
         for root in roots {
             let root = root.as_ref();
             stack.push(self.as_mut().find_file_by_name(root)?);
-            seen.insert(ProtobufPath::from(root).as_ref().to_vec());
+            seen.insert(ProtobufPath::from(root).as_bytes().to_vec());
         }
         while let Some(file) = stack.pop() {
             out.as_mut().add_file().copy_from(&file);
             for i in 0..file.dependency_size() {
                 let dep_path = ProtobufPath::from(file.dependency(i));
-                if !seen.contains(dep_path.as_ref()) {
+                if !seen.contains(dep_path.as_bytes()) {
                     let dep = self
                         .as_mut()
                         .find_file_by_name(dep_path.as_path().as_ref())?;
                     stack.push(dep);
-                    seen.insert(dep_path.as_ref().to_vec());
+                    seen.insert(dep_path.as_bytes().to_vec());
                 }
             }
         }
@@ -292,7 +292,7 @@ impl<'a> DescriptorDatabase for SourceTreeDescriptorDatabase<'a> {
         filename: &Path,
     ) -> Result<Pin<Box<FileDescriptorProto>>, OperationFailedError> {
         let mut fd = FileDescriptorProto::new();
-        let_cxx_string!(filename = ProtobufPath::from(filename));
+        let_cxx_string!(filename = ProtobufPath::from(filename).as_bytes());
         if unsafe {
             self.as_ffi_mut()
                 .FindFileByName(&filename, fd.as_mut().as_ffi_mut_ptr())

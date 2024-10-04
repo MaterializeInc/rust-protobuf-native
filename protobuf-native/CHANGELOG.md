@@ -9,6 +9,9 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Fix memory safety issue with `absl::string_view` that presented when linking
+  with libstdc++.
+
 ## [0.3.1] - 2024-06-11
 
 * Use double-quotes for `#include` statements in C headers for non-system files.
