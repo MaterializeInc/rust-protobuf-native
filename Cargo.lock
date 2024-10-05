@@ -567,7 +567,7 @@ dependencies = [
 
 [[package]]
 name = "protobuf-native"
-version = "0.3.1+26.1"
+version = "0.3.2+26.1"
 dependencies = [
  "cxx",
  "cxx-build",
