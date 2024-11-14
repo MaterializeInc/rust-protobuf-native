@@ -31,3 +31,7 @@ links = "protobuf-src"
 
 [build-dependencies]
 cmake = "0.1.50"
+
+[features]
+default = ["parallel"]
+parallel = []
