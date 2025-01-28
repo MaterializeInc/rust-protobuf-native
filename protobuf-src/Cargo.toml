@@ -30,4 +30,4 @@ edition = "2021"
 links = "protobuf-src"
 
 [build-dependencies]
-cmake = "0.1.50"
+cmake = "0.1.53"
