@@ -579,7 +579,7 @@ dependencies = [
 
 [[package]]
 name = "protobuf-src"
-version = "2.1.0+27.1"
+version = "2.1.1+27.1"
 dependencies = [
  "cmake",
 ]

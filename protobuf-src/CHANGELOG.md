@@ -9,6 +9,8 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+## [2.1.1] - 2025-01-31
+
 * Upgrade the `cmake` crate to 0.1.53.
 
   This fixes a build time regression.
@@ -73,7 +75,8 @@ Versioning].
 Initial release.
 
 <!-- #release:next-url -->
-[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.1.0...HEAD
+[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.1.1...HEAD
+[2.1.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.1.0...protobuf-src-v2.1.1
 [2.1.0]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.0.1...protobuf-src-v2.1.0
 [2.0.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v2.0.0...protobuf-src-v2.0.1
 [2.0.0]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-src-v1.1.0...protobuf-src-v2.0.0

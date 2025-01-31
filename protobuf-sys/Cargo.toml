@@ -28,7 +28,7 @@ edition = "2021"
 [dependencies]
 autocxx = "0.26.0"
 cxx = "1.0.122"
-protobuf-src = { path = "../protobuf-src", version = "2.1.0" }
+protobuf-src = { path = "../protobuf-src", version = "2.1.1" }
 
 [build-dependencies]
 autocxx-build = "0.26.0"
