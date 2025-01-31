@@ -9,6 +9,10 @@ Versioning].
 
 ## [Unreleased] <!-- #release:date -->
 
+* Upgrade the `cmake` crate to 0.1.53.
+
+  This fixes a build time regression.
+
 ## [2.1.0] - 2024-07-22
 
 * Upgrade to libprotobuf v27.2.
