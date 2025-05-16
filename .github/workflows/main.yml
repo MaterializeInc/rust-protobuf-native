@@ -17,10 +17,10 @@ jobs:
         - macos
         include:
           - build: ubuntu
-            os: ubuntu-20.04
+            os: ubuntu-24.04
             rust: stable
           - build: ubuntu-arm
-            os: ubuntu-22.04-arm
+            os: ubuntu-24.04-arm
             rust: stable
           - build: macos
             os: macos-latest
