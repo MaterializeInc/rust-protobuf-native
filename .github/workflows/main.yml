@@ -20,7 +20,7 @@ jobs:
             os: ubuntu-20.04
             rust: stable
           - build: ubuntu-arm
-            os: ubuntu-20.04-arm
+            os: ubuntu-22.04-arm
             rust: stable
           - build: macos
             os: macos-latest
