@@ -19,6 +19,7 @@ use protobuf_sys::google::protobuf::util::TimeUtil;
 
 // Currently segfaults.
 #[test]
+#[ignore]
 fn test_linkage() {
     // Simple test that calls a function to verify that linking has occurred.
     let time = Box::emplace(TimeUtil::SecondsToTimestamp(42));

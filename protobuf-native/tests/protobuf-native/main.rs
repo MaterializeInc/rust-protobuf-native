@@ -220,3 +220,54 @@ message Test {
     assert!(out.len() > 0);
     Ok(())
 }
+
+#[test]
+fn test_well_known_types() -> Result<(), Box<dyn Error>> {
+    let tempdir = tempfile::tempdir()?;
+    std::fs::write(
+        tempdir.path().join("test.proto"),
+        br#"
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/duration.proto";
+
+message Event {
+    google.protobuf.Timestamp created_at = 1;
+    google.protobuf.Duration ttl = 2;
+    google.protobuf.Any payload = 3;
+}
+"#,
+    )?;
+
+    let mut source_tree = DiskSourceTree::new();
+    source_tree.as_mut().map_well_known_types();
+    source_tree.as_mut().map_path(Path::new(""), tempdir.path());
+
+    let mut error_collector = SimpleErrorCollector::new();
+    let mut db = SourceTreeDescriptorDatabase::new(source_tree.as_mut());
+    db.as_mut().record_errors_to(error_collector.as_mut());
+
+    let fds = db
+        .as_mut()
+        .build_file_descriptor_set(&[Path::new("test.proto")])?;
+
+    assert_eq!(fds.file_size(), 4);
+
+    let mut found_event_message = false;
+    for i in 0..fds.file_size() {
+        let file = fds.file(i);
+        if file.message_type_size() > 0 && file.message_type(0).name() == b"Event" {
+            found_event_message = true;
+            break;
+        }
+    }
+    assert!(found_event_message);
+
+    drop(db);
+    let errors: Vec<_> = error_collector.as_mut().collect();
+    assert!(errors.is_empty(), "unexpected errors: {:?}", errors);
+
+    Ok(())
+}
