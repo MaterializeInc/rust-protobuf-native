@@ -452,6 +452,28 @@ impl DiskSourceTree {
             .MapPath(virtual_path.into(), disk_path.into())
     }
 
+    /// Maps the well-known protobuf types to the source tree.
+    ///
+    /// This method adds the vendored protobuf include directory to the source
+    /// tree, making the well-known types (like `google/protobuf/any.proto`,
+    /// `google/protobuf/timestamp.proto`, etc.) available for import.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use std::path::Path;
+    /// use protobuf_native::compiler::DiskSourceTree;
+    ///
+    /// let mut source_tree = DiskSourceTree::new();
+    /// source_tree.as_mut().map_well_known_types();
+    /// source_tree.as_mut().map_path(Path::new(""), Path::new("my/protos"));
+    /// // Now you can import well-known types in your .proto files:
+    /// // import "google/protobuf/timestamp.proto";
+    /// ```
+    pub fn map_well_known_types(self: Pin<&mut Self>) {
+        self.map_path(Path::new(""), &protobuf_src::include())
+    }
+
     unsafe_ffi_conversions!(ffi::DiskSourceTree);
 }
 
