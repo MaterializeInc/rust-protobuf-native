@@ -7,7 +7,17 @@ Versioning].
 
 <!-- #release:next-header -->
 
-## [Unreleased] <!-- #release:date -->
+## [0.3.3] <!-- #release:date -->
+
+* Add `DiskSourceTree::map_well_known_types` to map vendored well-known protobuf
+  types (like `google/protobuf/timestamp.proto`) to the source tree.
+
+* Add `VirtualSourceTree::map_well_known_types` with the same functionality for
+  virtual source trees.
+
+* Embed well-known proto files at compile time for portability.
+
+* Upgrade to protobuf-src v2.1.1+27.1.
 
 ## [0.3.2] - 2024-10-05
 
@@ -44,7 +54,7 @@ Versioning].
 Initial release.
 
 <!-- #release:next-url -->
-[Unreleased]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.3.2...HEAD
+[0.3.3]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.3.2...protobuf-native-v0.3.3
 [0.3.2]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.3.1...protobuf-native-v0.3.2
 [0.3.1]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.3.0...protobuf-native-v0.3.1
 [0.3.0]: https://github.com/MaterializeInc/rust-protobuf-native/compare/protobuf-native-v0.2.2...protobuf-native-v0.3.0
