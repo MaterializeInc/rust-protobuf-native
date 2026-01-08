@@ -14,8 +14,12 @@
 // limitations under the License.
 
 use std::env;
+use std::fs;
+use std::io::Write;
+use std::path::Path;
 
 fn main() {
+    generate_well_known_types();
     cxx_build::bridges([
         "src/compiler.rs",
         "src/internal.rs",
@@ -129,5 +133,60 @@ fn main() {
         "utf8_validity",
     ] {
         println!("cargo:rustc-link-lib=static={lib}");
+    }
+}
+
+/// Generates a Rust module containing embedded well-known protobuf types.
+fn generate_well_known_types() {
+    let out_dir = env::var("OUT_DIR").unwrap();
+    let dest_path = Path::new(&out_dir).join("well_known_types.rs");
+
+    let include_dir = Path::new(&env::var("DEP_PROTOBUF_SRC_ROOT").unwrap()).join("include");
+
+    let mut files = Vec::new();
+    collect_proto_files(&include_dir, &include_dir, &mut files);
+    files.sort();
+
+    let mut output = fs::File::create(&dest_path).unwrap();
+
+    writeln!(output, "/// Embedded well-known protobuf type definitions.").unwrap();
+    writeln!(output, "pub static WELL_KNOWN_TYPES: &[(&str, &[u8])] = &[").unwrap();
+
+    for (relative_path, absolute_path) in &files {
+        // Use forward slashes for protobuf paths regardless of platform
+        let proto_path = relative_path.replace('\\', "/");
+        writeln!(
+            output,
+            "    (\"{}\", include_bytes!(\"{}\")),",
+            proto_path,
+            absolute_path.replace('\\', "/")
+        )
+        .unwrap();
+    }
+
+    writeln!(output, "];").unwrap();
+
+    // Tell Cargo to rerun if the include directory changes
+    println!("cargo:rerun-if-changed={}", include_dir.display());
+}
+
+fn collect_proto_files(base_dir: &Path, current_dir: &Path, files: &mut Vec<(String, String)>) {
+    let entries = match fs::read_dir(current_dir) {
+        Ok(entries) => entries,
+        Err(_) => return,
+    };
+
+    for entry in entries.flatten() {
+        let path = entry.path();
+        if path.is_dir() {
+            collect_proto_files(base_dir, &path, files);
+        } else if path.extension().map_or(false, |ext| ext == "proto") {
+            if let Ok(relative) = path.strip_prefix(base_dir) {
+                files.push((
+                    relative.to_string_lossy().into_owned(),
+                    path.to_string_lossy().into_owned(),
+                ));
+            }
+        }
     }
 }
