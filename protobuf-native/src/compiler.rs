@@ -22,17 +22,49 @@
 use std::collections::HashSet;
 use std::error::Error;
 use std::fmt;
+use std::fs;
 use std::marker::PhantomData;
 use std::marker::PhantomPinned;
 use std::mem;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::pin::Pin;
+use std::sync::OnceLock;
 
 use cxx::let_cxx_string;
 
 use crate::internal::{unsafe_ffi_conversions, CInt, ProtobufPath};
 use crate::io::DynZeroCopyInputStream;
 use crate::{DescriptorDatabase, FileDescriptorProto, FileDescriptorSet, OperationFailedError};
+
+mod well_known_types {
+    include!(concat!(env!("OUT_DIR"), "/well_known_types.rs"));
+}
+
+/// Returns the path to a directory containing the well-known proto files.
+///
+/// The files are extracted from embedded data on first call and cached
+/// in a temporary directory for the lifetime of the process.
+fn well_known_types_dir() -> &'static Path {
+    static DIR: OnceLock<PathBuf> = OnceLock::new();
+    DIR.get_or_init(|| {
+        // Use a persistent temp directory that won't be cleaned up during the process
+        let dir = std::env::temp_dir().join(format!(
+            "protobuf-native-well-known-types-{}",
+            env!("CARGO_PKG_VERSION")
+        ));
+
+        // Write all embedded proto files to the directory
+        for (path, contents) in well_known_types::WELL_KNOWN_TYPES {
+            let full_path = dir.join(path);
+            if let Some(parent) = full_path.parent() {
+                let _ = fs::create_dir_all(parent);
+            }
+            let _ = fs::write(&full_path, contents);
+        }
+
+        dir
+    })
+}
 
 #[cxx::bridge(namespace = "protobuf_native::compiler")]
 pub(crate) mod ffi {
@@ -372,6 +404,35 @@ impl VirtualSourceTree {
         self.as_ffi_mut().AddFile(filename.into(), contents)
     }
 
+    /// Maps the well-known protobuf types to the source tree.
+    ///
+    /// This method adds all well-known type .proto files (like
+    /// `google/protobuf/any.proto`, `google/protobuf/timestamp.proto`, etc.)
+    /// to the virtual source tree, making them available for import.
+    ///
+    /// The proto files are embedded at compile time, so this method works
+    /// even if the protobuf include directory is not available at runtime.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use std::path::Path;
+    /// use protobuf_native::compiler::VirtualSourceTree;
+    ///
+    /// let mut source_tree = VirtualSourceTree::new();
+    /// source_tree.as_mut().map_well_known_types();
+    /// source_tree.as_mut().add_file(
+    ///     Path::new("my.proto"),
+    ///     b"syntax = \"proto3\";\nimport \"google/protobuf/timestamp.proto\";\n".to_vec(),
+    /// );
+    /// // Now my.proto can import well-known types
+    /// ```
+    pub fn map_well_known_types(mut self: Pin<&mut Self>) {
+        for (path, contents) in well_known_types::WELL_KNOWN_TYPES {
+            self.as_mut().add_file(Path::new(path), contents.to_vec());
+        }
+    }
+
     unsafe_ffi_conversions!(ffi::VirtualSourceTree);
 }
 
@@ -454,9 +515,19 @@ impl DiskSourceTree {
 
     /// Maps the well-known protobuf types to the source tree.
     ///
-    /// This method adds the vendored protobuf include directory to the source
-    /// tree, making the well-known types (like `google/protobuf/any.proto`,
+    /// This method makes the well-known types (like `google/protobuf/any.proto`,
     /// `google/protobuf/timestamp.proto`, etc.) available for import.
+    ///
+    /// The proto files are embedded at compile time, so this method works
+    /// even if the protobuf include directory is not available at runtime.
+    ///
+    /// # Note
+    ///
+    /// This method writes the embedded proto files to a temporary directory
+    /// on disk (under `$TMPDIR/protobuf-native-well-known-types-{version}/`)
+    /// on first invocation. The directory persists for the lifetime of the
+    /// process and across invocations. If you need to avoid disk writes,
+    /// consider using [`VirtualSourceTree::map_well_known_types`] instead.
     ///
     /// # Example
     ///
@@ -471,7 +542,7 @@ impl DiskSourceTree {
     /// // import "google/protobuf/timestamp.proto";
     /// ```
     pub fn map_well_known_types(self: Pin<&mut Self>) {
-        self.map_path(Path::new(""), &protobuf_src::include())
+        self.map_path(Path::new(""), well_known_types_dir())
     }
 
     unsafe_ffi_conversions!(ffi::DiskSourceTree);
