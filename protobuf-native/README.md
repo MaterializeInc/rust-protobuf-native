@@ -14,8 +14,8 @@ Buffers], Google's data interchange format.
 ```toml
 # Cargo.toml
 [dependencies]
-protobuf-native = "0.3.2"
+protobuf-native = "0.3.3"
 ```
 
-[docs]: https://docs.rs/protobuf-native/0.3.2/protobuf_native
+[docs]: https://docs.rs/protobuf-native/0.3.3/protobuf_native
 [Protocol Buffers]: https://github.com/google/protobuf
