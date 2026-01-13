@@ -13,10 +13,14 @@ jobs:
       matrix:
         build:
         - ubuntu
+        - ubuntu-arm
         - macos
         include:
           - build: ubuntu
             os: ubuntu-20.04
+            rust: stable
+          - build: ubuntu-arm
+            os: ubuntu-22.04-arm
             rust: stable
           - build: macos
             os: macos-latest
