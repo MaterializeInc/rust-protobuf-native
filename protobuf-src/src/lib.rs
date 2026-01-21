@@ -51,14 +51,22 @@
 
 use std::path::PathBuf;
 
+/// Installation directory.
+const INSTALL_DIR: &str = env!("INSTALL_DIR");
+
+/// *protoc* binary.
+#[cfg(target_os = "windows")]
+const PROTOC_BIN: &str = "protoc.exe";
+/// *protoc* binary.
+#[cfg(not(target_os = "windows"))]
+const PROTOC_BIN: &str = "protoc";
+
 /// Returns the path to the vendored protoc binary.
 pub fn protoc() -> PathBuf {
-    PathBuf::from(env!("INSTALL_DIR"))
-        .join("bin")
-        .join("protoc")
+    PathBuf::from(INSTALL_DIR).join("bin").join(PROTOC_BIN)
 }
 
 /// Returns the path to the vendored include directory.
 pub fn include() -> PathBuf {
-    PathBuf::from(env!("INSTALL_DIR")).join("include")
+    PathBuf::from(INSTALL_DIR).join("include")
 }

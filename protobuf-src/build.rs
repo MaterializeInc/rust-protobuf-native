@@ -17,6 +17,7 @@ use std::error::Error;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let install_dir = cmake::Config::new("protobuf")
+        .define("BUILD_SHARED_LIBS", "ON")
         .define("ABSL_PROPAGATE_CXX_STD", "ON")
         .define("protobuf_BUILD_TESTS", "OFF")
         .define("protobuf_DEBUG_POSTFIX", "")
