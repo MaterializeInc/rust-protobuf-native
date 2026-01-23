@@ -55,10 +55,10 @@ use std::path::PathBuf;
 const INSTALL_DIR: &str = env!("INSTALL_DIR");
 
 /// *protoc* binary.
-#[cfg(target_os = "windows")]
+#[cfg(windows)]
 const PROTOC_BIN: &str = "protoc.exe";
 /// *protoc* binary.
-#[cfg(not(target_os = "windows"))]
+#[cfg(not(windows))]
 const PROTOC_BIN: &str = "protoc";
 
 /// Returns the path to the vendored protoc binary.

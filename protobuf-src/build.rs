@@ -17,10 +17,16 @@ use std::error::Error;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let install_dir = cmake::Config::new("protobuf")
-        .define("BUILD_SHARED_LIBS", "ON")
-        .define("ABSL_PROPAGATE_CXX_STD", "ON")
+        // Build STATIC libraries.
+        // See https://cmake.org/cmake/help/latest/variable/BUILD_SHARED_LIBS.html
+        .define("BUILD_SHARED_LIBS", "OFF")
+        // Disable MSVC static runtime.
+        // This is enabled by default when BUILD_SHARED_LIBS is OFF.
+        // See https://cmake.org/cmake/help/latest/prop_tgt/MSVC_RUNTIME_LIBRARY.html
+        .define("protobuf_MSVC_STATIC_RUNTIME", "OFF")
         .define("protobuf_BUILD_TESTS", "OFF")
         .define("protobuf_DEBUG_POSTFIX", "")
+        .define("ABSL_PROPAGATE_CXX_STD", "ON")
         .define("CMAKE_CXX_STANDARD", "14")
         // CMAKE_INSTALL_LIBDIR is inferred as "lib64" on some platforms, but we
         // want a stable location that we can add to the linker search path.
