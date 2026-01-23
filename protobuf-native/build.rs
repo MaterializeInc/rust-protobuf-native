@@ -26,7 +26,7 @@ fn main() {
         "src/io.rs",
         "src/lib.rs",
     ])
-    .flag("-std=c++14")
+    .std("c++14")
     .files(["src/compiler.cc", "src/io.cc", "src/lib.cc"])
     .warnings_into_errors(cfg!(deny_warnings))
     .compile("protobuf_native");
@@ -129,6 +129,9 @@ fn main() {
         "absl_time_zone",
         "absl_utf8_for_code_point",
         "absl_vlog_config_internal",
+        #[cfg(windows)]
+        "libprotobuf",
+        #[cfg(not(windows))]
         "protobuf",
         "utf8_validity",
     ] {
@@ -180,7 +183,7 @@ fn collect_proto_files(base_dir: &Path, current_dir: &Path, files: &mut Vec<(Str
         let path = entry.path();
         if path.is_dir() {
             collect_proto_files(base_dir, &path, files);
-        } else if path.extension().map_or(false, |ext| ext == "proto") {
+        } else if path.extension().is_some_and(|ext| ext == "proto") {
             if let Ok(relative) = path.strip_prefix(base_dir) {
                 files.push((
                     relative.to_string_lossy().into_owned(),
