@@ -223,7 +223,7 @@ impl SimpleErrorCollector {
     unsafe_ffi_conversions!(ffi::SimpleErrorCollector);
 }
 
-impl<'a> Iterator for Pin<&'a mut SimpleErrorCollector> {
+impl Iterator for Pin<&mut SimpleErrorCollector> {
     type Item = FileLoadError;
 
     fn next(&mut self) -> Option<FileLoadError> {
@@ -355,7 +355,7 @@ pub trait SourceTree: source_tree::Sealed {
     ) -> Result<Pin<Box<DynZeroCopyInputStream<'a>>>, FileOpenError> {
         let filename = ProtobufPath::from(filename);
         let mut source_tree = self.upcast_mut();
-        let stream = source_tree.as_mut().Open(filename.into());
+        let stream = source_tree.as_mut().Open(filename.as_string_view());
         if stream.is_null() {
             Err(FileOpenError(ffi::SourceTreeGetLastErrorMessage(
                 source_tree,
@@ -401,7 +401,8 @@ impl VirtualSourceTree {
     /// Adds a file to the source tree with the specified name and contents.
     pub fn add_file(self: Pin<&mut Self>, filename: &Path, contents: Vec<u8>) {
         let filename = ProtobufPath::from(filename);
-        self.as_ffi_mut().AddFile(filename.into(), contents)
+        self.as_ffi_mut()
+            .AddFile(filename.as_string_view(), contents)
     }
 
     /// Maps the well-known protobuf types to the source tree.
@@ -510,7 +511,7 @@ impl DiskSourceTree {
         let virtual_path = ProtobufPath::from(virtual_path);
         let disk_path = ProtobufPath::from(disk_path);
         self.as_ffi_mut()
-            .MapPath(virtual_path.into(), disk_path.into())
+            .MapPath(virtual_path.as_string_view(), disk_path.as_string_view())
     }
 
     /// Maps the well-known protobuf types to the source tree.

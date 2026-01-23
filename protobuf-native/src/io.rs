@@ -234,7 +234,7 @@ pub trait ZeroCopyInputStream: zero_copy_input_stream::Sealed {
             // SAFETY: `data` and `size` are non-null, as required.
             self.upcast_mut()
                 .Next(data.as_mut_ptr(), size.as_mut_ptr())
-                .as_result()?;
+                .to_result()?;
             // SAFETY: `Next` has succeeded and so has promised to provide us
             // with a valid buffer.
             let data = data.assume_init() as *const u8;
@@ -275,7 +275,7 @@ pub trait ZeroCopyInputStream: zero_copy_input_stream::Sealed {
     /// [`byte_count`]: ZeroCopyInputStream::byte_count
     fn skip(self: Pin<&mut Self>, count: usize) -> Result<(), OperationFailedError> {
         let count = CInt::try_from(count).map_err(|_| OperationFailedError)?;
-        self.upcast_mut().Skip(count).as_result()
+        self.upcast_mut().Skip(count).to_result()
     }
 
     /// Returns the total number of bytes read since this stream was created.
@@ -452,7 +452,7 @@ pub trait ZeroCopyOutputStream: zero_copy_output_stream::Sealed {
         let mut size = MaybeUninit::uninit();
         self.upcast_mut()
             .Next(data.as_mut_ptr(), size.as_mut_ptr())
-            .as_result()?;
+            .to_result()?;
         let data = data.assume_init() as *mut MaybeUninit<u8>;
         let size = size.assume_init().to_usize()?;
         Ok(slice::from_raw_parts_mut(data, size))

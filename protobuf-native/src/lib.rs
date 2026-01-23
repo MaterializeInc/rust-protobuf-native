@@ -327,7 +327,7 @@ pub trait MessageLite: private::MessageLite {
         unsafe {
             self.upcast_mut()
                 .MergeFromCodedStream(input.as_ffi_mut_ptr())
-                .as_result()
+                .to_result()
         }
     }
 
@@ -341,7 +341,7 @@ pub trait MessageLite: private::MessageLite {
         unsafe {
             self.upcast()
                 .SerializeToCodedStream(output.as_ffi_mut_ptr())
-                .as_result()
+                .to_result()
         }
     }
 
@@ -355,7 +355,7 @@ pub trait MessageLite: private::MessageLite {
         unsafe {
             self.upcast()
                 .SerializeToZeroCopyStream(output.upcast_mut_ptr())
-                .as_result()
+                .to_result()
         }
     }
 

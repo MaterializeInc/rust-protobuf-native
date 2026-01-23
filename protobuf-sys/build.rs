@@ -24,7 +24,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     ];
     autocxx_build::Builder::new("src/lib.rs", &include_paths)
         .build()?
-        .flag_if_supported("-std=c++14")
+        .std("c++14")
         .compile("protobuf-sys");
     println!("cargo:rerun-if-changed=src/lib.rs");
     println!(
@@ -122,6 +122,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         "absl_time_zone",
         "absl_utf8_for_code_point",
         "absl_vlog_config_internal",
+        #[cfg(windows)]
+        "libprotobuf",
+        #[cfg(not(windows))]
         "protobuf",
         "utf8_validity",
     ] {

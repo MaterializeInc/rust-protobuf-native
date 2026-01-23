@@ -217,7 +217,7 @@ message Test {
     assert_eq!(fds.file(0).message_type(0).name(), b"Test");
     let mut out = vec![];
     fds.serialize_to_writer(&mut out)?;
-    assert!(out.len() > 0);
+    assert!(!out.is_empty());
     Ok(())
 }
 

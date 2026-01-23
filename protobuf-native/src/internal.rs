@@ -13,21 +13,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#[cfg(unix)]
-use std::ffi::OsStr;
 use std::fmt;
 use std::io::{Read, Write};
 use std::marker::PhantomData;
 use std::mem::MaybeUninit;
 use std::os::raw::{c_char, c_int, c_void};
-#[cfg(unix)]
-use std::os::unix::prelude::OsStrExt;
-use std::path::Path;
 
 use cxx::kind::Trivial;
 use cxx::{type_id, ExternType};
 
 use crate::OperationFailedError;
+
+#[cfg(unix)]
+pub use self::unix::ProtobufPath;
+#[cfg(windows)]
+pub use self::windows::ProtobufPath;
 
 // Pollyfill C++ APIs that aren't yet in cxx.
 // See: https://github.com/dtolnay/cxx/pull/984
@@ -47,7 +47,7 @@ mod ffi {
         type StringView<'a> = crate::internal::StringView<'a>;
 
         #[namespace = "protobuf_native::internal"]
-        fn string_view_from_bytes(bytes: &[u8]) -> StringView;
+        fn string_view_from_bytes<'a>(bytes: &'a [u8]) -> StringView<'a>;
     }
 }
 
@@ -65,12 +65,6 @@ pub struct StringView<'a> {
 impl<'a> From<&'a str> for StringView<'a> {
     fn from(s: &'a str) -> StringView<'a> {
         ffi::string_view_from_bytes(s.as_bytes())
-    }
-}
-
-impl<'a> From<ProtobufPath<'a>> for StringView<'a> {
-    fn from(path: ProtobufPath<'a>) -> StringView<'a> {
-        ffi::string_view_from_bytes(path.as_bytes())
     }
 }
 
@@ -160,10 +154,7 @@ pub trait ResultExt {
 
 impl<T, E> ResultExt for Result<T, E> {
     fn as_status(&self) -> bool {
-        match self {
-            Ok(_) => true,
-            Err(_) => false,
-        }
+        self.is_ok()
     }
 }
 
@@ -173,11 +164,11 @@ pub trait BoolExt {
     ///
     /// If the status boolean is true, returns `Ok`. If the status boolean is
     /// false, returns `Err`.
-    fn as_result(self) -> Result<(), OperationFailedError>;
+    fn to_result(self) -> Result<(), OperationFailedError>;
 }
 
 impl BoolExt for bool {
-    fn as_result(self) -> Result<(), OperationFailedError> {
+    fn to_result(self) -> Result<(), OperationFailedError> {
         match self {
             true => Ok(()),
             false => Err(OperationFailedError),
@@ -185,88 +176,102 @@ impl BoolExt for bool {
     }
 }
 
-/// An adapter for passing paths to `libprotobuf`.
-///
-/// On Unix, the bytes in a path can be passed directly.
-///
-/// On Windows, the situation is complicated. Protobuf assumes paths are UTF-8
-/// and converts them to wide-character strings before passing them to the
-/// underlying Windows wide-char APIs. But paths in Rust might not valid UTF-8.
-/// There's not much we can do to handle invalid UTF-8 correctly; we just throw
-/// `to_string_lossy` at the problem and hope `libprotobuf` sorts it out.
-///
-/// The point is to make this correct and performant on Unix in all cases, and
-/// correct in Windows as long as the path is valid UTF-8.
 #[cfg(unix)]
-#[derive(Debug, Clone, Eq, PartialEq, Hash)]
-pub struct ProtobufPath<'a>(&'a Path);
+mod unix {
+    use super::StringView;
+    use std::{ffi::OsStr, os::unix::prelude::OsStrExt, path::Path};
 
-#[cfg(windows)]
-#[derive(Debug, Clone, Eq, PartialEq, Hash)]
-pub struct ProtobufPath<'a> {
-    inner: Vec<u8>,
-    _phantom: PhantomData<'a>,
-}
+    /// An adapter for passing paths to `libprotobuf`.
+    ///
+    /// On Unix, the bytes in a path can be passed directly.
+    ///
+    /// The point is to make this correct and performant on Unix in all cases, and
+    /// correct in Windows as long as the path is valid UTF-8.
+    #[derive(Debug, Clone, Eq, PartialEq, Hash)]
+    pub struct ProtobufPath<'a>(&'a Path);
 
-#[cfg(unix)]
-impl<'a> ProtobufPath<'a> {
-    pub fn as_path(&self) -> impl AsRef<Path> + 'a {
-        self.0
+    impl<'a> ProtobufPath<'a> {
+        pub fn as_path(&self) -> impl AsRef<Path> + 'a {
+            self.0
+        }
+
+        pub fn as_bytes(&self) -> &'a [u8] {
+            self.0.as_os_str().as_bytes()
+        }
+
+        pub fn as_string_view(&'a self) -> StringView<'a> {
+            super::ffi::string_view_from_bytes(self.as_bytes())
+        }
     }
-}
 
-#[cfg(unix)]
-impl<'a> From<&'a [u8]> for ProtobufPath<'a> {
-    fn from(p: &'a [u8]) -> ProtobufPath<'a> {
-        ProtobufPath(Path::new(OsStr::from_bytes(p)))
+    impl<'a> From<&'a [u8]> for ProtobufPath<'a> {
+        fn from(p: &'a [u8]) -> ProtobufPath<'a> {
+            ProtobufPath(Path::new(OsStr::from_bytes(p)))
+        }
     }
-}
 
-#[cfg(unix)]
-impl<'a> From<&'a Path> for ProtobufPath<'a> {
-    fn from(p: &'a Path) -> ProtobufPath<'a> {
-        ProtobufPath(p)
-    }
-}
-
-#[cfg(unix)]
-impl<'a> ProtobufPath<'a> {
-    pub fn as_bytes(&self) -> &'a [u8] {
-        self.0.as_os_str().as_bytes()
-    }
-}
-
-#[cfg(windows)]
-impl<'a> ProtobufPath<'a> {
-    pub fn as_path(&self) -> impl AsRef<Path> {
-        PathBuf::from(String::from_utf8_lossy(self.inner))
-    }
-}
-
-#[cfg(windows)]
-impl<'a> From<&'a [u8]> for ProtobufPath<'static> {
-    fn from(p: &'a [u8]) -> ProtobufPath<'static> {
-        ProtobufPath {
-            inner: p.to_vec(),
-            _phantom: PhantomData,
+    impl<'a> From<&'a Path> for ProtobufPath<'a> {
+        fn from(p: &'a Path) -> ProtobufPath<'a> {
+            ProtobufPath(p)
         }
     }
 }
 
 #[cfg(windows)]
-impl<'a> From<Path> for ProtobufPath<'a> {
-    fn from(p: Path) -> ProtobufPath<'a> {
-        ProtobufPath {
-            inner: p.to_string_lossy().into_owned().into_bytes(),
-            _phantom: PhantomData,
+mod windows {
+    use super::StringView;
+    use std::{
+        marker::PhantomData,
+        path::{Path, PathBuf},
+    };
+
+    /// An adapter for passing paths to `libprotobuf`.
+    ///
+    /// On Windows, the situation is complicated.
+    /// Protobuf assumes paths are UTF-8 and converts them to wide-character strings
+    /// before passing them to the underlying Windows wide-char APIs.
+    /// But paths in Rust might not valid UTF-8.
+    /// There's not much we can do to handle invalid UTF-8 correctly; we just throw
+    /// `to_string_lossy` at the problem and hope `libprotobuf` sorts it out.
+    ///
+    /// The point is to make this correct and performant on Unix in all cases, and
+    /// correct in Windows as long as the path is valid UTF-8.
+    #[derive(Debug, Clone, Eq, PartialEq, Hash)]
+    pub struct ProtobufPath<'a> {
+        inner: Vec<u8>,
+        _phantom: PhantomData<&'a Path>,
+    }
+
+    impl<'a> ProtobufPath<'a> {
+        pub fn as_path(&self) -> impl AsRef<Path> {
+            PathBuf::from(String::from_utf8_lossy(&self.inner).into_owned())
+        }
+
+        pub fn as_bytes(&'a self) -> &'a [u8] {
+            &self.inner
+        }
+
+        pub fn as_string_view(&'a self) -> StringView<'a> {
+            super::ffi::string_view_from_bytes(self.as_bytes())
         }
     }
-}
 
-#[cfg(windows)]
-impl<'a> ProtobufPath<'a> {
-    pub fn as_bytes(&self) -> &'a [u8] {
-        &self.inner
+    impl<'a> From<&'a [u8]> for ProtobufPath<'a> {
+        fn from(p: &'a [u8]) -> ProtobufPath<'a> {
+            ProtobufPath {
+                inner: p.to_vec(),
+                _phantom: PhantomData,
+            }
+        }
+    }
+
+    impl<'a> From<&'a Path> for ProtobufPath<'a> {
+        fn from(p: &'a Path) -> ProtobufPath<'a> {
+            ProtobufPath {
+                inner: p.to_string_lossy().into_owned().into_bytes(),
+                _phantom: PhantomData,
+            }
+        }
     }
 }
 
@@ -279,7 +284,7 @@ macro_rules! unsafe_ffi_conversions {
 
         #[allow(dead_code)]
         pub(crate) unsafe fn from_ffi_ptr<'_a>(from: *const $ty) -> &'_a Self {
-            std::mem::transmute(from)
+            &*(from as *const Self)
         }
 
         #[allow(dead_code)]
@@ -309,7 +314,7 @@ macro_rules! unsafe_ffi_conversions {
 
         #[allow(dead_code)]
         pub(crate) unsafe fn as_ffi_mut_ptr_unpinned(&mut self) -> *mut $ty {
-            std::mem::transmute(self)
+            self as *mut Self as *mut $ty
         }
     };
 }
