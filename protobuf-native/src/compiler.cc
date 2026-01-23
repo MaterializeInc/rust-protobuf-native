@@ -35,11 +35,9 @@ void SimpleErrorCollector::RecordWarning(absl::string_view filename, int line, i
 
 void SimpleErrorCollector::RecordErrorOrWarning(absl::string_view filename, int line, int column,
                                                 absl::string_view message, bool warning) {
-    errors_.push_back(FileLoadError{.filename = rust::String(filename.data(), filename.size()),
-                                    .line = line,
-                                    .column = column,
-                                    .message = rust::String(message.data(), message.size()),
-                                    .warning = warning});
+    // TODO: use designated initializers when std("c++20") is enabled in build.rs
+    errors_.push_back(FileLoadError{rust::String(filename.data(), filename.size()), line, column,
+                                    rust::String(message.data(), message.size()), warning});
 }
 
 std::vector<FileLoadError>& SimpleErrorCollector::Errors() { return errors_; }
